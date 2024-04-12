@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+
+        <variable
+            name="RegisterViewModel"
+            type="com.android.auth.register.RegisterViewModel" />
+
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/bg_authentication"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="25dp"
+            android:text="TẠO TÀI KHOẢN MỚI"
+            android:textColor="@color/red_600"
+            android:textSize="24sp"
+            android:textStyle="bold" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="40dp"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
+                android:autofillHints=""
+                android:background="@drawable/bg_edit_text"
+                android:hint="Số điện thoại"
+                android:inputType="phone"
+                android:paddingHorizontal="25dp"
+                android:paddingVertical="20dp"
+                android:text="@={RegisterViewModel.username}"
+                android:textColor="@color/teal_600"
+                android:textColorHint="@color/teal_600" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
+                android:autofillHints=""
+                android:background="@drawable/bg_edit_text"
+                android:hint="Mật khẩu"
+                android:inputType="textPassword"
+                android:paddingHorizontal="25dp"
+                android:paddingVertical="20dp"
+                android:text="@={RegisterViewModel.password}"
+                android:textColor="@color/teal_600"
+                android:textColorHint="@color/teal_600" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
+                android:autofillHints=""
+                android:background="@drawable/bg_edit_text"
+                android:hint="Mật khẩu xác nhận"
+                android:inputType="textPassword"
+                android:paddingHorizontal="25dp"
+                android:paddingVertical="20dp"
+                android:text="@={RegisterViewModel.password2}"
+                android:textColor="@color/teal_600"
+                android:textColorHint="@color/teal_600" />
+
+            <CheckBox
+                android:id="@+id/ckb_policy"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start"
+                android:layout_marginBottom="20dp"
+                android:buttonTint="@color/red_600"
+                android:checked="true"
+                android:text="Tôi đồng ý với các điều khoản"
+                android:textColor="@color/teal_600"
+                android:textSize="16sp"
+                android:textStyle="italic" />
+
+            <Button
+                style="@style/CustomTextAppearanceButton"
+                android:layout_width="175dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/bg_button"
+                android:backgroundTint="@{RegisterViewModel.username.length() > 0 &amp;&amp; RegisterViewModel.password.length() > 0 &amp;&amp; RegisterViewModel.password2.length() > 0 &amp;&amp; ckbPolicy.checked ? @color/red_600 : @color/red_300}"
+                android:enabled="@{RegisterViewModel.username.length() > 0 &amp;&amp; RegisterViewModel.password.length() > 0 &amp;&amp; RegisterViewModel.password2.length() > 0 &amp;&amp; ckbPolicy.checked}"
+                android:onClick="@{RegisterViewModel.register}"
+                android:text="ĐĂNG KÝ" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</layout>

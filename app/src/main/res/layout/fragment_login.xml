@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+
+        <variable
+            name="LoginViewModel"
+            type="com.android.auth.login.LoginViewModel" />
+
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/bg_authentication"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <ImageView
+            android:layout_width="165dp"
+            android:layout_height="165dp"
+            android:contentDescription="LOGO"
+            android:src="@drawable/icon_logo" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="25dp"
+            android:text="CHÀO MỪNG QUÝ KHÁCH"
+            android:textColor="@color/red_500"
+            android:textSize="24sp"
+            android:textStyle="bold" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="40dp"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
+                android:autofillHints=""
+                android:background="@drawable/bg_edit_text"
+                android:hint="Số điện thoại"
+                android:inputType="phone"
+                android:paddingHorizontal="25dp"
+                android:paddingVertical="20dp"
+                android:text="@={LoginViewModel.username}"
+                android:textColor="@color/teal_600"
+                android:textColorHint="@color/teal_600" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
+                android:autofillHints=""
+                android:background="@drawable/bg_edit_text"
+                android:hint="Mật khẩu"
+                android:inputType="textPassword"
+                android:paddingHorizontal="25dp"
+                android:paddingVertical="20dp"
+                android:text="@={LoginViewModel.password}"
+                android:textColor="@color/teal_600"
+                android:textColorHint="@color/teal_600" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:layout_marginBottom="20dp"
+                android:onClick="@{LoginViewModel.redirectToRegisterPage}"
+                android:text="Đăng ký tài khoản mới"
+                android:textColor="@color/red_600"
+                android:textSize="16sp"
+                android:textStyle="italic" />
+
+            <Button
+                style="@style/CustomTextAppearanceButton"
+                android:layout_width="175dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/bg_button"
+                android:backgroundTint="@{LoginViewModel.username.length() > 0 &amp;&amp; LoginViewModel.password.length() > 0 ? @color/red_500 : @color/red_300}"
+                android:enabled="@{LoginViewModel.username.length() > 0 &amp;&amp; LoginViewModel.password.length() > 0}"
+                android:onClick="@{LoginViewModel.login}"
+                android:text="ĐĂNG NHẬP" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</layout>
