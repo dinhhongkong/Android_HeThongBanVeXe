@@ -61,11 +61,11 @@ public class HomeFragment extends Fragment implements NavigationView.OnNavigatio
 
         NavController navController = Navigation.findNavController(mFragmentHomeBinding.fragmentContainerView);
         int destinationId = Objects.requireNonNull(navController.getCurrentDestination()).getId();
-        if (itemId == R.id.mHome && destinationId != R.id.bookTicketFragment) {
-            navController.navigate(R.id.action_profileFragment_to_bookTicketFragment);
+        if (itemId == R.id.mHome && destinationId != R.id.ticketFragment) {
+            navController.navigate(R.id.action_profileFragment_to_ticketFragment);
             mFragmentHomeBinding.DrawerLayout.close();
         } else if (itemId == R.id.mProfile && destinationId != R.id.profileFragment) {
-            navController.navigate(R.id.action_bookTicketFragment_to_profileFragment);
+            navController.navigate(R.id.action_ticketFragment_to_profileFragment);
             mFragmentHomeBinding.DrawerLayout.close();
         } else if (itemId == R.id.mLogout) {
             View view = getView();

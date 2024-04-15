@@ -4,8 +4,8 @@
     <data>
 
         <variable
-            name="ProfileModelView"
-            type="com.android.home.profile.ProfileModelView" />
+            name="ProfileViewModel"
+            type="com.android.home.profile.ProfileViewModel" />
 
     </data>
 
@@ -17,6 +17,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginVertical="15dp"
             android:gravity="center"
             android:paddingVertical="10dp"
             android:text="THÔNG TIN CÁ NHÂN"
@@ -27,8 +28,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="40dp"
-            android:layout_marginTop="25dp"
-            android:layout_marginBottom="50dp"
             android:orientation="vertical">
 
             <TextView
@@ -51,7 +50,7 @@
                 android:inputType="text"
                 android:paddingHorizontal="20dp"
                 android:paddingVertical="15dp"
-                android:text="@={ProfileModelView.fullName}" />
+                android:text="@={ProfileViewModel.fullName}" />
 
             <TextView
                 android:layout_width="match_parent"
@@ -74,7 +73,7 @@
                 android:letterSpacing="0.1"
                 android:paddingHorizontal="20dp"
                 android:paddingVertical="15dp"
-                android:text="@={ProfileModelView.phone}" />
+                android:text="@={ProfileViewModel.phone}" />
 
             <TextView
                 android:layout_width="match_parent"
@@ -95,7 +94,7 @@
                 android:inputType="textEmailAddress"
                 android:paddingHorizontal="20dp"
                 android:paddingVertical="15dp"
-                android:text="@={ProfileModelView.email}" />
+                android:text="@={ProfileViewModel.email}" />
 
         </LinearLayout>
 
@@ -103,9 +102,10 @@
             android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:background="@drawable/bg_button"
+            android:layout_marginTop="50dp"
+            android:background="@drawable/bg_rounded"
             android:backgroundTint="@color/red_600"
-            android:onClick="@{ProfileModelView.updateProfile}"
+            android:onClick="@{ProfileViewModel.updateProfile}"
             android:padding="10dp"
             android:text="LƯU"
             android:textColor="@color/white"

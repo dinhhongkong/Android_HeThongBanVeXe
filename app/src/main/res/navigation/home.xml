@@ -3,23 +3,23 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/home"
-    app:startDestination="@id/bookTicketFragment">
-    <fragment
-        android:id="@+id/bookTicketFragment"
-        android:name="com.android.home.ticket.BookTicketFragment"
-        android:label="fragment_book_ticket"
-        tools:layout="@layout/fragment_book_ticket" >
-        <action
-            android:id="@+id/action_bookTicketFragment_to_profileFragment"
-            app:destination="@id/profileFragment" />
-    </fragment>
+    app:startDestination="@id/ticketFragment">
     <fragment
         android:id="@+id/profileFragment"
         android:name="com.android.home.profile.ProfileFragment"
         android:label="fragment_profile"
         tools:layout="@layout/fragment_profile" >
         <action
-            android:id="@+id/action_profileFragment_to_bookTicketFragment"
-            app:destination="@id/bookTicketFragment" />
+            android:id="@+id/action_profileFragment_to_ticketFragment"
+            app:destination="@id/ticketFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/ticketFragment"
+        android:name="com.android.home.ticket.TicketFragment"
+        android:label="fragment_ticket"
+        tools:layout="@layout/fragment_ticket" >
+        <action
+            android:id="@+id/action_ticketFragment_to_profileFragment"
+            app:destination="@id/profileFragment" />
     </fragment>
 </navigation>

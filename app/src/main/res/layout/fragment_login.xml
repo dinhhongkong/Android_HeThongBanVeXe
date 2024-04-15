@@ -82,7 +82,7 @@
                 android:layout_width="175dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
-                android:background="@drawable/bg_button"
+                android:background="@drawable/bg_rounded"
                 android:backgroundTint="@{LoginViewModel.username.length() > 0 &amp;&amp; LoginViewModel.password.length() > 0 ? @color/red_500 : @color/red_300}"
                 android:enabled="@{LoginViewModel.username.length() > 0 &amp;&amp; LoginViewModel.password.length() > 0}"
                 android:onClick="@{LoginViewModel.login}"

@@ -19,8 +19,8 @@ public class ProfileFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         this.mFragmentProfileBinding = DataBindingUtil
                 .inflate(inflater, R.layout.fragment_profile, container, false);
-        ProfileModelView profileModelView = new ProfileModelView();
-        mFragmentProfileBinding.setProfileModelView(profileModelView);
+        ProfileViewModel profileViewModel = new ProfileViewModel();
+        mFragmentProfileBinding.setProfileViewModel(profileViewModel);
 
         return mFragmentProfileBinding.getRoot();
     }

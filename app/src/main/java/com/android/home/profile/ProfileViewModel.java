@@ -7,14 +7,14 @@ import androidx.databinding.Bindable;
 
 import com.android.BR;
 
-public class ProfileModelView extends BaseObservable {
+public class ProfileViewModel extends BaseObservable {
     private String fullName, phone, email;
 
-    public ProfileModelView() {
+    public ProfileViewModel() {
 
     }
 
-    public ProfileModelView(String fullName, String phone, String email) {
+    public ProfileViewModel(String fullName, String phone, String email) {
         this.fullName = fullName;
         this.phone = phone;
         this.email = email;
