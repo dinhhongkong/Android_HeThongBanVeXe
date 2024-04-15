@@ -48,5 +48,6 @@ public class LoginViewModel extends BaseObservable {
 
     public void login(View view) {
         // CALL API LOGIN & REDIRECT TO HOME PAGE.
+        Navigation.findNavController(view).navigate(R.id.action_loginFragment_to_homeFragment); // DEBUG.
     }
 }
