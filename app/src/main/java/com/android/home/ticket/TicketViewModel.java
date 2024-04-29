@@ -3,58 +3,61 @@ package com.android.home.ticket;
 import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
 import android.view.View;
+import android.widget.DatePicker;
 
 import androidx.databinding.BaseObservable;
 import androidx.databinding.Bindable;
 
 import com.android.BR;
 import com.android.R;
+import com.android.utils.DateUtils;
+
+import java.util.Date;
 
 public class TicketViewModel extends BaseObservable {
-    private int ticketType;
-    private String source, destination;
+    private Integer ticketType, startDestination, endDestination;
     private String startDate, endDate;
 
     public TicketViewModel() {
 
     }
 
-    public TicketViewModel(int ticketType, String source, String destination, String startDate, String endDate) {
+    public TicketViewModel(Integer ticketType, Integer startDestination, Integer endDestination, String startDate, String endDate) {
         this.ticketType = ticketType;
-        this.source = source;
-        this.destination = destination;
+        this.startDestination = startDestination;
+        this.endDestination = endDestination;
         this.startDate = startDate;
         this.endDate = endDate;
     }
 
     @Bindable
-    public int getTicketType() {
+    public Integer getTicketType() {
         return ticketType;
     }
 
-    public void setTicketType(int ticketType) {
+    public void setTicketType(Integer ticketType) {
         this.ticketType = ticketType;
         notifyPropertyChanged(BR.ticketType);
     }
 
     @Bindable
-    public String getSource() {
-        return source;
+    public Integer getStartDestination() {
+        return startDestination;
     }
 
-    public void setSource(String source) {
-        this.source = source;
-        notifyPropertyChanged(BR.source);
+    public void setStartDestination(Integer startDestination) {
+        this.startDestination = startDestination;
+        notifyPropertyChanged(BR.startDestination);
     }
 
     @Bindable
-    public String getDestination() {
-        return destination;
+    public Integer getEndDestination() {
+        return endDestination;
     }
 
-    public void setDestination(String destination) {
-        this.destination = destination;
-        notifyPropertyChanged(BR.destination);
+    public void setEndDestination(Integer endDestination) {
+        this.endDestination = endDestination;
+        notifyPropertyChanged(BR.endDestination);
     }
 
     @Bindable
@@ -70,8 +73,17 @@ public class TicketViewModel extends BaseObservable {
     @SuppressLint("DefaultLocale")
     public void setStartDate(View view) {
         DatePickerDialog dialog = new DatePickerDialog(view.getContext());
-        dialog.setOnDateSetListener((view1, year, month, dayOfMonth) ->
-                setStartDate(String.format("%02d/%02d/%d", dayOfMonth, month, year)));
+        dialog.setOnDateSetListener((view1, year, month, dayOfMonth) -> {
+            Date date = DateUtils.getDate(year, month, dayOfMonth);
+            setStartDate(DateUtils.format(date));
+        });
+        // CONSTRAINT MIN & MAX DATE.
+        DatePicker datePicker = dialog.getDatePicker();
+        datePicker.setMinDate(DateUtils.getDate().getTime());
+        if (endDate != null) {
+            datePicker.setMaxDate(DateUtils.parse(endDate).getTime());
+        }
+
         dialog.show();
     }
 
@@ -88,8 +100,14 @@ public class TicketViewModel extends BaseObservable {
     @SuppressLint("DefaultLocale")
     public void setEndDate(View view) {
         DatePickerDialog dialog = new DatePickerDialog(view.getContext());
-        dialog.setOnDateSetListener((view1, year, month, dayOfMonth) ->
-                setEndDate(String.format("%02d/%02d/%d", dayOfMonth, month, year)));
+        dialog.setOnDateSetListener((view1, year, month, dayOfMonth) -> {
+            Date date = DateUtils.getDate(year, month, dayOfMonth);
+            setEndDate(DateUtils.format(date));
+        });
+        // CONSTRAINT MIN & MAX DATE.
+        DatePicker datePicker = dialog.getDatePicker();
+        datePicker.setMinDate(DateUtils.parse(startDate).getTime());
+
         dialog.show();
     }
 
@@ -100,9 +118,5 @@ public class TicketViewModel extends BaseObservable {
         } else if (viewId == R.id.rdbTwoWay && isChecked) {
             setTicketType(1);
         }
-    }
-
-    public void searchJourney(View view) {
-        // CALL API SEARCH JOURNEY & DISPLAY DATA.
     }
 }
