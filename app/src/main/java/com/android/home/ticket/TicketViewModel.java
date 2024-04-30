@@ -10,22 +10,24 @@ import androidx.databinding.Bindable;
 
 import com.android.BR;
 import com.android.R;
+import com.android.model.Province;
 import com.android.utils.DateUtils;
 
 import java.util.Date;
 
 public class TicketViewModel extends BaseObservable {
-    private Integer ticketType, startDestination, endDestination;
+    private Integer ticketType;
+    private Province origin, destination;
     private String startDate, endDate;
 
     public TicketViewModel() {
-
+        this.ticketType = 0;
     }
 
-    public TicketViewModel(Integer ticketType, Integer startDestination, Integer endDestination, String startDate, String endDate) {
+    public TicketViewModel(Integer ticketType, Province origin, Province destination, String startDate, String endDate) {
         this.ticketType = ticketType;
-        this.startDestination = startDestination;
-        this.endDestination = endDestination;
+        this.origin = origin;
+        this.destination = destination;
         this.startDate = startDate;
         this.endDate = endDate;
     }
@@ -41,23 +43,23 @@ public class TicketViewModel extends BaseObservable {
     }
 
     @Bindable
-    public Integer getStartDestination() {
-        return startDestination;
+    public Province getOrigin() {
+        return origin;
     }
 
-    public void setStartDestination(Integer startDestination) {
-        this.startDestination = startDestination;
-        notifyPropertyChanged(BR.startDestination);
+    public void setOrigin(Province origin) {
+        this.origin = origin;
+        notifyPropertyChanged(BR.origin);
     }
 
     @Bindable
-    public Integer getEndDestination() {
-        return endDestination;
+    public Province getDestination() {
+        return destination;
     }
 
-    public void setEndDestination(Integer endDestination) {
-        this.endDestination = endDestination;
-        notifyPropertyChanged(BR.endDestination);
+    public void setDestination(Province destination) {
+        this.destination = destination;
+        notifyPropertyChanged(BR.destination);
     }
 
     @Bindable
@@ -118,5 +120,9 @@ public class TicketViewModel extends BaseObservable {
         } else if (viewId == R.id.rdbTwoWay && isChecked) {
             setTicketType(1);
         }
+    }
+
+    public boolean validate() {
+        return origin != null && destination != null;
     }
 }
