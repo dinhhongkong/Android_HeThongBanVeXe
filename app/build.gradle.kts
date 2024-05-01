@@ -37,13 +37,24 @@ android {
 }
 
 dependencies {
-    // library jar
-    implementation(fileTree(mapOf(
-        "dir" to "C:\\Users\\KongDinh\\Documents\\Project\\DichVuHeThongDatVeXe\\Android_HeThongBanVeXe\\ZPDK-Android",
-        "include" to listOf("*.aar")
-    )))
+    // LIBRARY JAR.
+//    implementation(
+//        fileTree(
+//            mapOf(
+//                "dir" to "C:\\Users\\KongDinh\\Documents\\Project\\DichVuHeThongDatVeXe\\Android_HeThongBanVeXe\\ZPDK-Android",
+//                "include" to listOf("*.aar")
+//            )
+//        )
+//    )
+    implementation(
+        fileTree(
+            mapOf(
+                "dir" to "C:\\Users\\HP\\Documents\\CoachTicketBookingApp\\ZPDK-Android",
+                "include" to listOf("*.aar")
+            )
+        )
+    )
 
-    //api retrofit
     implementation("com.squareup.retrofit2:retrofit: 2.9.0")
     implementation("com.squareup.okhttp3:logging-interceptor:4.12.0")
     implementation("com.squareup.retrofit2:converter-gson:2.9.0")

@@ -1,11 +1,11 @@
-package com.android.response;
+package com.android.model.response;
 
 import com.android.model.Province;
 import com.android.utils.NumberUtils;
 
 import java.util.List;
 
-public class JourneyViewModel {
+public class JourneyRespone {
     private static final int TOTAL_SEAT = 44;
     private String startTime, endTime;
     private Province origin, destination;

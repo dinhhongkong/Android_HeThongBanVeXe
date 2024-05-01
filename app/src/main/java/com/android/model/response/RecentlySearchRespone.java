@@ -1,10 +1,10 @@
-package com.android.response;
+package com.android.model.response;
 
 import com.android.model.Province;
 
 import java.util.Objects;
 
-public class RecentlySearchViewModel {
+public class RecentlySearchRespone {
     private String departureDate;
     private Province origin, destination;
 
@@ -36,7 +36,7 @@ public class RecentlySearchViewModel {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        RecentlySearchViewModel that = (RecentlySearchViewModel) o;
+        RecentlySearchRespone that = (RecentlySearchRespone) o;
         return Objects.equals(departureDate, that.departureDate) && Objects.equals(origin, that.origin) && Objects.equals(destination, that.destination);
     }
 

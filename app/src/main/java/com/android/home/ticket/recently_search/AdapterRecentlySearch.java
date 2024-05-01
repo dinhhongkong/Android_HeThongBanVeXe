@@ -11,32 +11,32 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.R;
 import com.android.databinding.ItemRecentlySearchBinding;
-import com.android.response.RecentlySearchViewModel;
+import com.android.model.response.RecentlySearchRespone;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class AdapterRecentlySearch extends RecyclerView.Adapter<AdapterRecentlySearch.ItemViewHolder> {
     private final OnItemListener onItemListener;
-    private List<RecentlySearchViewModel> data;
+    private List<RecentlySearchRespone> data;
 
     public AdapterRecentlySearch(OnItemListener onItemListener) {
         this.data = new ArrayList<>();
         this.onItemListener = onItemListener;
     }
 
-    public List<RecentlySearchViewModel> getData() {
+    public List<RecentlySearchRespone> getData() {
         return data;
     }
 
     @SuppressLint("NotifyDataSetChanged")
-    public void setData(List<RecentlySearchViewModel> data) {
+    public void setData(List<RecentlySearchRespone> data) {
         this.data = data;
         notifyDataSetChanged();
     }
 
     @SuppressLint("NotifyDataSetChanged")
-    public void addData(RecentlySearchViewModel item) {
+    public void addData(RecentlySearchRespone item) {
         if (data.contains(item)) return;
         this.data.add(item);
         notifyDataSetChanged();
@@ -48,7 +48,7 @@ public class AdapterRecentlySearch extends RecyclerView.Adapter<AdapterRecentlyS
         notifyDataSetChanged();
     }
 
-    public RecentlySearchViewModel getItem(int position) {
+    public RecentlySearchRespone getItem(int position) {
         return data.get(position);
     }
 
@@ -63,8 +63,8 @@ public class AdapterRecentlySearch extends RecyclerView.Adapter<AdapterRecentlyS
 
     @Override
     public void onBindViewHolder(@NonNull ItemViewHolder holder, int position) {
-        RecentlySearchViewModel item = getItem(position);
-        holder.binding.setRecentlySearchViewModel(item);
+        RecentlySearchRespone item = getItem(position);
+        holder.binding.setRecentlySearchRespone(item);
     }
 
     @Override

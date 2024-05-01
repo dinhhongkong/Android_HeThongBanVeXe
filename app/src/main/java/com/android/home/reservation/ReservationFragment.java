@@ -26,7 +26,7 @@ import com.android.MainActivity;
 import com.android.R;
 import com.android.databinding.FragmentReservationBinding;
 import com.android.home.reservation.seat.AdapterSeat;
-import com.android.response.JourneyViewModel;
+import com.android.model.response.JourneyRespone;
 import com.android.utils.SpaceItemDecoration;
 
 import java.util.ArrayList;
@@ -71,7 +71,7 @@ public class ReservationFragment extends Fragment implements AdapterJourney.OnIt
 
     @Override
     public void onItemClick(View view, int position) {
-        JourneyViewModel journey = adapterJourney.getItem(position);
+        JourneyRespone journey = adapterJourney.getItem(position);
         if (journey.getAvailableSeat() == 0) return;
 
         view.setBackgroundResource(R.drawable.bg_selected);
