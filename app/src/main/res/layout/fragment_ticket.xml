@@ -3,6 +3,8 @@
 
     <data>
 
+        <import type="android.view.View" />
+
         <variable
             name="TicketViewModel"
             type="com.android.home.ticket.TicketViewModel" />
@@ -14,20 +16,11 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginVertical="15dp"
-            android:gravity="center"
-            android:paddingVertical="10dp"
-            android:text="ĐẶT VÉ XE"
-            android:textColor="@color/red_600"
-            android:textSize="20sp" />
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="20dp"
+            android:layout_marginTop="30dp"
             android:background="@drawable/bg_outlined"
             android:orientation="vertical"
             android:padding="15dp">
@@ -43,6 +36,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:checked="@{TicketViewModel.ticketType == 0}"
                     android:onCheckedChanged="@{(view, isChecked) -> TicketViewModel.setTicketTypeChoice(view, isChecked)}"
                     android:text="Một chiều"
                     android:textSize="16sp"
@@ -53,6 +47,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:checked="@{TicketViewModel.ticketType == 1}"
                     android:onCheckedChanged="@{(view, isChecked) -> TicketViewModel.setTicketTypeChoice(view, isChecked)}"
                     android:text="Khứ hồi"
                     android:textSize="16sp"
@@ -72,7 +67,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="10dp"
-                        android:labelFor="@id/edtSource"
+                        android:labelFor="@id/actOrigin"
                         android:padding="5dp"
                         android:text="Điểm đi"
                         android:textColor="@color/black"
@@ -83,7 +78,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="10dp"
-                        android:labelFor="@id/edtDestination"
+                        android:labelFor="@id/actDestination"
                         android:padding="5dp"
                         android:text="Điểm đến"
                         android:textColor="@color/black"
@@ -94,27 +89,33 @@
 
                 <TableRow>
 
-                    <EditText
-                        android:id="@+id/edtSource"
+                    <AutoCompleteTextView
+                        android:id="@+id/actOrigin"
                         android:layout_width="0dp"
-                        android:layout_height="wrap_content"
+                        android:layout_height="60dp"
                         android:layout_marginEnd="10dp"
                         android:autofillHints=""
                         android:background="@drawable/bg_edit_text"
+                        android:completionThreshold="1"
+                        android:dropDownHeight="192dp"
+                        android:gravity="center_vertical"
                         android:inputType="text"
-                        android:padding="10dp"
-                        android:text="@={TicketViewModel.source}" />
+                        android:padding="15dp"
+                        android:textSize="16sp" />
 
-                    <EditText
-                        android:id="@+id/edtDestination"
+                    <AutoCompleteTextView
+                        android:id="@+id/actDestination"
                         android:layout_width="0dp"
-                        android:layout_height="wrap_content"
+                        android:layout_height="60dp"
                         android:layout_marginStart="10dp"
                         android:autofillHints=""
                         android:background="@drawable/bg_edit_text"
+                        android:completionThreshold="1"
+                        android:dropDownHeight="192dp"
+                        android:gravity="center_vertical"
                         android:inputType="text"
-                        android:padding="10dp"
-                        android:text="@={TicketViewModel.destination}" />
+                        android:padding="15dp"
+                        android:textSize="16sp" />
 
                 </TableRow>
 
@@ -124,7 +125,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
-                android:layout_marginBottom="30dp"
+                android:layout_marginBottom="40dp"
                 android:stretchColumns="*">
 
                 <TableRow>
@@ -133,7 +134,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="10dp"
-                        android:labelFor="@id/edtStart"
+                        android:labelFor="@id/edtStartDate"
                         android:padding="5dp"
                         android:text="Ngày đi"
                         android:textColor="@color/black"
@@ -144,38 +145,43 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="10dp"
-                        android:labelFor="@id/edtEnd"
+                        android:labelFor="@id/edtEndDate"
                         android:padding="5dp"
                         android:text="Ngày về"
                         android:textColor="@color/black"
                         android:textSize="16sp"
-                        android:textStyle="italic" />
-
+                        android:textStyle="italic"
+                        android:visibility="@{TicketViewModel.ticketType == 1 ? View.VISIBLE : View.INVISIBLE}" />
                 </TableRow>
 
                 <TableRow>
 
                     <TextView
-                        android:id="@+id/edtStart"
+                        android:id="@+id/edtStartDate"
                         android:layout_width="0dp"
-                        android:layout_height="wrap_content"
+                        android:layout_height="60dp"
                         android:layout_marginEnd="10dp"
                         android:autofillHints=""
                         android:background="@drawable/bg_edit_text"
+                        android:gravity="center_vertical"
                         android:onClick="@{TicketViewModel.setStartDate}"
-                        android:padding="13dp"
-                        android:text="@{TicketViewModel.startDate}" />
+                        android:paddingHorizontal="15dp"
+                        android:text="@={TicketViewModel.startDate}"
+                        android:textSize="16sp" />
 
                     <TextView
-                        android:id="@+id/edtEnd"
+                        android:id="@+id/edtEndDate"
                         android:layout_width="0dp"
-                        android:layout_height="wrap_content"
+                        android:layout_height="60dp"
                         android:layout_marginStart="10dp"
                         android:autofillHints=""
                         android:background="@drawable/bg_edit_text"
+                        android:gravity="center_vertical"
                         android:onClick="@{TicketViewModel.setEndDate}"
-                        android:padding="13dp"
-                        android:text="@{TicketViewModel.endDate}" />
+                        android:paddingHorizontal="15dp"
+                        android:text="@={TicketViewModel.endDate}"
+                        android:textSize="16sp"
+                        android:visibility="@{TicketViewModel.ticketType == 1 ? View.VISIBLE : View.INVISIBLE}" />
 
                 </TableRow>
 
@@ -184,6 +190,7 @@
         </LinearLayout>
 
         <Button
+            android:id="@+id/btnSubmit"
             android:layout_width="200dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -191,11 +198,58 @@
             android:background="@drawable/bg_rounded"
             android:backgroundTint="@color/red_600"
             android:elevation="10dp"
-            android:onClick="@{TicketViewModel.searchJourney}"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
             android:padding="10dp"
             android:text="TÌM CHUYẾN XE"
             android:textColor="@color/white"
             android:textSize="16sp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginTop="10dp"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="15dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:padding="5dp"
+                    android:text="Tìm kiếm gần đây"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
+                    android:textStyle="italic" />
+
+                <TextView
+                    android:id="@+id/btnClearHistory"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:background="@drawable/bg_rounded"
+                    android:backgroundTint="@color/red_300"
+                    android:gravity="center"
+                    android:paddingHorizontal="15dp"
+                    android:paddingVertical="5dp"
+                    android:text="Xóa lịch sử"
+                    android:textColor="@color/white"
+                    android:textSize="14sp"
+                    android:textStyle="italic" />
+
+            </RelativeLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvRecentlySearch"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+        </LinearLayout>
 
     </LinearLayout>
 

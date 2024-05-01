@@ -21,5 +21,17 @@
         <action
             android:id="@+id/action_ticketFragment_to_profileFragment"
             app:destination="@id/profileFragment" />
+        <action
+            android:id="@+id/action_ticketFragment_to_reservationFragment"
+            app:destination="@id/reservationFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/reservationFragment"
+        android:name="com.android.home.reservation.ReservationFragment"
+        android:label="fragment_reservation"
+        tools:layout="@layout/fragment_reservation">
+        <action
+            android:id="@+id/action_reservationFragment_to_ticketFragment"
+            app:destination="@id/ticketFragment" />
     </fragment>
 </navigation>
