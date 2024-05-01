@@ -31,11 +31,23 @@ android {
     }
 
     buildFeatures {
+        viewBinding = true
         dataBinding = true
     }
 }
 
 dependencies {
+    // library jar
+    implementation(fileTree(mapOf(
+        "dir" to "C:\\Users\\KongDinh\\Documents\\Project\\DichVuHeThongDatVeXe\\Android_HeThongBanVeXe\\ZPDK-Android",
+        "include" to listOf("*.aar")
+    )))
+
+    //api retrofit
+    implementation("com.squareup.retrofit2:retrofit: 2.9.0")
+    implementation("com.squareup.okhttp3:logging-interceptor:4.12.0")
+    implementation("com.squareup.retrofit2:converter-gson:2.9.0")
+    implementation("com.google.code.gson:gson:2.10.1")
 
     implementation(libs.appcompat)
     implementation(libs.material)
@@ -43,6 +55,7 @@ dependencies {
     implementation(libs.constraintlayout)
     implementation(libs.navigation.fragment)
     implementation(libs.navigation.ui)
+
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
