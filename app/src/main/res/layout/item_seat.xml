@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/SeatCode"
+    android:layout_width="75dp"
+    android:layout_height="75dp"
+    android:background="@drawable/bgi_seat"
+    android:gravity="center"
+    android:textColor="@color/green_500"
+    android:textSize="18sp" />

@@ -13,9 +13,12 @@ import com.android.R;
 import com.android.model.Province;
 import com.android.utils.DateUtils;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 public class TicketViewModel extends BaseObservable {
+    private final List<Province> PROVINCES = new ArrayList<>();
     private Integer ticketType;
     private Province origin, destination;
     private String startDate, endDate;
@@ -30,6 +33,14 @@ public class TicketViewModel extends BaseObservable {
         this.destination = destination;
         this.startDate = startDate;
         this.endDate = endDate;
+    }
+
+    public List<Province> getProvinces() {
+        return PROVINCES;
+    }
+
+    public Province getProvince(String name) {
+        return PROVINCES.stream().filter(p -> p.getName().equals(name)).findFirst().orElse(null);
     }
 
     @Bindable

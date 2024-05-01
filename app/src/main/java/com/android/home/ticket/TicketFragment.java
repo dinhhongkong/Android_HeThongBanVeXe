@@ -14,6 +14,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.android.MainActivity;
@@ -24,12 +25,8 @@ import com.android.model.Province;
 import com.android.response.RecentlySearchViewModel;
 import com.android.utils.SpaceItemDecoration;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class TicketFragment extends Fragment implements View.OnTouchListener, View.OnFocusChangeListener, View.OnClickListener,
         AdapterRecentlySearch.OnItemListener {
-    private final List<Province> PROVINCE_DATA = new ArrayList<>();
     private AdapterRecentlySearch adapterRecentlySearch;
     private FragmentTicketBinding mFragmentTicketBinding;
 
@@ -48,7 +45,6 @@ public class TicketFragment extends Fragment implements View.OnTouchListener, Vi
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        // SETUP AUTOCOMPLETE TEXTVIEW.
         setData();
         setEvent();
     }
@@ -94,12 +90,11 @@ public class TicketFragment extends Fragment implements View.OnTouchListener, Vi
         else return mFragmentTicketBinding.actDestination;
     }
 
-    private void setDestination(AutoCompleteTextView view, String provinceName) {
-        Province province = PROVINCE_DATA.stream().filter(p -> p.getName().equals(provinceName))
-                .findFirst().orElse(null);
+    private void setDestination(AutoCompleteTextView view, String name) {
+        TicketViewModel viewModel = mFragmentTicketBinding.getTicketViewModel();
+        Province province = viewModel.getProvince(name);
         if (province == null) view.setText("");
         else {
-            TicketViewModel viewModel = mFragmentTicketBinding.getTicketViewModel();
             if (view.getId() == R.id.actOrigin) viewModel.setOrigin(province);
             else viewModel.setDestination(province);
         }
@@ -122,8 +117,7 @@ public class TicketFragment extends Fragment implements View.OnTouchListener, Vi
 
     public void onItemClick(AdapterView<?> parent, int position, int viewId) {
         AutoCompleteTextView view = getAutoCompleteTextView(viewId);
-        String provinceName = String.valueOf(parent.getItemAtPosition(position));
-        setDestination(view, provinceName);
+        setDestination(view, String.valueOf(parent.getItemAtPosition(position)));
     }
 
     @Override
@@ -131,30 +125,28 @@ public class TicketFragment extends Fragment implements View.OnTouchListener, Vi
         if (v.getId() == R.id.btnClearHistory) adapterRecentlySearch.clearData();
         else {
             storeRecentlySearch();
-            // CALL API SEARCH JOURNEY.
+            // REDIRECT TO RESERVATION PAGE.
+            View view = getView();
+            if (view == null) return;
+            Navigation.findNavController(view).navigate(R.id.action_ticketFragment_to_reservationFragment);
         }
     }
 
     private void storeRecentlySearch() {
-        // CHECK IF VALID INPUTS.
-        TicketViewModel ticketViewModel = mFragmentTicketBinding.getTicketViewModel();
-        if (!ticketViewModel.validate()) return;
-        // INITIALIZE RECENTLY SEARCH.
+        TicketViewModel viewModel = mFragmentTicketBinding.getTicketViewModel();
+        if (!viewModel.validate()) return;
         RecentlySearchViewModel item = new RecentlySearchViewModel();
-        item.setOrigin(ticketViewModel.getOrigin());
-        item.setDestination(ticketViewModel.getDestination());
-        item.setDepartureTime(ticketViewModel.getStartDate());
-        // CHECK IF NOT DUPLICATED.
-        if (adapterRecentlySearch.getData().contains(item)) return;
+        item.setOrigin(viewModel.getOrigin());
+        item.setDestination(viewModel.getDestination());
+        item.setDepartureDate(viewModel.getStartDate());
         adapterRecentlySearch.addData(item);
     }
 
     @Override
     public void onItemClickListener(View v, int position) {
         RecentlySearchViewModel item = adapterRecentlySearch.getItem(position);
-        // ASSIGN TO FIELDS.
         mFragmentTicketBinding.actOrigin.setText(item.getOrigin().getName());
         mFragmentTicketBinding.actDestination.setText(item.getDestination().getName());
-        mFragmentTicketBinding.edtStartDate.setText(item.getDepartureTime());
+        mFragmentTicketBinding.edtStartDate.setText(item.getDepartureDate());
     }
 }

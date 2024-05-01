@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+
+        <variable
+            name="JourneyViewModel"
+            type="com.android.response.JourneyViewModel" />
+
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bgi_journey"
+        android:padding="15dp">
+
+        <RelativeLayout
+            android:id="@+id/InfoOrigin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true">
+
+            <TextView
+                android:id="@+id/OriginTime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="start"
+                android:text="@{JourneyViewModel.startTime}"
+                android:textColor="@color/black"
+                android:textSize="18sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/OriginTime"
+                android:gravity="start"
+                android:text="@{JourneyViewModel.origin.name}"
+                android:textColor="@color/black"
+                android:textSize="14sp" />
+
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="4dp"
+                android:layout_toEndOf="@id/OriginTime"
+                android:contentDescription="ORIGIN"
+                android:src="@drawable/icon_origin" />
+
+        </RelativeLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:layout_marginTop="15dp"
+            android:layout_toStartOf="@+id/Duration"
+            android:layout_toEndOf="@+id/InfoOrigin"
+            android:background="@color/teal_300" />
+
+        <LinearLayout
+            android:id="@+id/Duration"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginHorizontal="10dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="@{JourneyViewModel.toString(JourneyViewModel.duration)}"
+                android:textSize="16sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:gravity="center"
+                android:text="GIỜ"
+                android:textSize="16sp" />
+
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:layout_marginTop="15dp"
+            android:layout_toStartOf="@+id/InfoDestination"
+            android:layout_toEndOf="@+id/Duration"
+            android:background="@color/teal_300" />
+
+        <RelativeLayout
+            android:id="@+id/InfoDestination"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true">
+
+            <TextView
+                android:id="@+id/DestinationTime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignEnd="@id/DestinationPlace"
+                android:gravity="end"
+                android:text="@{JourneyViewModel.endTime}"
+                android:textColor="@color/black"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/DestinationPlace"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/DestinationTime"
+                android:gravity="end"
+                android:text="@{JourneyViewModel.destination.name}"
+                android:textColor="@color/black"
+                android:textSize="14sp" />
+
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_marginTop="4dp"
+                android:layout_marginEnd="15dp"
+                android:layout_toStartOf="@id/DestinationTime"
+                android:contentDescription="DESTINATION"
+                android:src="@drawable/icon_destination" />
+
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/Divider"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:layout_below="@id/InfoOrigin"
+            android:layout_marginVertical="10dp"
+            android:background="@color/teal_300" />
+
+        <RelativeLayout
+            android:id="@+id/SeatAndPriceInfo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/Divider">
+
+            <TextView
+                android:id="@+id/TitleSeat"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_marginEnd="5dp"
+                android:text="GHẾ TRỐNG:"
+                android:textColor="@color/green_500"
+                android:textSize="16sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@id/TitleSeat"
+                android:text="@{JourneyViewModel.toString(JourneyViewModel.getAvailableSeat())}"
+                android:textColor="@color/green_500"
+                android:textSize="16sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toStartOf="@id/TitlePrice"
+                android:gravity="end"
+                android:text="@{JourneyViewModel.toString(JourneyViewModel.price)}"
+                android:textColor="@color/red_500"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/TitlePrice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_marginStart="5dp"
+                android:gravity="end"
+                android:text="ĐỒNG"
+                android:textColor="@color/red_500"
+                android:textSize="16sp" />
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+</layout>

@@ -8,14 +8,21 @@ import androidx.recyclerview.widget.RecyclerView;
 
 public class SpaceItemDecoration extends RecyclerView.ItemDecoration {
     private final int gap;
+    private int start;
 
     public SpaceItemDecoration(int gap) {
+        this.start = 0;
         this.gap = gap;
+    }
+
+    public SpaceItemDecoration(int gap, int start) {
+        this(gap);
+        this.start = start;
     }
 
     @Override
     public void getItemOffsets(@NonNull Rect outRect, @NonNull View view, @NonNull RecyclerView parent, @NonNull RecyclerView.State state) {
         super.getItemOffsets(outRect, view, parent, state);
-        if (parent.getChildAdapterPosition(view) > 0) outRect.top = gap;
+        if (parent.getChildAdapterPosition(view) > start) outRect.top = gap;
     }
 }

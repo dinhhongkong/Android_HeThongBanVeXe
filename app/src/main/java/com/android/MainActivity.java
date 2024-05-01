@@ -7,13 +7,21 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class MainActivity extends AppCompatActivity {
-
     public static void setActionBarTitle(Activity activity, String title) {
         MainActivity mainActivity = (MainActivity) activity;
-        if (mainActivity != null) {
-            ActionBar actionBar = mainActivity.getSupportActionBar();
-            if (actionBar != null) actionBar.setTitle(title);
-        }
+        if (mainActivity == null) return;
+        ActionBar actionBar = mainActivity.getSupportActionBar();
+        if (actionBar == null) return;
+        actionBar.setTitle(title);
+    }
+
+    public static void toggleActionBar(Activity activity, boolean state) {
+        MainActivity mainActivity = (MainActivity) activity;
+        if (mainActivity == null) return;
+        ActionBar actionBar = mainActivity.getSupportActionBar();
+        if (actionBar == null) return;
+        if (!state) actionBar.hide();
+        else actionBar.show();
     }
 
     @Override

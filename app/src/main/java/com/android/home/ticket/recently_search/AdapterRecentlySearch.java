@@ -17,8 +17,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AdapterRecentlySearch extends RecyclerView.Adapter<AdapterRecentlySearch.ItemViewHolder> {
-    private List<RecentlySearchViewModel> data;
     private final OnItemListener onItemListener;
+    private List<RecentlySearchViewModel> data;
 
     public AdapterRecentlySearch(OnItemListener onItemListener) {
         this.data = new ArrayList<>();
@@ -37,6 +37,7 @@ public class AdapterRecentlySearch extends RecyclerView.Adapter<AdapterRecentlyS
 
     @SuppressLint("NotifyDataSetChanged")
     public void addData(RecentlySearchViewModel item) {
+        if (data.contains(item)) return;
         this.data.add(item);
         notifyDataSetChanged();
     }
@@ -71,6 +72,10 @@ public class AdapterRecentlySearch extends RecyclerView.Adapter<AdapterRecentlyS
         return data.size();
     }
 
+    public interface OnItemListener {
+        void onItemClickListener(View v, int position);
+    }
+
     public class ItemViewHolder extends RecyclerView.ViewHolder {
         private final ItemRecentlySearchBinding binding;
 
@@ -81,9 +86,5 @@ public class AdapterRecentlySearch extends RecyclerView.Adapter<AdapterRecentlyS
             mItemRecentlySearchBinding.getRoot().setOnClickListener(v ->
                     onItemListener.onItemClickListener(v, getAdapterPosition()));
         }
-    }
-
-    public interface OnItemListener {
-        void onItemClickListener(View v, int position);
     }
 }

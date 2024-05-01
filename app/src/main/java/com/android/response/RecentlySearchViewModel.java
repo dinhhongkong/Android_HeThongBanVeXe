@@ -5,15 +5,15 @@ import com.android.model.Province;
 import java.util.Objects;
 
 public class RecentlySearchViewModel {
-    private String departureTime;
+    private String departureDate;
     private Province origin, destination;
 
-    public String getDepartureTime() {
-        return departureTime;
+    public String getDepartureDate() {
+        return departureDate;
     }
 
-    public void setDepartureTime(String departureTime) {
-        this.departureTime = departureTime;
+    public void setDepartureDate(String departureDate) {
+        this.departureDate = departureDate;
     }
 
     public Province getOrigin() {
@@ -37,11 +37,11 @@ public class RecentlySearchViewModel {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         RecentlySearchViewModel that = (RecentlySearchViewModel) o;
-        return Objects.equals(departureTime, that.departureTime) && Objects.equals(origin, that.origin) && Objects.equals(destination, that.destination);
+        return Objects.equals(departureDate, that.departureDate) && Objects.equals(origin, that.origin) && Objects.equals(destination, that.destination);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(departureTime, origin, destination);
+        return Objects.hash(departureDate, origin, destination);
     }
 }
