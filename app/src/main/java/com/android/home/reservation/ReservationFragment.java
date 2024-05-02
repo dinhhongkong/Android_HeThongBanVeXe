@@ -13,20 +13,23 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.android.MainActivity;
 import com.android.R;
 import com.android.databinding.FragmentReservationBinding;
 import com.android.home.reservation.seat.AdapterSeat;
-import com.android.model.response.JourneyRespone;
+import com.android.model.Province;
+import com.android.model.response.JourneyResponse;
+import com.android.utils.ActionBarUtils;
 import com.android.utils.SpaceItemDecoration;
 
 import java.util.ArrayList;
@@ -41,13 +44,13 @@ public class ReservationFragment extends Fragment implements AdapterJourney.OnIt
 
     @Override
     public void onDestroy() {
-        MainActivity.toggleActionBar(getActivity(), true);
+        ActionBarUtils.toggle(true);
         super.onDestroy();
     }
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        MainActivity.toggleActionBar(getActivity(), false);
+        ActionBarUtils.toggle(false);
 
         this.mFragmentReservationBinding = DataBindingUtil
                 .inflate(inflater, R.layout.fragment_reservation, container, false);
@@ -67,11 +70,23 @@ public class ReservationFragment extends Fragment implements AdapterJourney.OnIt
         mFragmentReservationBinding.rvJourney.addItemDecoration(new SpaceItemDecoration(50));
         mFragmentReservationBinding.rvJourney.setAdapter(adapterJourney);
         // CALL API SEARCH JOURNEY.
+        List<JourneyResponse> data = new ArrayList<>();
+        JourneyResponse journeyResponse = new JourneyResponse();
+        journeyResponse.setOrigin(new Province(1, "LONG AN"));
+        journeyResponse.setDestination(new Province(2, "TP. HỒ CHÍ MINH"));
+        journeyResponse.setStartTime("01/01/2024 00:00");
+        journeyResponse.setEndTime("10/01/2024 00:00");
+        journeyResponse.setListReservedSeat(new ArrayList<>());
+        journeyResponse.setDuration(12);
+        journeyResponse.setPrice(1000000);
+
+        data.add(journeyResponse);
+        adapterJourney.setData(data);
     }
 
     @Override
     public void onItemClick(View view, int position) {
-        JourneyRespone journey = adapterJourney.getItem(position);
+        JourneyResponse journey = adapterJourney.getItem(position);
         if (journey.getAvailableSeat() == 0) return;
 
         view.setBackgroundResource(R.drawable.bg_selected);
@@ -87,16 +102,30 @@ public class ReservationFragment extends Fragment implements AdapterJourney.OnIt
         windowAttributes.gravity = Gravity.BOTTOM;
         window.setAttributes(windowAttributes);
 
+        Context context = view.getContext();
         RecyclerView belowSeats = dialog.findViewById(R.id.BelowSeats);
         RecyclerView aboveSeats = dialog.findViewById(R.id.AboveSeats);
         Button btnConfirm = dialog.findViewById(R.id.btnConfirm);
         Button btnCancel = dialog.findViewById(R.id.btnCancel);
 
-        loadRecyclerView(view.getContext(), belowSeats, "A", journey.getListReservedSeat());
-        loadRecyclerView(view.getContext(), aboveSeats, "B", journey.getListReservedSeat());
+        loadRecyclerView(context, belowSeats, "A", journey.getListReservedSeat());
+        loadRecyclerView(context, aboveSeats, "B", journey.getListReservedSeat());
         btnConfirm.setOnClickListener(v -> {
-            // CALL API RESERVE TICKET.
-            dialog.dismiss();
+            if (listChosenSeat.isEmpty()) {
+                Toast.makeText(context, "Vui lòng chọn ít nhất 1 vé!", Toast.LENGTH_SHORT).show();
+                return;
+            }
+
+            View root = getView();
+            if (root != null) {
+                // REDIRECT TO PAYMENT PAGE.
+                Bundle data = new Bundle();
+                data.putSerializable("journey", journey);
+                data.putStringArrayList("chosenSeats", (ArrayList<String>) listChosenSeat);
+                Navigation.findNavController(root).navigate(R.id.action_reservationFragment_to_orderFragment, data);
+
+                dialog.dismiss();
+            }
         });
         btnCancel.setOnClickListener(v -> dialog.dismiss());
 
@@ -122,7 +151,10 @@ public class ReservationFragment extends Fragment implements AdapterJourney.OnIt
         dialogForm.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialogForm.setContentView(R.layout.dialog_choose_seat);
         dialogForm.setCancelable(true);
-        dialogForm.setOnDismissListener(dialog -> view.setBackgroundResource(R.drawable.bgi_journey));
+        dialogForm.setOnDismissListener(dialog -> {
+            view.setBackgroundResource(R.drawable.bgi_journey);
+            listChosenSeat.clear();
+        });
         return dialogForm;
     }
 }

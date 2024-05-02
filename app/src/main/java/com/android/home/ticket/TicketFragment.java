@@ -17,12 +17,12 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
-import com.android.MainActivity;
 import com.android.R;
 import com.android.databinding.FragmentTicketBinding;
 import com.android.home.ticket.recently_search.AdapterRecentlySearch;
 import com.android.model.Province;
-import com.android.model.response.RecentlySearchRespone;
+import com.android.model.response.RecentlySearchResponse;
+import com.android.utils.ActionBarUtils;
 import com.android.utils.SpaceItemDecoration;
 
 public class TicketFragment extends Fragment implements View.OnTouchListener, View.OnFocusChangeListener, View.OnClickListener,
@@ -32,7 +32,7 @@ public class TicketFragment extends Fragment implements View.OnTouchListener, Vi
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        MainActivity.setActionBarTitle(getActivity(), "ĐẶT VÉ XE");
+        ActionBarUtils.setTitle("ĐẶT VÉ XE");
 
         this.mFragmentTicketBinding = DataBindingUtil
                 .inflate(inflater, R.layout.fragment_ticket, container, false);
@@ -135,7 +135,7 @@ public class TicketFragment extends Fragment implements View.OnTouchListener, Vi
     private void storeRecentlySearch() {
         TicketViewModel viewModel = mFragmentTicketBinding.getTicketViewModel();
         if (!viewModel.validate()) return;
-        RecentlySearchRespone item = new RecentlySearchRespone();
+        RecentlySearchResponse item = new RecentlySearchResponse();
         item.setOrigin(viewModel.getOrigin());
         item.setDestination(viewModel.getDestination());
         item.setDepartureDate(viewModel.getStartDate());
@@ -144,7 +144,7 @@ public class TicketFragment extends Fragment implements View.OnTouchListener, Vi
 
     @Override
     public void onItemClickListener(View v, int position) {
-        RecentlySearchRespone item = adapterRecentlySearch.getItem(position);
+        RecentlySearchResponse item = adapterRecentlySearch.getItem(position);
         mFragmentTicketBinding.actOrigin.setText(item.getOrigin().getName());
         mFragmentTicketBinding.actDestination.setText(item.getDestination().getName());
         mFragmentTicketBinding.edtStartDate.setText(item.getDepartureDate());

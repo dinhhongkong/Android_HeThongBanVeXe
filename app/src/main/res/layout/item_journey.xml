@@ -4,8 +4,8 @@
     <data>
 
         <variable
-            name="JourneyRespone"
-            type="com.android.model.response.JourneyRespone" />
+            name="JourneyResponse"
+            type="com.android.model.response.JourneyResponse" />
 
     </data>
 
@@ -17,7 +17,7 @@
 
         <RelativeLayout
             android:id="@+id/InfoOrigin"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true">
 
@@ -26,7 +26,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="start"
-                android:text="@{JourneyRespone.startTime}"
+                android:text="@{JourneyResponse.getStartTimePart()}"
                 android:textColor="@color/black"
                 android:textSize="18sp" />
 
@@ -35,11 +35,12 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/OriginTime"
                 android:gravity="start"
-                android:text="@{JourneyRespone.origin.name}"
+                android:text="@{JourneyResponse.origin.name}"
                 android:textColor="@color/black"
                 android:textSize="14sp" />
 
             <ImageView
+                android:id="@+id/OriginImage"
                 android:layout_width="24dp"
                 android:layout_height="24dp"
                 android:layout_marginStart="15dp"
@@ -48,62 +49,56 @@
                 android:contentDescription="ORIGIN"
                 android:src="@drawable/icon_origin" />
 
-        </RelativeLayout>
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="2dp"
-            android:layout_marginTop="15dp"
-            android:layout_toStartOf="@+id/Duration"
-            android:layout_toEndOf="@+id/InfoOrigin"
-            android:background="@color/teal_300" />
-
-        <LinearLayout
-            android:id="@+id/Duration"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_marginHorizontal="10dp"
-            android:orientation="horizontal">
-
             <TextView
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="15dp"
+                android:layout_toStartOf="@+id/Duration"
+                android:layout_toEndOf="@+id/OriginImage"
+                android:background="@color/teal_300" />
+
+            <LinearLayout
+                android:id="@+id/Duration"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:gravity="center"
-                android:text="@{JourneyRespone.toString(JourneyRespone.duration)}"
-                android:textSize="16sp" />
+                android:layout_centerHorizontal="true"
+                android:layout_marginHorizontal="10dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="@{JourneyResponse.toString(JourneyResponse.duration)}"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:gravity="center"
+                    android:text="GIỜ"
+                    android:textSize="16sp" />
+
+            </LinearLayout>
 
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="5dp"
-                android:gravity="center"
-                android:text="GIỜ"
-                android:textSize="16sp" />
-
-        </LinearLayout>
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="2dp"
-            android:layout_marginTop="15dp"
-            android:layout_toStartOf="@+id/InfoDestination"
-            android:layout_toEndOf="@+id/Duration"
-            android:background="@color/teal_300" />
-
-        <RelativeLayout
-            android:id="@+id/InfoDestination"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true">
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginEnd="10dp"
+                android:layout_toStartOf="@+id/DestinationImage"
+                android:layout_toEndOf="@+id/Duration"
+                android:background="@color/teal_300" />
 
             <TextView
                 android:id="@+id/DestinationTime"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignEnd="@id/DestinationPlace"
+                android:layout_alignParentEnd="true"
                 android:gravity="end"
-                android:text="@{JourneyRespone.endTime}"
+                android:text="@{JourneyResponse.getEndTimePart()}"
                 android:textColor="@color/black"
                 android:textSize="18sp" />
 
@@ -112,12 +107,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/DestinationTime"
+                android:layout_alignParentEnd="true"
                 android:gravity="end"
-                android:text="@{JourneyRespone.destination.name}"
+                android:text="@{JourneyResponse.destination.name}"
                 android:textColor="@color/black"
                 android:textSize="14sp" />
 
             <ImageView
+                android:id="@+id/DestinationImage"
                 android:layout_width="24dp"
                 android:layout_height="24dp"
                 android:layout_marginTop="4dp"
@@ -156,7 +153,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_toEndOf="@id/TitleSeat"
-                android:text="@{JourneyRespone.toString(JourneyRespone.getAvailableSeat())}"
+                android:text="@{JourneyResponse.toString(JourneyResponse.getAvailableSeat())}"
                 android:textColor="@color/green_500"
                 android:textSize="16sp" />
 
@@ -165,7 +162,7 @@
                 android:layout_height="wrap_content"
                 android:layout_toStartOf="@id/TitlePrice"
                 android:gravity="end"
-                android:text="@{JourneyRespone.toString(JourneyRespone.price)}"
+                android:text="@{JourneyResponse.toString(JourneyResponse.price)}"
                 android:textColor="@color/red_500"
                 android:textSize="16sp" />
 

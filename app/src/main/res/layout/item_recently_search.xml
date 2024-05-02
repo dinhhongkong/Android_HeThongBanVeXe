@@ -4,8 +4,8 @@
     <data>
 
         <variable
-            name="RecentlySearchRespone"
-            type="com.android.model.response.RecentlySearchRespone" />
+            name="RecentlySearchResponse"
+            type="com.android.model.response.RecentlySearchResponse" />
 
     </data>
 
@@ -26,7 +26,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="5dp"
-                android:text="@{RecentlySearchRespone.origin.name}"
+                android:text="@{RecentlySearchResponse.origin.name}"
                 android:textColor="@color/black"
                 android:textSize="16sp" />
 
@@ -43,7 +43,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="5dp"
-                android:text="@{RecentlySearchRespone.destination.name}"
+                android:text="@{RecentlySearchResponse.destination.name}"
                 android:textColor="@color/black"
                 android:textSize="16sp" />
 
@@ -53,7 +53,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="5dp"
-            android:text="@{RecentlySearchRespone.departureDate}"
+            android:text="@{RecentlySearchResponse.departureDate}"
             android:textColor="@color/teal_600"
             android:textSize="14sp" />
 

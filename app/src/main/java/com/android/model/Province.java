@@ -2,9 +2,10 @@ package com.android.model;
 
 import androidx.annotation.NonNull;
 
+import java.io.Serializable;
 import java.util.Objects;
 
-public class Province {
+public class Province implements Serializable {
     private int id;
     private String name;
 

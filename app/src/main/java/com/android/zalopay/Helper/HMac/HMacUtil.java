@@ -4,7 +4,6 @@ import android.os.Build;
 
 import androidx.annotation.RequiresApi;
 
-import java.io.UnsupportedEncodingException;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
@@ -38,10 +37,7 @@ public class HMacUtil {
         }
 
         byte[] dataByte = null;
-        try {
-            dataByte = data.getBytes("UTF-8");
-        } catch (UnsupportedEncodingException e) {
-        }
+        dataByte = data.getBytes(StandardCharsets.UTF_8);
 
         return macGenerator.doFinal(dataByte);
     }
@@ -49,15 +45,12 @@ public class HMacUtil {
     /**
      * Calculating a message authentication code (MAC) involving a cryptographic
      * hash function in combination with a secret cryptographic key.
-     *
+     * <p>
      * The result will be represented base64-encoded string.
      *
      * @param algorithm A cryptographic hash function (such as MD5 or SHA-1)
-     *
-     * @param key A secret cryptographic key
-     *
-     * @param data The message to be authenticated
-     *
+     * @param key       A secret cryptographic key
+     * @param data      The message to be authenticated
      * @return Base64-encoded HMAC String
      */
     @RequiresApi(api = Build.VERSION_CODES.O)
@@ -72,15 +65,12 @@ public class HMacUtil {
     /**
      * Calculating a message authentication code (MAC) involving a cryptographic
      * hash function in combination with a secret cryptographic key.
-     *
+     * <p>
      * The result will be represented hex string.
      *
      * @param algorithm A cryptographic hash function (such as MD5 or SHA-1)
-     *
-     * @param key A secret cryptographic key
-     *
-     * @param data The message to be authenticated
-     *
+     * @param key       A secret cryptographic key
+     * @param data      The message to be authenticated
      * @return Hex HMAC String
      */
     public static String HMacHexStringEncode(final String algorithm, final String key, final String data) {

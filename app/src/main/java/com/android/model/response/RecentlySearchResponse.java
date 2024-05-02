@@ -4,7 +4,7 @@ import com.android.model.Province;
 
 import java.util.Objects;
 
-public class RecentlySearchRespone {
+public class RecentlySearchResponse {
     private String departureDate;
     private Province origin, destination;
 
@@ -36,7 +36,7 @@ public class RecentlySearchRespone {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        RecentlySearchRespone that = (RecentlySearchRespone) o;
+        RecentlySearchResponse that = (RecentlySearchResponse) o;
         return Objects.equals(departureDate, that.departureDate) && Objects.equals(origin, that.origin) && Objects.equals(destination, that.destination);
     }
 

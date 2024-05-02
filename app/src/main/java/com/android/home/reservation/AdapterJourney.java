@@ -11,31 +11,31 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.R;
 import com.android.databinding.ItemJourneyBinding;
-import com.android.model.response.JourneyRespone;
+import com.android.model.response.JourneyResponse;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class AdapterJourney extends RecyclerView.Adapter<AdapterJourney.ItemViewHolder> {
     private final OnItemListener onItemListener;
-    private List<JourneyRespone> data;
+    private List<JourneyResponse> data;
 
     public AdapterJourney(OnItemListener onItemListener) {
         this.data = new ArrayList<>();
         this.onItemListener = onItemListener;
     }
 
-    public List<JourneyRespone> getData() {
+    public List<JourneyResponse> getData() {
         return data;
     }
 
     @SuppressLint("NotifyDataSetChanged")
-    public void setData(List<JourneyRespone> data) {
+    public void setData(List<JourneyResponse> data) {
         this.data = data;
         notifyDataSetChanged();
     }
 
-    public JourneyRespone getItem(int position) {
+    public JourneyResponse getItem(int position) {
         return data.get(position);
     }
 
@@ -50,8 +50,8 @@ public class AdapterJourney extends RecyclerView.Adapter<AdapterJourney.ItemView
 
     @Override
     public void onBindViewHolder(@NonNull ItemViewHolder holder, int position) {
-        JourneyRespone item = getItem(position);
-        holder.binding.setJourneyRespone(item);
+        JourneyResponse item = getItem(position);
+        holder.binding.setJourneyResponse(item);
     }
 
     @Override

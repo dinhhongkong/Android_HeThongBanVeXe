@@ -5,6 +5,9 @@ import android.view.View;
 import androidx.databinding.BaseObservable;
 import androidx.databinding.Bindable;
 import androidx.databinding.library.baseAdapters.BR;
+import androidx.navigation.Navigation;
+
+import com.android.R;
 
 public class RegisterViewModel extends BaseObservable {
     private String username, password, password2;
@@ -53,5 +56,6 @@ public class RegisterViewModel extends BaseObservable {
 
     public void register(View view) {
         // CALL API REGISTER & REDIRECT TO LOGIN PAGE.
+        Navigation.findNavController(view).navigate(R.id.action_registerFragment_to_loginFragment);
     }
 }

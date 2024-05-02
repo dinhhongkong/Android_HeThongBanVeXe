@@ -9,18 +9,15 @@ import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 
-import com.android.MainActivity;
 import com.android.R;
-import com.android.databinding.FragmentProfileBinding;
+import com.android.utils.ActionBarUtils;
 
 public class ProfileFragment extends Fragment {
-    private FragmentProfileBinding mFragmentProfileBinding;
-
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        MainActivity.setActionBarTitle(getActivity(), "THÔNG TIN CÁ NHÂN");
+        ActionBarUtils.setTitle("THÔNG TIN CÁ NHÂN");
 
-        this.mFragmentProfileBinding = DataBindingUtil
+        com.android.databinding.FragmentProfileBinding mFragmentProfileBinding = DataBindingUtil
                 .inflate(inflater, R.layout.fragment_profile, container, false);
         ProfileViewModel profileViewModel = new ProfileViewModel();
         mFragmentProfileBinding.setProfileViewModel(profileViewModel);

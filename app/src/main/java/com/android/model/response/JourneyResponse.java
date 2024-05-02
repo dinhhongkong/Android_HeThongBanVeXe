@@ -3,9 +3,10 @@ package com.android.model.response;
 import com.android.model.Province;
 import com.android.utils.NumberUtils;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class JourneyRespone {
+public class JourneyResponse implements Serializable {
     private static final int TOTAL_SEAT = 44;
     private String startTime, endTime;
     private Province origin, destination;
@@ -70,6 +71,22 @@ public class JourneyRespone {
 
     public int getAvailableSeat() {
         return TOTAL_SEAT - listReservedSeat.size();
+    }
+
+    public String getStartDatePart() {
+        return startTime.split(" ")[0];
+    }
+
+    public String getStartTimePart() {
+        return startTime.split(" ")[1];
+    }
+
+    public String getEndDatePart() {
+        return endTime.split(" ")[0];
+    }
+
+    public String getEndTimePart() {
+        return endTime.split(" ")[1];
     }
 
     public String toString(int number) {
