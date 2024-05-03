@@ -52,7 +52,8 @@ public class TicketFragment extends Fragment implements View.OnTouchListener, Vi
     private void setData() {
         // PROVINCE.
         ArrayAdapter<Province> provinceAdapter = new ArrayAdapter<>(
-                requireContext(), android.R.layout.simple_dropdown_item_1line);
+                requireContext(), android.R.layout.simple_dropdown_item_1line,
+                mFragmentTicketBinding.getTicketViewModel().getProvinces());
         mFragmentTicketBinding.actOrigin.setAdapter(provinceAdapter);
         mFragmentTicketBinding.actDestination.setAdapter(provinceAdapter);
         // RECENTLY SEARCH.
@@ -61,7 +62,6 @@ public class TicketFragment extends Fragment implements View.OnTouchListener, Vi
                 new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
         mFragmentTicketBinding.rvRecentlySearch.addItemDecoration(new SpaceItemDecoration(50));
         mFragmentTicketBinding.rvRecentlySearch.setAdapter(adapterRecentlySearch);
-        // CALL API GET PROVINCE DATA.
     }
 
     @SuppressLint("ClickableViewAccessibility")

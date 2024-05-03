@@ -11,6 +11,7 @@ import androidx.databinding.Bindable;
 import com.android.BR;
 import com.android.R;
 import com.android.model.Province;
+import com.android.service.api_implement.ServiceProvince;
 import com.android.utils.DateUtils;
 
 import java.util.ArrayList;
@@ -22,6 +23,10 @@ public class TicketViewModel extends BaseObservable {
     private Integer ticketType;
     private Province origin, destination;
     private String startDate, endDate;
+
+    {
+        ServiceProvince.listProvince(PROVINCES);
+    }
 
     public TicketViewModel() {
         this.ticketType = 0;
