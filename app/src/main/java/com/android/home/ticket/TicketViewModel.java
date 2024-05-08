@@ -2,8 +2,10 @@ package com.android.home.ticket;
 
 import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
+import android.content.Context;
 import android.view.View;
 import android.widget.DatePicker;
+import android.widget.Toast;
 
 import androidx.databinding.BaseObservable;
 import androidx.databinding.Bindable;
@@ -11,22 +13,14 @@ import androidx.databinding.Bindable;
 import com.android.BR;
 import com.android.R;
 import com.android.model.Province;
-import com.android.service.api_implement.ServiceProvince;
 import com.android.utils.DateUtils;
 
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 public class TicketViewModel extends BaseObservable {
-    private final List<Province> PROVINCES = new ArrayList<>();
     private Integer ticketType;
     private Province origin, destination;
     private String startDate, endDate;
-
-    {
-        ServiceProvince.listProvince(PROVINCES);
-    }
 
     public TicketViewModel() {
         this.ticketType = 0;
@@ -38,14 +32,6 @@ public class TicketViewModel extends BaseObservable {
         this.destination = destination;
         this.startDate = startDate;
         this.endDate = endDate;
-    }
-
-    public List<Province> getProvinces() {
-        return PROVINCES;
-    }
-
-    public Province getProvince(String name) {
-        return PROVINCES.stream().filter(p -> p.getName().equals(name)).findFirst().orElse(null);
     }
 
     @Bindable
@@ -138,7 +124,23 @@ public class TicketViewModel extends BaseObservable {
         }
     }
 
-    public boolean validate() {
-        return origin != null && destination != null;
+    public boolean validate(Context context) {
+        if (origin == null) {
+            Toast.makeText(context, "Vui lòng chọn điểm đi!", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        if (destination == null) {
+            Toast.makeText(context, "Vui lòng chọn điểm đến!", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        if (startDate == null) {
+            Toast.makeText(context, "Vui lòng chọn ngày đi!", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        if (ticketType == 1 && endDate == null) {
+            Toast.makeText(context, "Vui lòng chọn ngày về!", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        return true;
     }
 }

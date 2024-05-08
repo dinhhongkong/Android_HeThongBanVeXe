@@ -20,7 +20,7 @@ public class NumberUtils {
         return Double.NaN;
     }
 
-    public static String formatInteger(double number) {
+    public static String formatIntegerConstraint(double number) {
         formatter.applyPattern("#.#");
         return formatter.format(number);
     }

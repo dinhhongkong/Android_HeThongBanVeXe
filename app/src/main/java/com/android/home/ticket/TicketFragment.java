@@ -22,11 +22,23 @@ import com.android.databinding.FragmentTicketBinding;
 import com.android.home.ticket.recently_search.AdapterRecentlySearch;
 import com.android.model.Province;
 import com.android.model.response.RecentlySearchResponse;
+import com.android.service.api_implement.ServiceProvince;
 import com.android.utils.ActionBarUtils;
 import com.android.utils.SpaceItemDecoration;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class TicketFragment extends Fragment implements View.OnTouchListener, View.OnFocusChangeListener, View.OnClickListener,
         AdapterRecentlySearch.OnItemListener {
+    private static final List<Province> PROVINCES;
+
+    static {
+        PROVINCES = new ArrayList<>();
+        ServiceProvince.listProvince(PROVINCES);
+    }
+
+    private ArrayAdapter<Province> adapterProvince;
     private AdapterRecentlySearch adapterRecentlySearch;
     private FragmentTicketBinding mFragmentTicketBinding;
 
@@ -49,13 +61,19 @@ public class TicketFragment extends Fragment implements View.OnTouchListener, Vi
         setEvent();
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        // REFRESH.
+        mFragmentTicketBinding.actOrigin.setText("");
+        mFragmentTicketBinding.actDestination.setText("");
+        mFragmentTicketBinding.actOrigin.setAdapter(adapterProvince);
+        mFragmentTicketBinding.actDestination.setAdapter(adapterProvince);
+    }
+
     private void setData() {
-        // PROVINCE.
-        ArrayAdapter<Province> provinceAdapter = new ArrayAdapter<>(
-                requireContext(), android.R.layout.simple_dropdown_item_1line,
-                mFragmentTicketBinding.getTicketViewModel().getProvinces());
-        mFragmentTicketBinding.actOrigin.setAdapter(provinceAdapter);
-        mFragmentTicketBinding.actDestination.setAdapter(provinceAdapter);
+        // PROVINCE ADAPTER.
+        adapterProvince = new ArrayAdapter<>(requireContext(), android.R.layout.simple_dropdown_item_1line, PROVINCES);
         // RECENTLY SEARCH.
         this.adapterRecentlySearch = new AdapterRecentlySearch(this);
         mFragmentTicketBinding.rvRecentlySearch.setLayoutManager(
@@ -92,7 +110,7 @@ public class TicketFragment extends Fragment implements View.OnTouchListener, Vi
 
     private void setDestination(AutoCompleteTextView view, String name) {
         TicketViewModel viewModel = mFragmentTicketBinding.getTicketViewModel();
-        Province province = viewModel.getProvince(name);
+        Province province = PROVINCES.stream().filter(p -> p.getName().equals(name)).findFirst().orElse(null);
         if (province == null) view.setText("");
         else {
             if (view.getId() == R.id.actOrigin) viewModel.setOrigin(province);
@@ -124,17 +142,25 @@ public class TicketFragment extends Fragment implements View.OnTouchListener, Vi
     public void onClick(View v) {
         if (v.getId() == R.id.btnClearHistory) adapterRecentlySearch.clearData();
         else {
+            if (!mFragmentTicketBinding.getTicketViewModel().validate(v.getContext())) return;
             storeRecentlySearch();
             // REDIRECT TO RESERVATION PAGE.
             View view = getView();
             if (view == null) return;
-            Navigation.findNavController(view).navigate(R.id.action_ticketFragment_to_reservationFragment);
+
+            Bundle data = new Bundle();
+            TicketViewModel viewModel = mFragmentTicketBinding.getTicketViewModel();
+            data.putSerializable("origin", viewModel.getOrigin());
+            data.putSerializable("destination", viewModel.getDestination());
+            data.putString("startDate", viewModel.getStartDate());
+            data.putString("endDate", viewModel.getEndDate());
+
+            Navigation.findNavController(view).navigate(R.id.action_ticketFragment_to_reservationFragment, data);
         }
     }
 
     private void storeRecentlySearch() {
         TicketViewModel viewModel = mFragmentTicketBinding.getTicketViewModel();
-        if (!viewModel.validate()) return;
         RecentlySearchResponse item = new RecentlySearchResponse();
         item.setOrigin(viewModel.getOrigin());
         item.setDestination(viewModel.getDestination());

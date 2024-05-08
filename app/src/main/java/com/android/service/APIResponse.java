@@ -1,4 +1,4 @@
-package com.android.model;
+package com.android.service;
 
 public class APIResponse<T> {
     private int status;

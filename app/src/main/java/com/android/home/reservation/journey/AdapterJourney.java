@@ -1,4 +1,4 @@
-package com.android.home.reservation;
+package com.android.home.reservation.journey;
 
 import android.annotation.SuppressLint;
 import android.view.LayoutInflater;

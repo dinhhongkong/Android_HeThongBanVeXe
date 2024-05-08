@@ -76,7 +76,7 @@ public class OrderFragment extends Fragment {
         binding.Origin.setText(item.getOrigin().getName());
         binding.Destination.setText(item.getDestination().getName());
         binding.StartDate.setText(item.getStartTime());
-        binding.Duration.setText(NumberUtils.formatInteger(item.getDuration()));
+        binding.Duration.setText(NumberUtils.formatIntegerConstraint(item.getDuration()));
         binding.Price.setText(NumberUtils.format(item.getPrice()));
         binding.TicketQuantity.setText(String.valueOf(listChosenSeat.size()));
         binding.Total.setText(NumberUtils.format(item.getPrice() * listChosenSeat.size()));

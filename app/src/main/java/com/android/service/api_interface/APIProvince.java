@@ -1,8 +1,7 @@
 package com.android.service.api_interface;
 
-import com.android.model.APIResponse;
+import com.android.service.APIResponse;
 import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
 
 import retrofit2.Call;
 import retrofit2.http.GET;
