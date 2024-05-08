@@ -6,8 +6,9 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public interface API {
+    String IP_ADDRESS = "192.168.1.17", PORT = "8080";
     Retrofit builder = new Retrofit.Builder()
-            .baseUrl("http://192.168.1.17:8080/")
+            .baseUrl(String.format("http://%s:%s/", IP_ADDRESS, PORT))
             .addConverterFactory(GsonConverterFactory.create(new GsonBuilder().create()))
             .build();
 }

@@ -2,13 +2,14 @@ package com.android.service.api_implement;
 
 import androidx.annotation.NonNull;
 
-import com.android.service.APIResponse;
 import com.android.model.Province;
+import com.android.service.APIResponse;
 import com.android.service.api_interface.APIProvince;
 import com.google.gson.JsonArray;
-import com.google.gson.JsonObject;
+import com.google.gson.JsonElement;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -20,12 +21,11 @@ public class ServiceProvince {
             @Override
             public void onResponse(@NonNull Call<APIResponse<JsonArray>> call, @NonNull Response<APIResponse<JsonArray>> response) {
                 if (!response.isSuccessful() || response.body() == null) return;
-                response.body().getData().forEach(e -> {
-                    JsonObject data = e.getAsJsonObject();
-                    dataStorage.add(new Province(
-                            data.get("maTinh").getAsInt(),
-                            data.get("tenTinh").getAsString().toUpperCase()));
-                });
+                dataStorage.addAll(response.body().getData().asList()
+                        .stream()
+                        .map(JsonElement::getAsJsonObject)
+                        .map(e -> new Province(e.get("maTinh").getAsInt(), e.get("tenTinh").getAsString().toUpperCase()))
+                        .collect(Collectors.toList()));
             }
 
             @Override
