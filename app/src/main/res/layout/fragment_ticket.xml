@@ -1,15 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<androidx.fragment.app.FragmentContainerView
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <data>
-
-        <import type="android.view.View" />
-
-        <variable
-            name="TicketViewModel"
-            type="com.android.home.ticket.TicketViewModel" />
-
-    </data>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -253,4 +247,4 @@
 
     </LinearLayout>
 
-</layout>
+</androidx.fragment.app.FragmentContainerView>

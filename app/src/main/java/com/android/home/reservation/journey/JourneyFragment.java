@@ -82,7 +82,7 @@ public class JourneyFragment extends Fragment implements AdapterJourney.OnItemLi
         rvJourney.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
         rvJourney.addItemDecoration(new SpaceItemDecoration(50));
         rvJourney.setAdapter(adapterJourney);
-        // CALL API SEARCH JOURNEY.
+        // CALL ApiClient SEARCH JOURNEY.
         ServiceJourney.listJourney(originId, destinationId, startDate, adapterJourney);
     }
 

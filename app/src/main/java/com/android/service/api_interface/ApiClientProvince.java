@@ -6,8 +6,8 @@ import com.google.gson.JsonArray;
 import retrofit2.Call;
 import retrofit2.http.GET;
 
-public interface APIProvince extends API {
-    APIProvince service = builder.create(APIProvince.class);
+public interface ApiClientProvince extends ApiClient {
+    ApiClientProvince service = builder.create(ApiClientProvince.class);
 
     @GET("datve/get-all-province")
     Call<APIResponse<JsonArray>> listProvince();

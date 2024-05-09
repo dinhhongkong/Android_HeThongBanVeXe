@@ -4,7 +4,7 @@ import androidx.annotation.NonNull;
 
 import com.android.model.Province;
 import com.android.service.APIResponse;
-import com.android.service.api_interface.APIProvince;
+import com.android.service.api_interface.ApiClientProvince;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 
@@ -17,7 +17,7 @@ import retrofit2.Response;
 
 public class ServiceProvince {
     public static void listProvince(List<Province> dataStorage) {
-        APIProvince.service.listProvince().enqueue(new Callback<APIResponse<JsonArray>>() {
+        ApiClientProvince.service.listProvince().enqueue(new Callback<APIResponse<JsonArray>>() {
             @Override
             public void onResponse(@NonNull Call<APIResponse<JsonArray>> call, @NonNull Response<APIResponse<JsonArray>> response) {
                 if (!response.isSuccessful() || response.body() == null) return;

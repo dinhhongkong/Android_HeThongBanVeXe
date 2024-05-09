@@ -1,6 +1,5 @@
 package com.android.home.ticket;
 
-import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -12,46 +11,36 @@ import android.widget.AutoCompleteTextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.android.R;
 import com.android.databinding.FragmentTicketBinding;
-import com.android.home.ticket.recently_search.AdapterRecentlySearch;
+import com.android.home.ticket.recently_search.RecentlySearchAdapter;
 import com.android.model.Province;
 import com.android.model.response.RecentlySearchResponse;
-import com.android.service.api_implement.ServiceProvince;
 import com.android.utils.ActionBarUtils;
 import com.android.utils.SpaceItemDecoration;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class TicketFragment extends Fragment implements View.OnTouchListener, View.OnFocusChangeListener, View.OnClickListener,
-        AdapterRecentlySearch.OnItemListener {
-    private static final List<Province> PROVINCES;
-
-    static {
-        PROVINCES = new ArrayList<>();
-        ServiceProvince.listProvince(PROVINCES);
-    }
+        RecentlySearchAdapter.OnItemListener {
+//    private static final List<Province> PROVINCES;
+//
+//    static {
+//        PROVINCES = new ArrayList<>();
+//        ServiceProvince.listProvince(PROVINCES);
+//    }
 
     private ArrayAdapter<Province> adapterProvince;
-    private AdapterRecentlySearch adapterRecentlySearch;
-    private FragmentTicketBinding mFragmentTicketBinding;
+    private RecentlySearchAdapter adapterRecentlySearch;
+    private FragmentTicketBinding binding;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         ActionBarUtils.setTitle("ĐẶT VÉ XE");
-
-        this.mFragmentTicketBinding = DataBindingUtil
-                .inflate(inflater, R.layout.fragment_ticket, container, false);
-        TicketViewModel ticketViewModel = new TicketViewModel();
-        mFragmentTicketBinding.setTicketViewModel(ticketViewModel);
-
-        return mFragmentTicketBinding.getRoot();
+        binding = FragmentTicketBinding.inflate(inflater,container,false);
+        return binding.getRoot();
     }
 
     @Override
@@ -61,31 +50,23 @@ public class TicketFragment extends Fragment implements View.OnTouchListener, Vi
         setEvent();
     }
 
-    @Override
-    public void onResume() {
-        super.onResume();
-        // REFRESH.
-        mFragmentTicketBinding.actOrigin.setText("");
-        mFragmentTicketBinding.actDestination.setText("");
-        mFragmentTicketBinding.actOrigin.setAdapter(adapterProvince);
-        mFragmentTicketBinding.actDestination.setAdapter(adapterProvince);
-    }
+
 
     private void setData() {
         // PROVINCE ADAPTER.
         adapterProvince = new ArrayAdapter<>(requireContext(), android.R.layout.simple_dropdown_item_1line, PROVINCES);
         // RECENTLY SEARCH.
-        this.adapterRecentlySearch = new AdapterRecentlySearch(this);
-        mFragmentTicketBinding.rvRecentlySearch.setLayoutManager(
+        this.adapterRecentlySearch = new RecentlySearchAdapter(this);
+        binding.rvRecentlySearch.setLayoutManager(
                 new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
-        mFragmentTicketBinding.rvRecentlySearch.addItemDecoration(new SpaceItemDecoration(50));
-        mFragmentTicketBinding.rvRecentlySearch.setAdapter(adapterRecentlySearch);
+        binding.rvRecentlySearch.addItemDecoration(new SpaceItemDecoration(50));
+        binding.rvRecentlySearch.setAdapter(adapterRecentlySearch);
     }
 
-    @SuppressLint("ClickableViewAccessibility")
+
     private void setEvent() {
-        AutoCompleteTextView actOrigin = mFragmentTicketBinding.actOrigin;
-        AutoCompleteTextView actDestination = mFragmentTicketBinding.actDestination;
+        AutoCompleteTextView actOrigin = binding.actOrigin;
+        AutoCompleteTextView actDestination = binding.actDestination;
         // SHOW DROPDOWN LIST EVENT.
         actOrigin.setOnTouchListener(this);
         actDestination.setOnTouchListener(this);
@@ -104,8 +85,8 @@ public class TicketFragment extends Fragment implements View.OnTouchListener, Vi
     }
 
     private AutoCompleteTextView getAutoCompleteTextView(int viewId) {
-        if (viewId == R.id.actOrigin) return mFragmentTicketBinding.actOrigin;
-        else return mFragmentTicketBinding.actDestination;
+        if (viewId == R.id.actOrigin) return binding.actOrigin;
+        else return binding.actDestination;
     }
 
     private void setDestination(AutoCompleteTextView view, String name) {
@@ -113,12 +94,13 @@ public class TicketFragment extends Fragment implements View.OnTouchListener, Vi
         Province province = PROVINCES.stream().filter(p -> p.getName().equals(name)).findFirst().orElse(null);
         if (province == null) view.setText("");
         else {
-            if (view.getId() == R.id.actOrigin) viewModel.setOrigin(province);
+            if (view.getId() == R.id.actOrigin)
+                viewModel.setOrigin(province);
             else viewModel.setDestination(province);
         }
     }
 
-    @SuppressLint("ClickableViewAccessibility")
+
     @Override
     public boolean onTouch(View v, MotionEvent event) {
         AutoCompleteTextView view = getAutoCompleteTextView(v.getId());
@@ -171,8 +153,8 @@ public class TicketFragment extends Fragment implements View.OnTouchListener, Vi
     @Override
     public void onItemClickListener(View v, int position) {
         RecentlySearchResponse item = adapterRecentlySearch.getItem(position);
-        mFragmentTicketBinding.actOrigin.setText(item.getOrigin().getName());
-        mFragmentTicketBinding.actDestination.setText(item.getDestination().getName());
-        mFragmentTicketBinding.edtStartDate.setText(item.getDepartureDate());
+        binding.actOrigin.setText(item.getOrigin().getName());
+        binding.actDestination.setText(item.getDestination().getName());
+        binding.edtStartDate.setText(item.getDepartureDate());
     }
 }

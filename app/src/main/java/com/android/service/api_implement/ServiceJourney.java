@@ -6,7 +6,7 @@ import com.android.home.reservation.journey.AdapterJourney;
 import com.android.model.Province;
 import com.android.model.response.JourneyResponse;
 import com.android.service.APIResponse;
-import com.android.service.api_interface.APIJourney;
+import com.android.service.api_interface.ApiClientJourney;
 import com.android.utils.DateUtils;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
@@ -20,7 +20,7 @@ import retrofit2.Response;
 
 public class ServiceJourney {
     public static void listJourney(int originId, int destinationId, String startDate, AdapterJourney adapter) {
-        APIJourney.service.listJourney(originId, destinationId, startDate).enqueue(new Callback<APIResponse<JsonArray>>() {
+        ApiClientJourney.service.listJourney(originId, destinationId, startDate).enqueue(new Callback<APIResponse<JsonArray>>() {
             @Override
             public void onResponse(@NonNull Call<APIResponse<JsonArray>> call, @NonNull Response<APIResponse<JsonArray>> response) {
                 if (!response.isSuccessful() || response.body() == null) return;

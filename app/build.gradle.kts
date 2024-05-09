@@ -32,28 +32,28 @@ android {
 
     buildFeatures {
         viewBinding = true
-        dataBinding = true
+//        dataBinding = true
     }
 }
 
 dependencies {
     // LIBRARY JAR.
-//    implementation(
-//        fileTree(
-//            mapOf(
-//                "dir" to "C:\\Users\\KongDinh\\Documents\\Project\\DichVuHeThongDatVeXe\\Android_HeThongBanVeXe\\ZPDK-Android",
-//                "include" to listOf("*.aar")
-//            )
-//        )
-//    )
     implementation(
         fileTree(
             mapOf(
-                "dir" to "C:\\Users\\HP\\Documents\\CoachTicketBookingApp\\ZPDK-Android",
+                "dir" to "C:\\Users\\KongDinh\\Documents\\Project\\DichVuHeThongDatVeXe\\Android_HeThongBanVeXe\\ZPDK-Android",
                 "include" to listOf("*.aar")
             )
         )
     )
+//    implementation(
+//        fileTree(
+//            mapOf(
+//                "dir" to "C:\\Users\\HP\\Documents\\CoachTicketBookingApp\\ZPDK-Android",
+//                "include" to listOf("*.aar")
+//            )
+//        )
+//    )
 
     implementation("com.squareup.retrofit2:retrofit: 2.9.0")
     implementation("com.squareup.okhttp3:logging-interceptor:4.12.0")

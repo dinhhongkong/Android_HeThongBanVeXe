@@ -7,7 +7,6 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.navigation.Navigation;
@@ -26,33 +25,23 @@ import java.util.Objects;
 
 public class ReservationFragment extends Fragment {
     private final Map<String, Object> searchData = new HashMap<>();
-    private FragmentReservationBinding mFragmentReservationBinding;
+    private FragmentReservationBinding binding;
 
-    @Override
-    public void onDestroy() {
-        ActionBarUtils.toggle(true);
-        super.onDestroy();
-    }
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         receiveData();
         ActionBarUtils.toggle(false);
-
-        this.mFragmentReservationBinding = DataBindingUtil
-                .inflate(inflater, R.layout.fragment_reservation, container, false);
-        ReservationViewModel reservationViewModel = new ReservationViewModel();
-        mFragmentReservationBinding.setReservationViewModel(reservationViewModel);
-
-        return mFragmentReservationBinding.getRoot();
+        binding = FragmentReservationBinding.inflate(inflater,container,false);
+        return binding.getRoot();
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         // SETUP TAB LAYOUT & VIEW PAGER.
-        TabLayout tabLayout = mFragmentReservationBinding.TabLayout;
-        ViewPager2 viewPager2 = mFragmentReservationBinding.ViewPager;
+        TabLayout tabLayout = binding.TabLayout;
+        ViewPager2 viewPager2 = binding.ViewPager;
 
         FragmentManager fragmentManager = requireActivity().getSupportFragmentManager();
         ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(fragmentManager, getLifecycle());
@@ -63,6 +52,13 @@ public class ReservationFragment extends Fragment {
             tab.setText(viewPagerAdapter.getPageTitle(i));
         }).attach();
     }
+
+    @Override
+    public void onDestroy() {
+        ActionBarUtils.toggle(true);
+        super.onDestroy();
+    }
+
 
     private void receiveData() {
         Bundle data = getArguments();

@@ -9,6 +9,7 @@ import android.widget.Toast;
 
 import androidx.databinding.BaseObservable;
 import androidx.databinding.Bindable;
+import androidx.lifecycle.ViewModel;
 
 import com.android.BR;
 import com.android.R;
@@ -17,7 +18,7 @@ import com.android.utils.DateUtils;
 
 import java.util.Date;
 
-public class TicketViewModel extends BaseObservable {
+public class TicketViewModel extends ViewModel {
     private Integer ticketType;
     private Province origin, destination;
     private String startDate, endDate;
