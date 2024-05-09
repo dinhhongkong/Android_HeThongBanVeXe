@@ -12,6 +12,7 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.stream.Collectors;
 
 import retrofit2.Call;
@@ -36,13 +37,17 @@ public class ServiceJourney {
                             int destinationId = e.get("maTinhDen").getAsInt();
                             String originName = e.get("tenTinhDi").getAsString();
                             String destinationName = e.get("tenTinhDen").getAsString();
+                            List<String> listReversedSeat = e.get("listMaGhe").getAsJsonArray()
+                                    .asList().stream()
+                                    .map(JsonElement::getAsString)
+                                    .collect(Collectors.toList());
 
                             JourneyResponse item = new JourneyResponse();
                             item.setOrigin(new Province(originId, originName));
                             item.setDestination(new Province(destinationId, destinationName));
                             item.setStartTime(datePart + " " + timePart);
                             item.setEndTime(DateUtils.getCalculatedDateString(datePart, timePart, duration));
-                            item.setListReservedSeat(new ArrayList<>());
+                            item.setListReservedSeat(listReversedSeat);
                             item.setDuration(duration);
                             item.setPrice(price);
                             return item;
