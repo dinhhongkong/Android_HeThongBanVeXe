@@ -1,4 +1,4 @@
-package com.android.home.reservation;
+package com.android.feature.home.reservation;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -29,7 +29,6 @@ public class ReservationFragment extends Fragment {
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-//        receiveData();
         ActionBarUtils.toggle(false);
         binding = FragmentReservationBinding.inflate(inflater,container,false);
         return binding.getRoot();
@@ -54,17 +53,7 @@ public class ReservationFragment extends Fragment {
     }
 
     private void setupTabLayoutAndViewPager(){
-        TabLayout tabLayout = binding.TabLayout;
-        ViewPager2 viewPager2 = binding.ViewPager;
 
-        FragmentManager fragmentManager = requireActivity().getSupportFragmentManager();
-        ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(fragmentManager, getLifecycle());
-//        viewPagerAdapter.setData(searchData);
-        viewPager2.setAdapter(viewPagerAdapter);
-
-        new TabLayoutMediator(tabLayout, viewPager2, (tab, i) -> {
-            tab.setText(viewPagerAdapter.getPageTitle(i));
-        }).attach();
     }
 
 
@@ -72,8 +61,6 @@ public class ReservationFragment extends Fragment {
 
 
     private void goBack() {
-        View root = getView();
-        if (root == null) return;
-        Navigation.findNavController(root).navigate(R.id.action_reservationFragment_to_ticketFragment);
+        Navigation.findNavController(requireView()).navigate(R.id.action_reservationFragment_to_ticketFragment);
     }
 }

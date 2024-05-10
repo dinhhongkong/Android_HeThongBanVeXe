@@ -1,4 +1,4 @@
-package com.android.home.ticket;
+package com.android.feature.home.ticket;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -14,7 +14,6 @@ import com.android.utils.ActionBarUtils;
 
 public class TicketFragment extends Fragment{
 
-//    private RecentlySearchAdapter adapterRecentlySearch;
     private FragmentTicketBinding binding;
 
     @Override
@@ -27,8 +26,7 @@ public class TicketFragment extends Fragment{
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-//        setData();
-//        setEvent();
+
     }
 
     public boolean validate() {

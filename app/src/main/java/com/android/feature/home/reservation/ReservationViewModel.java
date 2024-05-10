@@ -1,4 +1,4 @@
-package com.android.home.reservation;
+package com.android.feature.home.reservation;
 
 import androidx.lifecycle.ViewModel;
 

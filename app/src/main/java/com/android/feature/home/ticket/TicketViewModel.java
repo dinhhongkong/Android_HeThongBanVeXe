@@ -1,4 +1,4 @@
-package com.android.home.ticket;
+package com.android.feature.home.ticket;
 
 import androidx.lifecycle.ViewModel;
 
