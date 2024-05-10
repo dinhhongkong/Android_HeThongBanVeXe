@@ -24,13 +24,12 @@ import java.util.Map;
 import java.util.Objects;
 
 public class ReservationFragment extends Fragment {
-    private final Map<String, Object> searchData = new HashMap<>();
     private FragmentReservationBinding binding;
 
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        receiveData();
+//        receiveData();
         ActionBarUtils.toggle(false);
         binding = FragmentReservationBinding.inflate(inflater,container,false);
         return binding.getRoot();
@@ -39,18 +38,13 @@ public class ReservationFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        // SETUP TAB LAYOUT & VIEW PAGER.
-        TabLayout tabLayout = binding.TabLayout;
-        ViewPager2 viewPager2 = binding.ViewPager;
+        setupTabLayoutAndViewPager();
+    }
 
-        FragmentManager fragmentManager = requireActivity().getSupportFragmentManager();
-        ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(fragmentManager, getLifecycle());
-        viewPagerAdapter.setData(searchData);
-        viewPager2.setAdapter(viewPagerAdapter);
-
-        new TabLayoutMediator(tabLayout, viewPager2, (tab, i) -> {
-            tab.setText(viewPagerAdapter.getPageTitle(i));
-        }).attach();
+    @Override
+    public void onDestroyView() {
+        binding = null;
+        super.onDestroyView();
     }
 
     @Override
@@ -59,21 +53,23 @@ public class ReservationFragment extends Fragment {
         super.onDestroy();
     }
 
+    private void setupTabLayoutAndViewPager(){
+        TabLayout tabLayout = binding.TabLayout;
+        ViewPager2 viewPager2 = binding.ViewPager;
 
-    private void receiveData() {
-        Bundle data = getArguments();
-        try {
-            Province origin = ((Province) Objects.requireNonNull(data).getSerializable("origin"));
-            Province destination = ((Province) Objects.requireNonNull(data).getSerializable("destination"));
+        FragmentManager fragmentManager = requireActivity().getSupportFragmentManager();
+        ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(fragmentManager, getLifecycle());
+//        viewPagerAdapter.setData(searchData);
+        viewPager2.setAdapter(viewPagerAdapter);
 
-            searchData.put("originId", Objects.requireNonNull(origin).getId());
-            searchData.put("destinationId", Objects.requireNonNull(destination).getId());
-            searchData.put("startDate", data.getString("startDate"));
-            searchData.put("endDate", data.getString("endDate"));
-        } catch (Exception e) {
-            goBack();
-        }
+        new TabLayoutMediator(tabLayout, viewPager2, (tab, i) -> {
+            tab.setText(viewPagerAdapter.getPageTitle(i));
+        }).attach();
     }
+
+
+
+
 
     private void goBack() {
         View root = getView();

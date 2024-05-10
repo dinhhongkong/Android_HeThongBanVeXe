@@ -30,8 +30,6 @@ import vn.zalopay.sdk.listeners.PayOrderListener;
 
 public class OrderFragment extends Fragment {
     private FragmentOrderBinding binding;
-    private JourneyResponse item;
-    private List<String> listChosenSeat;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -44,26 +42,16 @@ public class OrderFragment extends Fragment {
 
     @Override
     public void onDestroyView() {
-        super.onDestroyView();
         binding = null;
+        super.onDestroyView();
     }
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        this.receiveData();
-
         binding = FragmentOrderBinding.inflate(inflater, container, false);
         return binding.getRoot();
     }
 
-    private void receiveData() {
-        Bundle data = getArguments();
-        if (data == null) goBack();
-        else {
-            this.item = (JourneyResponse) data.getSerializable("journey");
-            this.listChosenSeat = data.getStringArrayList("chosenSeats");
-        }
-    }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
@@ -73,13 +61,13 @@ public class OrderFragment extends Fragment {
     }
 
     private void setControl() {
-        binding.Origin.setText(item.getOrigin().getName());
-        binding.Destination.setText(item.getDestination().getName());
-        binding.StartDate.setText(item.getStartTime());
-        binding.Duration.setText(NumberUtils.formatIntegerConstraint(item.getDuration()));
-        binding.Price.setText(NumberUtils.format(item.getPrice()));
-        binding.TicketQuantity.setText(String.valueOf(listChosenSeat.size()));
-        binding.Total.setText(NumberUtils.format(item.getPrice() * listChosenSeat.size()));
+//        binding.Origin.setText(item.getOrigin().getName());
+//        binding.Destination.setText(item.getDestination().getName());
+//        binding.StartDate.setText(item.getStartTime());
+//        binding.Duration.setText(NumberUtils.formatIntegerConstraint(item.getDuration()));
+//        binding.Price.setText(NumberUtils.format(item.getPrice()));
+//        binding.TicketQuantity.setText(String.valueOf(listChosenSeat.size()));
+//        binding.Total.setText(NumberUtils.format(item.getPrice() * listChosenSeat.size()));
     }
 
     private void setEvent() {

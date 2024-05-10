@@ -3,7 +3,6 @@ package com.android.service.api_implement;
 import androidx.annotation.NonNull;
 
 import com.android.home.reservation.journey.AdapterJourney;
-import com.android.model.Province;
 import com.android.model.response.JourneyResponse;
 import com.android.service.APIResponse;
 import com.android.service.api_interface.ApiClientJourney;
@@ -17,6 +16,7 @@ import java.util.stream.Collectors;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+import com.android.model.Province;
 
 public class ServiceJourney {
     public static void listJourney(int originId, int destinationId, String startDate, AdapterJourney adapter) {

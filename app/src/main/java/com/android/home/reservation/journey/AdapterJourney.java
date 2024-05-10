@@ -6,7 +6,6 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
-import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.R;
@@ -39,19 +38,17 @@ public class AdapterJourney extends RecyclerView.Adapter<AdapterJourney.ItemView
         return data.get(position);
     }
 
+
     @NonNull
     @Override
     public ItemViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        LayoutInflater inflater = LayoutInflater.from(parent.getContext());
-        ItemJourneyBinding mItemJourneyBinding = DataBindingUtil
-                .inflate(inflater, R.layout.item_journey, parent, false);
-        return new ItemViewHolder(mItemJourneyBinding);
+        return null;
     }
 
     @Override
     public void onBindViewHolder(@NonNull ItemViewHolder holder, int position) {
         JourneyResponse item = getItem(position);
-        holder.binding.setJourneyResponse(item);
+
     }
 
     @Override

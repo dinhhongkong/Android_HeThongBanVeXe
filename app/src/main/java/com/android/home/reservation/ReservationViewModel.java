@@ -1,4 +1,7 @@
 package com.android.home.reservation;
 
-public class ReservationViewModel {
+import androidx.lifecycle.ViewModel;
+
+public class ReservationViewModel extends ViewModel {
+
 }

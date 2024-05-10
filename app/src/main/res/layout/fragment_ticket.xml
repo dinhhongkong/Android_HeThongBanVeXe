@@ -30,8 +30,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:checked="@{TicketViewModel.ticketType == 0}"
-                    android:onCheckedChanged="@{(view, isChecked) -> TicketViewModel.setTicketTypeChoice(view, isChecked)}"
                     android:text="Một chiều"
                     android:textSize="16sp"
                     android:textStyle="italic" />
@@ -41,8 +39,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:checked="@{TicketViewModel.ticketType == 1}"
-                    android:onCheckedChanged="@{(view, isChecked) -> TicketViewModel.setTicketTypeChoice(view, isChecked)}"
                     android:text="Khứ hồi"
                     android:textSize="16sp"
                     android:textStyle="italic" />
@@ -144,8 +140,7 @@
                         android:text="Ngày về"
                         android:textColor="@color/black"
                         android:textSize="16sp"
-                        android:textStyle="italic"
-                        android:visibility="@{TicketViewModel.ticketType == 1 ? View.VISIBLE : View.INVISIBLE}" />
+                        android:textStyle="italic" />
                 </TableRow>
 
                 <TableRow>
@@ -158,9 +153,7 @@
                         android:autofillHints=""
                         android:background="@drawable/bg_edit_text"
                         android:gravity="center_vertical"
-                        android:onClick="@{TicketViewModel.setStartDate}"
                         android:paddingHorizontal="15dp"
-                        android:text="@={TicketViewModel.startDate}"
                         android:textSize="16sp" />
 
                     <TextView
@@ -171,11 +164,10 @@
                         android:autofillHints=""
                         android:background="@drawable/bg_edit_text"
                         android:gravity="center_vertical"
-                        android:onClick="@{TicketViewModel.setEndDate}"
                         android:paddingHorizontal="15dp"
                         android:text="@={TicketViewModel.endDate}"
                         android:textSize="16sp"
-                        android:visibility="@{TicketViewModel.ticketType == 1 ? View.VISIBLE : View.INVISIBLE}" />
+                       />
 
                 </TableRow>
 

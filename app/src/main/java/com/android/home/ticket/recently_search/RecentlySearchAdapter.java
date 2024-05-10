@@ -8,32 +8,32 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.databinding.ItemRecentlySearchBinding;
-import com.android.model.response.RecentlySearchResponse;
+import com.android.model.RecentlySearch;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class RecentlySearchAdapter extends RecyclerView.Adapter<RecentlySearchAdapter.ItemViewHolder> {
     private final OnItemListener onItemListener;
-    private List<RecentlySearchResponse> data;
+    private List<RecentlySearch> data;
 
     public RecentlySearchAdapter(OnItemListener onItemListener) {
         this.data = new ArrayList<>();
         this.onItemListener = onItemListener;
     }
 
-    public List<RecentlySearchResponse> getData() {
+    public List<RecentlySearch> getData() {
         return data;
     }
 
 //
-//    public void setData(List<RecentlySearchResponse> data) {
+//    public void setData(List<RecentlySearch> data) {
 //        this.data = data;
 //        notifyDataSetChanged();
 //    }
 //
 //
-//    public void addData(RecentlySearchResponse item) {
+//    public void addData(RecentlySearch item) {
 //        if (data.contains(item)) return;
 //        this.data.add(item);
 //        notifyDataSetChanged();
@@ -45,7 +45,7 @@ public class RecentlySearchAdapter extends RecyclerView.Adapter<RecentlySearchAd
 //        notifyDataSetChanged();
 //    }
 
-//    public RecentlySearchResponse getItem(int position) {
+//    public RecentlySearch getItem(int position) {
 //        return data.get(position);
 //    }
 

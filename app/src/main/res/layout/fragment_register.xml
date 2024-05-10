@@ -37,7 +37,6 @@
                 android:inputType="phone"
                 android:paddingHorizontal="25dp"
                 android:paddingVertical="20dp"
-                android:text="@={RegisterViewModel.username}"
                 android:textColor="@color/teal_600"
                 android:textColorHint="@color/teal_600" />
 
@@ -51,7 +50,6 @@
                 android:inputType="textPassword"
                 android:paddingHorizontal="25dp"
                 android:paddingVertical="20dp"
-                android:text="@={RegisterViewModel.password}"
                 android:textColor="@color/teal_600"
                 android:textColorHint="@color/teal_600" />
 
@@ -65,7 +63,6 @@
                 android:inputType="textPassword"
                 android:paddingHorizontal="25dp"
                 android:paddingVertical="20dp"
-                android:text="@={RegisterViewModel.password2}"
                 android:textColor="@color/teal_600"
                 android:textColorHint="@color/teal_600" />
 
@@ -88,9 +85,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:background="@drawable/bg_rounded"
-                android:backgroundTint="@{RegisterViewModel.username.length() > 0 &amp;&amp; RegisterViewModel.password.length() > 0 &amp;&amp; RegisterViewModel.password2.length() > 0 &amp;&amp; ckbPolicy.checked ? @color/red_600 : @color/red_300}"
-                android:enabled="@{RegisterViewModel.username.length() > 0 &amp;&amp; RegisterViewModel.password.length() > 0 &amp;&amp; RegisterViewModel.password2.length() > 0 &amp;&amp; ckbPolicy.checked}"
-                android:onClick="@{RegisterViewModel.register}"
+
                 android:text="ĐĂNG KÝ" />
 
         </LinearLayout>

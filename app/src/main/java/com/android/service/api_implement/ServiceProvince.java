@@ -2,7 +2,6 @@ package com.android.service.api_implement;
 
 import androidx.annotation.NonNull;
 
-import com.android.model.Province;
 import com.android.service.APIResponse;
 import com.android.service.api_interface.ApiClientProvince;
 import com.google.gson.JsonArray;
@@ -14,6 +13,7 @@ import java.util.stream.Collectors;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+import com.android.model.Province;
 
 public class ServiceProvince {
     public static void listProvince(List<Province> dataStorage) {
