@@ -25,5 +25,9 @@ public class ProfileFragment extends Fragment {
         return binding.getRoot();
     }
 
-
+    @Override
+    public void onDestroyView() {
+        binding = null;
+        super.onDestroyView();
+    }
 }

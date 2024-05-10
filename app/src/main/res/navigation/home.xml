@@ -24,7 +24,7 @@
     </fragment>
     <fragment
         android:id="@+id/ticketFragment"
-        android:name="com.android.home.ticket.TicketFragment"
+        android:name="com.android.feature.home.ticket.TicketFragment"
         android:label="fragment_ticket"
         tools:layout="@layout/fragment_ticket">
         <action
@@ -36,7 +36,7 @@
     </fragment>
     <fragment
         android:id="@+id/reservationFragment"
-        android:name="com.android.home.reservation.ReservationFragment"
+        android:name="com.android.feature.home.reservation.ReservationFragment"
         android:label="fragment_reservation"
         tools:layout="@layout/fragment_reservation">
         <action
