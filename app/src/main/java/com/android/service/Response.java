@@ -1,14 +1,14 @@
 package com.android.service;
 
-public class APIResponse<T> {
+public class Response<T> {
     private int status;
     private String message;
     private T data;
 
-    public APIResponse() {
+    public Response() {
     }
 
-    public APIResponse(int status, String message, T data) {
+    public Response(int status, String message, T data) {
         this.status = status;
         this.message = message;
         this.data = data;
