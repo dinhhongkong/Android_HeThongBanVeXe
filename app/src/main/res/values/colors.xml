@@ -11,4 +11,13 @@
     <color name="indigo_500">#6366f1</color>
     <color name="green_500">#22c55e</color>
     <color name="sky_500">#0ea5e9</color>
+
+    <color name="orange">#F2724B</color>
+    <color name="text_black_100">#FF000000</color>
+    <color name="text_black_50">#404040</color>
+    <color name="text_green">#378367</color>
+    <color name="text_orange_100">#F2724B</color>
+    <color name="text_orange_50">#FAD1C4</color>
+    <color name="text_blue">#339AF4</color>
+    <color name="background_color">#F3F3F5</color>
 </resources>
