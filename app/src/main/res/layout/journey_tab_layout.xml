@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/tvContent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Ngay di"
+        android:textSize="22sp"
+        android:background="@color/orange"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        android:gravity="center" />
+    <TextView
+        android:padding="5dp"
+        android:id="@+id/tvDate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="12/02/2036"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:background="@color/orange"
+        android:textColor="@color/white"
+        android:gravity="center"/>
+
+</LinearLayout>

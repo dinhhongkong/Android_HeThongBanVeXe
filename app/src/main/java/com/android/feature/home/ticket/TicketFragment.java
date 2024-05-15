@@ -1,20 +1,44 @@
 package com.android.feature.home.ticket;
 
+import android.app.DatePickerDialog;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
+import android.widget.DatePicker;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.Navigation;
 
+import com.android.R;
 import com.android.databinding.FragmentTicketBinding;
+import com.android.feature.home.reservation.ReservationViewModel;
+import com.android.model.Province;
 import com.android.utils.ActionBarUtils;
+import com.android.utils.DateUtils;
+
+import java.util.Date;
 
 public class TicketFragment extends Fragment{
 
     private FragmentTicketBinding binding;
+    private ReservationViewModel viewModel;
+    private ArrayAdapter<Province> provinceAdapter;
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        viewModel = new ViewModelProvider(requireActivity()).get(ReservationViewModel.class);
+        viewModel.loadAllProvince();
+    }
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -26,133 +50,142 @@ public class TicketFragment extends Fragment{
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
+        initAdapter();
+        setEvent();
+        observeData();
     }
 
+    private void initAdapter() {
+        viewModel.getProvinces().observe(getViewLifecycleOwner(), provinces -> {
+            provinceAdapter = new ArrayAdapter<>(requireContext(), android.R.layout.simple_dropdown_item_1line, provinces);
+            binding.actOrigin.setAdapter(provinceAdapter);
+            binding.actDestination.setAdapter(provinceAdapter);
+        });
+    }
+
+    private void observeData() {
+        viewModel.getIsRoundTrip().observe(getViewLifecycleOwner(), isRoundTrip ->{
+            if (isRoundTrip) {
+                binding.edtEndDate.setVisibility(View.VISIBLE);
+                binding.txtEndDate.setVisibility(View.VISIBLE);
+            }
+            else {
+                binding.edtEndDate.setVisibility(View.INVISIBLE);
+                binding.txtEndDate.setVisibility(View.INVISIBLE);
+            }
+
+        });
+    }
+
+
+    private void setEvent() {
+
+        // SHOW DROPDOWN LIST EVENT.
+        binding.actOrigin.setOnClickListener(v->{
+            binding.actOrigin.showDropDown();
+        });
+
+        binding.actDestination.setOnClickListener(v->{
+            binding.actDestination.showDropDown();
+        });
+        // TYPE DESTINATION EVENT.
+//        binding.actOrigin.setOnFocusChangeListener();
+//        binding.actDestination.setOnFocusChangeListener();
+        // CHOOSE DESTINATION EVENT.
+//        binding.actOrigin.setOnItemClickListener((adapterView, view, i, l) -> {
+//            adapterView.setOnClickListener(view1 -> {
+//                binding.actOrigin.setText(adapterView.getSelectedItem().toString());
+//            });
+//        });
+//        binding.actDestination.setOnItemClickListener((parent, view, position, id) -> {
+//                    binding.actOrigin.setText(parent.getSelectedItem().toString());
+//        });
+        // CLEAR HISTORY EVENT.
+        binding.btnClearHistory.setOnClickListener(v->{
+
+        });
+        // SUBMIT EVENT.
+        binding.btnSubmit.setOnClickListener(v->{
+            Navigation.findNavController(requireView()).navigate(R.id.action_ticketFragment_to_reservationFragment);
+        });
+
+
+        binding.edtStartDate.setOnClickListener(v->{
+            setStartDate();
+        });
+
+        binding.edtEndDate.setOnClickListener(v->{
+            setEndDate();
+        });
+
+        binding.rdbTwoWay.setOnClickListener(v->{
+            viewModel.setIsRoundTrip(binding.rdbTwoWay.isChecked());
+        });
+
+        binding.rdbOneWay.setOnClickListener(v->{
+            viewModel.setIsRoundTrip(binding.rdbTwoWay.isChecked());
+        });
+    }
+
+    private AutoCompleteTextView getAutoCompleteTextView(int viewId) {
+        if (viewId == R.id.actOrigin)
+            return binding.actOrigin;
+        else return binding.actDestination;
+    }
+
+    public void setStartDate() {
+        DatePickerDialog dialog = new DatePickerDialog(requireContext());
+        dialog.setOnDateSetListener((view1, year, month, dayOfMonth) -> {
+            Date date = DateUtils.getDate(year, month, dayOfMonth);
+            binding.edtStartDate.setText(DateUtils.format(date));
+        });
+        // CONSTRAINT MIN & MAX DATE.
+        DatePicker datePicker = dialog.getDatePicker();
+        datePicker.setMinDate(DateUtils.getDate().getTime());
+        if (!binding.edtEndDate.getText().toString().isEmpty()) {
+            datePicker.setMaxDate(DateUtils.parse(binding.edtEndDate.getText().toString()).getTime());
+        }
+
+        dialog.show();
+    }
+
+
+    public void setEndDate() {
+        DatePickerDialog dialog = new DatePickerDialog(requireContext());
+        dialog.setOnDateSetListener((view1, year, month, dayOfMonth) -> {
+            Date date = DateUtils.getDate(year, month, dayOfMonth);
+            binding.edtEndDate.setText(DateUtils.format(date));
+        });
+        // CONSTRAINT MIN & MAX DATE.
+        DatePicker datePicker = dialog.getDatePicker();
+        datePicker.setMinDate(DateUtils.parse(binding.edtStartDate.getText().toString()).getTime());
+
+        dialog.show();
+    }
+
+
+
     public boolean validate() {
-//        if (origin == null) {
-//            Toast.makeText(context, "Vui lòng chọn điểm đi!", Toast.LENGTH_SHORT).show();
-//            return false;
-//        }
-//        if (destination == null) {
-//            Toast.makeText(context, "Vui lòng chọn điểm đến!", Toast.LENGTH_SHORT).show();
-//            return false;
-//        }
-//        if (startDate == null) {
-//            Toast.makeText(context, "Vui lòng chọn ngày đi!", Toast.LENGTH_SHORT).show();
-//            return false;
-//        }
-//        if (ticketType == 1 && endDate == null) {
-//            Toast.makeText(context, "Vui lòng chọn ngày về!", Toast.LENGTH_SHORT).show();
-//            return false;
-//        }
+        if (binding.actOrigin.getText().toString().isEmpty()) {
+            Toast.makeText(requireContext(), "Vui lòng chọn điểm đi!", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        if (binding.actDestination.getText().toString().isEmpty()) {
+            Toast.makeText(requireContext(), "Vui lòng chọn điểm đến!", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        if (binding.edtStartDate.getText().toString().isEmpty()) {
+            Toast.makeText(requireContext(), "Vui lòng chọn ngày đi!", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        if (binding.rdbTwoWay.isChecked() && binding.edtEndDate.toString().isEmpty()) {
+            Toast.makeText(requireContext(), "Vui lòng chọn ngày về!", Toast.LENGTH_SHORT).show();
+            return false;
+        }
         return true;
     }
 
 
 
-//    private void setData() {
-//        // PROVINCE ADAPTER.
-//        adapterProvince = new ArrayAdapter<>(requireContext(), android.R.layout.simple_dropdown_item_1line, PROVINCES);
-//        // RECENTLY SEARCH.
-//        this.adapterRecentlySearch = new RecentlySearchAdapter(this);
-//        binding.rvRecentlySearch.setLayoutManager(
-//                new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
-//        binding.rvRecentlySearch.addItemDecoration(new SpaceItemDecoration(50));
-//        binding.rvRecentlySearch.setAdapter(adapterRecentlySearch);
-//    }
 
-//
-//    private void setEvent() {
-//
-//        // SHOW DROPDOWN LIST EVENT.
-//        binding.actOrigin.setOnTouchListener(this);
-//        binding.actDestination.setOnTouchListener(this);
-//        // TYPE DESTINATION EVENT.
-//        binding.actOrigin.setOnFocusChangeListener(this);
-//        binding.actDestination.setOnFocusChangeListener(this);
-//        // CHOOSE DESTINATION EVENT.
-//        binding.actOrigin.setOnItemClickListener((parent, view, position, id) ->
-//                onItemClick(parent, position, R.id.actOrigin));
-//        binding.actDestination.setOnItemClickListener((parent, view, position, id) ->
-//                onItemClick(parent, position, R.id.actDestination));
-//        // CLEAR HISTORY EVENT.
-//        binding.btnClearHistory.setOnClickListener(this);
-//        // SUBMIT EVENT.
-//        binding.btnSubmit.setOnClickListener(this);
-//    }
-//
-//    private AutoCompleteTextView getAutoCompleteTextView(int viewId) {
-//        if (viewId == R.id.actOrigin) return binding.actOrigin;
-//        else return binding.actDestination;
-//    }
-//
-//    private void setDestination(AutoCompleteTextView view, String name) {
-//        TicketViewModel viewModel = mFragmentTicketBinding.getTicketViewModel();
-//        Province province = PROVINCES.stream().filter(p -> p.getName().equals(name)).findFirst().orElse(null);
-//        if (province == null) view.setText("");
-//        else {
-//            if (view.getId() == R.id.actOrigin)
-//                viewModel.setOrigin(province);
-//            else viewModel.setDestination(province);
-//        }
-//    }
-//
-//
-//    @Override
-//    public boolean onTouch(View v, MotionEvent event) {
-//        AutoCompleteTextView view = getAutoCompleteTextView(v.getId());
-//        view.showDropDown();
-//        return false;
-//    }
-//
-//    @Override
-//    public void onFocusChange(View v, boolean hasFocus) {
-//        if (hasFocus) return;
-//        AutoCompleteTextView view = getAutoCompleteTextView(v.getId());
-//        setDestination(view, view.getText().toString());
-//    }
-//
-//    public void onItemClick(AdapterView<?> parent, int position, int viewId) {
-//        AutoCompleteTextView view = getAutoCompleteTextView(viewId);
-//        setDestination(view, String.valueOf(parent.getItemAtPosition(position)));
-//    }
-//
-//    @Override
-//    public void onClick(View v) {
-//        if (v.getId() == R.id.btnClearHistory) adapterRecentlySearch.clearData();
-//        else {
-//            if (!mFragmentTicketBinding.getTicketViewModel().validate(v.getContext())) return;
-//            storeRecentlySearch();
-//            // REDIRECT TO RESERVATION PAGE.
-//            View view = getView();
-//            if (view == null) return;
-//
-//            Bundle data = new Bundle();
-//            TicketViewModel viewModel = mFragmentTicketBinding.getTicketViewModel();
-//            data.putSerializable("origin", viewModel.getOrigin());
-//            data.putSerializable("destination", viewModel.getDestination());
-//            data.putString("startDate", viewModel.getStartDate());
-//            data.putString("endDate", viewModel.getEndDate());
-//
-//            Navigation.findNavController(view).navigate(R.id.action_ticketFragment_to_reservationFragment, data);
-//        }
-//    }
-
-//    private void storeRecentlySearch() {
-//        TicketViewModel viewModel = mFragmentTicketBinding.getTicketViewModel();
-//        RecentlySearch item = new RecentlySearch();
-//        item.setOrigin(viewModel.getOrigin());
-//        item.setDestination(viewModel.getDestination());
-//        item.setDepartureDate(viewModel.getStartDate());
-//        adapterRecentlySearch.addData(item);
-//    }
-
-//    @Override
-//    public void onItemClickListener(View v, int position) {
-//        RecentlySearch item = adapterRecentlySearch.getItem(position);
-//        binding.actOrigin.setText(item.getOrigin().getName());
-//        binding.actDestination.setText(item.getDestination().getName());
-//        binding.edtStartDate.setText(item.getDepartureDate());
-//    }
 }

@@ -8,24 +8,23 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
-import androidx.viewpager2.widget.ViewPager2;
 
 import com.android.R;
 import com.android.databinding.FragmentReservationBinding;
-import com.android.model.Province;
 import com.android.utils.ActionBarUtils;
-import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
-
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Objects;
 
 public class ReservationFragment extends Fragment {
     private FragmentReservationBinding binding;
+    private ReservationViewModel viewModel;
 
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        viewModel = new ViewModelProvider(requireActivity()).get(ReservationViewModel.class);
+    }
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -53,7 +52,18 @@ public class ReservationFragment extends Fragment {
     }
 
     private void setupTabLayoutAndViewPager(){
+        ReservationViewPagerAdapter viewPagerAdapter = new ReservationViewPagerAdapter(this,true);
+        binding.viewPager.setAdapter(viewPagerAdapter);
+        new TabLayoutMediator(binding.tabLayout, binding.viewPager, (tab, position) -> {
 
+            if(position == 0) {
+                tab.setText("Ngày đi: 20/04/2024");
+            }
+            else {
+                tab.setText("Ngày về: 25/04/2024");
+            }
+
+        }).attach();
     }
 
 

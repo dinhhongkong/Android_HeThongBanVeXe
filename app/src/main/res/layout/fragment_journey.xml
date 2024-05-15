@@ -3,12 +3,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".home.reservation.journey.JourneyFragment">
+    tools:context=".feature.home.reservation.journey.DepartureFragment"
+    android:background="@color/background_color">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvJourney"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_margin="20dp" />
+        tools:listitem="@layout/journey_item_layout"/>
 
 </FrameLayout>

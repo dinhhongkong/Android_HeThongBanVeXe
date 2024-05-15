@@ -15,9 +15,6 @@ import com.android.databinding.FragmentLoginBinding;
 public abstract class BaseFragment<VB extends ViewBinding> extends Fragment {
     private VB binding;
     protected VB getBinding() {
-        if (binding == null) {
-            throw new IllegalStateException("Binding cannot be null");
-        }
         return binding;
     }
 
