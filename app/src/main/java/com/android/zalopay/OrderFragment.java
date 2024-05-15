@@ -113,6 +113,6 @@ public class OrderFragment extends Fragment {
     private void goBack() {
         View root = getView();
         if (root == null) return;
-        Navigation.findNavController(root).navigate(R.id.action_orderFragment_to_reservationFragment);
+//        Navigation.findNavController(root).navigate(R.id.action_orderFragment_to_reservationFragment);
     }
 }

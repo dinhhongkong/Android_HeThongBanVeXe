@@ -59,7 +59,7 @@ public class SeatAdapter extends RecyclerView.Adapter<SeatAdapter.VH> {
 
         for (int i = 0; i < seatStyle.length(); i++) {
             if (seatStyle.charAt(i) == 'U') {
-                if (seatIndex == 14 && type == Type.TOP_SLEEPING_BERTH ) {
+                if (seatIndex == 16 && type == Type.TOP_SLEEPING_BERTH ) {
                     seatIndex++;
                 }
                 String seatName = positionSeat + seatIndex++;

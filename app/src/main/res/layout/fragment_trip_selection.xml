@@ -62,7 +62,8 @@
                 android:id="@+id/cvInfoDeparture"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="5dp">
+                android:layout_marginBottom="5dp"
+                android:visibility="gone">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
@@ -183,7 +184,8 @@
             <androidx.cardview.widget.CardView
                 android:id="@+id/cvInfoReturn"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:visibility="gone">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
@@ -302,6 +304,7 @@
             </androidx.cardview.widget.CardView>
 
             <Button
+                android:id="@+id/btnSelectSeat"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"

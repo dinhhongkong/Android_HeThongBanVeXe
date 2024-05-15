@@ -2,22 +2,30 @@ package com.android.feature.home.reservation.seat;
 
 import android.os.Bundle;
 
+import androidx.annotation.CallSuper;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.android.databinding.FragmentSeatBinding;
+import com.android.feature.home.reservation.ReservationViewModel;
 
-public class SeatFragment extends Fragment {
+public abstract class BaseSeatFragment extends Fragment {
 
     protected FragmentSeatBinding binding;
+    protected ReservationViewModel viewModel;
+    protected SeatAdapter bottomSeatAdapter;
+    protected SeatAdapter topSeatAdapter;
     @Override
+    @CallSuper
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        viewModel = new ViewModelProvider(requireActivity()).get(ReservationViewModel.class);
     }
 
     @Nullable
@@ -37,6 +45,9 @@ public class SeatFragment extends Fragment {
         binding = null;
         super.onDestroyView();
     }
+
+
+
 
 //        private void initAdapter() {
 //        TopDeskSeatAdapter adapter = new TopDeskSeatAdapter();

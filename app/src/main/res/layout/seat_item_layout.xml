@@ -9,8 +9,9 @@
 
     <TextView
         android:id="@+id/tvSeat"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_margin="5dp"
         android:background="@drawable/seat_active"
         android:gravity="center"
         android:text="A1"

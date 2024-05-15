@@ -1,9 +1,11 @@
 package com.android.feature.home.reservation.journey;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Adapter;
 
 import androidx.annotation.CallSuper;
 import androidx.annotation.NonNull;
@@ -17,6 +19,7 @@ import com.android.feature.home.reservation.ReservationViewModel;
 public abstract class BaseJourneyFragment extends Fragment {
     protected FragmentJourneyBinding binding;
     protected ReservationViewModel viewModel;
+    protected JourneyAdapter journeyAdapter;
 
     @Override
     @CallSuper
@@ -33,8 +36,17 @@ public abstract class BaseJourneyFragment extends Fragment {
     }
 
     @Override
+    @CallSuper
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        initJourneyAdapter();
+    }
+
+    @Override
     public void onDestroyView() {
         binding = null;
         super.onDestroyView();
     }
+
+     protected abstract void initJourneyAdapter() ;
 }

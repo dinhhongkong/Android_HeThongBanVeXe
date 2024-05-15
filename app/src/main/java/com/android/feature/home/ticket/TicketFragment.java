@@ -22,6 +22,7 @@ import com.android.R;
 import com.android.databinding.FragmentTicketBinding;
 import com.android.feature.home.reservation.ReservationViewModel;
 import com.android.model.Province;
+import com.android.model.request.JourneyRequest;
 import com.android.utils.ActionBarUtils;
 import com.android.utils.DateUtils;
 
@@ -75,6 +76,11 @@ public class TicketFragment extends Fragment{
             }
 
         });
+
+        viewModel.getJourney().observe(getViewLifecycleOwner(), journey ->{
+            binding.edtStartDate.setText(journey.getStartDate());
+            binding.edtEndDate.setText(journey.getEndDate());
+        });
     }
 
 
@@ -92,21 +98,19 @@ public class TicketFragment extends Fragment{
 //        binding.actOrigin.setOnFocusChangeListener();
 //        binding.actDestination.setOnFocusChangeListener();
         // CHOOSE DESTINATION EVENT.
-//        binding.actOrigin.setOnItemClickListener((adapterView, view, i, l) -> {
-//            adapterView.setOnClickListener(view1 -> {
-//                binding.actOrigin.setText(adapterView.getSelectedItem().toString());
-//            });
-//        });
-//        binding.actDestination.setOnItemClickListener((parent, view, position, id) -> {
-//                    binding.actOrigin.setText(parent.getSelectedItem().toString());
-//        });
+        binding.actOrigin.setOnItemClickListener((parent, view, position, id) -> {
+            viewModel.getJourney().getValue().setOriginProvinceId(position+1);
+        });
+        binding.actDestination.setOnItemClickListener((parent, view, position, id) -> {
+            viewModel.getJourney().getValue().setDestProvinceId(position+1);
+        });
         // CLEAR HISTORY EVENT.
         binding.btnClearHistory.setOnClickListener(v->{
 
         });
         // SUBMIT EVENT.
         binding.btnSubmit.setOnClickListener(v->{
-            Navigation.findNavController(requireView()).navigate(R.id.action_ticketFragment_to_reservationFragment);
+            goToJourneyFragment();
         });
 
 
@@ -138,6 +142,8 @@ public class TicketFragment extends Fragment{
         dialog.setOnDateSetListener((view1, year, month, dayOfMonth) -> {
             Date date = DateUtils.getDate(year, month, dayOfMonth);
             binding.edtStartDate.setText(DateUtils.format(date));
+            viewModel.getJourney().getValue().setStartDate(DateUtils.format(date));
+
         });
         // CONSTRAINT MIN & MAX DATE.
         DatePicker datePicker = dialog.getDatePicker();
@@ -155,6 +161,7 @@ public class TicketFragment extends Fragment{
         dialog.setOnDateSetListener((view1, year, month, dayOfMonth) -> {
             Date date = DateUtils.getDate(year, month, dayOfMonth);
             binding.edtEndDate.setText(DateUtils.format(date));
+            viewModel.getJourney().getValue().setEndDate(DateUtils.format(date));
         });
         // CONSTRAINT MIN & MAX DATE.
         DatePicker datePicker = dialog.getDatePicker();
@@ -183,6 +190,15 @@ public class TicketFragment extends Fragment{
             return false;
         }
         return true;
+    }
+
+    private void goToJourneyFragment() {
+        if (!validate()) {
+            return;
+        }
+
+        Navigation.findNavController(requireView()).navigate(R.id.action_ticketFragment_to_reservationFragment);
+
     }
 
 

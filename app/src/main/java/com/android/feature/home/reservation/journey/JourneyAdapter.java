@@ -70,6 +70,15 @@ public class JourneyAdapter extends RecyclerView.Adapter<JourneyAdapter.VH> {
         }
 
         public void onBind(JourneyResponse journey) {
+            binding.tvDepartureTime.setText(journey.getStartTime());
+//            binding.tvDestinationTime.setText(journey.getE);
+            binding.tvHours.setText(String.valueOf(journey.getEstimatedTime()));
+
+            binding.tvDeparture.setText(journey.getDepartureProvince());
+            binding.tvDestination.setText(journey.getDestProvince());
+//            binding.tvSeatType.setText();
+//            binding.tvEmptySeat.setText();
+            binding.tvPrice.setText(String.valueOf(journey.getPrice()) +"đ");
 
 
         }

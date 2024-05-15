@@ -6,10 +6,13 @@ import androidx.viewpager2.adapter.FragmentStateAdapter;
 
 import com.android.feature.home.reservation.journey.DepartureFragment;
 import com.android.feature.home.reservation.journey.ReturnFragment;
+import com.android.feature.home.reservation.seat.DepartureSeatFragment;
+import com.android.feature.home.reservation.seat.ReturnSeatFragment;
 
-public class ReservationViewPagerAdapter extends FragmentStateAdapter {
+public class SeatSelectionViewPageAdapter extends FragmentStateAdapter {
     private final boolean isRoundTrip;
-    public ReservationViewPagerAdapter(@NonNull Fragment fragment, boolean isRoundTrip) {
+
+    public SeatSelectionViewPageAdapter(@NonNull Fragment fragment, boolean isRoundTrip) {
         super(fragment);
         this.isRoundTrip = isRoundTrip;
     }
@@ -18,14 +21,13 @@ public class ReservationViewPagerAdapter extends FragmentStateAdapter {
     @Override
     public Fragment createFragment(int position) {
         if (position == 0) {
-            return DepartureFragment.newInstance();
+            return DepartureSeatFragment.newInstance();
         }
-        return ReturnFragment.newInstance();
+        return ReturnSeatFragment.newInstance();
     }
 
     @Override
     public int getItemCount() {
         return isRoundTrip ? 2 : 1;
     }
-
 }
