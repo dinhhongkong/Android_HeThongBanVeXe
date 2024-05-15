@@ -9,4 +9,8 @@ data class Province(
     var id: Int,
     @SerializedName("tenTinh")
     var name: String
-)
+) {
+    override fun toString(): String {
+        return name;
+    }
+}
