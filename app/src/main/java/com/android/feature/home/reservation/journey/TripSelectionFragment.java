@@ -1,6 +1,9 @@
-package com.android.feature.home.reservation;
+package com.android.feature.home.reservation.journey;
 
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -8,22 +11,16 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-
 import com.android.R;
-import com.android.databinding.FragmentSeatSelectionBinding;
 import com.android.databinding.FragmentTripSelectionBinding;
+import com.android.feature.home.reservation.ReservationViewModel;
 import com.android.model.Ticket;
 import com.android.utils.ActionBarUtils;
 import com.android.utils.DateUtils;
 import com.google.android.material.tabs.TabLayoutMediator;
 
-
-public class SeatSelectionFragment extends Fragment {
-
-    private FragmentSeatSelectionBinding binding;
+public class TripSelectionFragment extends Fragment {
+    private FragmentTripSelectionBinding binding;
     private ReservationViewModel viewModel;
 
     @Override
@@ -35,7 +32,7 @@ public class SeatSelectionFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         ActionBarUtils.toggle(false);
-        binding = FragmentSeatSelectionBinding.inflate(inflater, container, false);
+        binding = FragmentTripSelectionBinding.inflate(inflater, container, false);
         return binding.getRoot();
     }
 
@@ -61,7 +58,7 @@ public class SeatSelectionFragment extends Fragment {
     }
 
     private void setupTabLayoutAndViewPager() {
-        SeatSelectionViewPageAdapter viewPagerAdapter = new SeatSelectionViewPageAdapter(this, viewModel.getIsRoundTrip().getValue());
+        TripSelectionViewPagerAdapter viewPagerAdapter = new TripSelectionViewPagerAdapter(this, viewModel.getIsRoundTrip().getValue());
         binding.viewPager.setAdapter(viewPagerAdapter);
         new TabLayoutMediator(binding.tabLayout, binding.viewPager, (tab, position) -> {
 
@@ -81,18 +78,28 @@ public class SeatSelectionFragment extends Fragment {
     private void setupObserver() {
         viewModel.getDepartureTicket().observe(getViewLifecycleOwner(), ticket -> {
             if (ticket.getJourney() != null) {
-
+                binding.cvInfoDeparture.setVisibility(View.VISIBLE);
+                binding.tvInfoDepartureDate.setText(DateUtils.convertToDDMMYYYY(ticket.getJourney().getStartDate()) );
+                binding.tvInfoStartTimeDeparture.setText(ticket.getJourney().getStartTime());
+                binding.tvInfoEndTimeDeparture.setText(ticket.getJourney().getStartTime());
+                binding.tvInfoDepature.setText(ticket.getJourney().getDepartureProvince());
+                binding.tvInfoDestination.setText(ticket.getJourney().getDestProvince());
             } else {
-
+                binding.cvInfoDeparture.setVisibility(View.GONE);
             }
 
         });
 
         viewModel.getReturnTicket().observe(getViewLifecycleOwner(), ticket -> {
             if (ticket.getJourney() != null) {
-
+                binding.cvInfoReturn.setVisibility(View.VISIBLE);
+                binding.tvInfoReturnDate.setText(DateUtils.convertToDDMMYYYY(ticket.getJourney().getStartDate()) );
+                binding.tvInfoStartTimeReturn.setText(ticket.getJourney().getStartTime());
+                binding.tvInfoEndTimeReturn.setText(ticket.getJourney().getStartTime());
+                binding.tvInfoReturn.setText(ticket.getJourney().getDepartureProvince());
+                binding.tvInfoReturnDestination.setText(ticket.getJourney().getDestProvince());
             } else {
-
+                binding.cvInfoReturn.setVisibility(View.GONE);
             }
         });
 
@@ -105,10 +112,18 @@ public class SeatSelectionFragment extends Fragment {
         binding.btnDeleteReturn.setOnClickListener(v->{
             viewModel.setReturnTicket(new Ticket());
         });
+
+        binding.btnSelectSeat.setOnClickListener(v->{
+            goToSelectSeat();
+        });
     }
 
 
     private void goBack() {
         Navigation.findNavController(requireView()).navigate(R.id.action_reservationFragment_to_ticketFragment);
+    }
+
+    private void goToSelectSeat() {
+        Navigation.findNavController(requireView()).navigate(R.id.action_reservationFragment_to_seatSelectionFragment);
     }
 }

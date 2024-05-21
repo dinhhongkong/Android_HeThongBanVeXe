@@ -1,4 +1,4 @@
-package com.android.feature.home.reservation.seat;
+package com.android.feature.home.reservation.seat.page;
 
 import android.os.Bundle;
 import android.view.View;

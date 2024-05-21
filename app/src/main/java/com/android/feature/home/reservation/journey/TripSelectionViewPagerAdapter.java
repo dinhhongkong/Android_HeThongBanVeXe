@@ -1,11 +1,11 @@
-package com.android.feature.home.reservation;
+package com.android.feature.home.reservation.journey;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 
-import com.android.feature.home.reservation.journey.DepartureFragment;
-import com.android.feature.home.reservation.journey.ReturnFragment;
+import com.android.feature.home.reservation.journey.page.DepartureFragment;
+import com.android.feature.home.reservation.journey.page.ReturnFragment;
 
 public class TripSelectionViewPagerAdapter extends FragmentStateAdapter {
     private final boolean isRoundTrip;

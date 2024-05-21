@@ -1,4 +1,4 @@
-package com.android.feature.home.reservation.seat;
+package com.android.feature.home.reservation.seat.page;
 
 import android.graphics.Color;
 import android.view.LayoutInflater;

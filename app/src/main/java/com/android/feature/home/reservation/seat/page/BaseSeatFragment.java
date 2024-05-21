@@ -1,11 +1,6 @@
-package com.android.feature.home.reservation.journey;
+package com.android.feature.home.reservation.seat.page;
 
 import android.os.Bundle;
-import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Adapter;
 
 import androidx.annotation.CallSuper;
 import androidx.annotation.NonNull;
@@ -13,14 +8,20 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.android.databinding.FragmentJourneyBinding;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+
+import com.android.databinding.FragmentSeatBinding;
 import com.android.feature.home.reservation.ReservationViewModel;
+import com.android.feature.home.reservation.seat.page.SeatAdapter;
 
-public abstract class BaseJourneyFragment extends Fragment {
-    protected FragmentJourneyBinding binding;
+public abstract class BaseSeatFragment extends Fragment {
+
+    protected FragmentSeatBinding binding;
     protected ReservationViewModel viewModel;
-    protected JourneyAdapter journeyAdapter;
-
+    protected SeatAdapter bottomSeatAdapter;
+    protected SeatAdapter topSeatAdapter;
     @Override
     @CallSuper
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -31,15 +32,13 @@ public abstract class BaseJourneyFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        binding = FragmentJourneyBinding.inflate(inflater,container,false);
+        binding = FragmentSeatBinding.inflate(inflater,container,false);
         return binding.getRoot();
     }
 
     @Override
-    @CallSuper
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        initJourneyAdapter();
     }
 
     @Override
@@ -48,5 +47,14 @@ public abstract class BaseJourneyFragment extends Fragment {
         super.onDestroyView();
     }
 
-     protected abstract void initJourneyAdapter() ;
+
+
+
+//        private void initAdapter() {
+//        TopDeskSeatAdapter adapter = new TopDeskSeatAdapter();
+//        binding.rvRecentlySearch.setAdapter(adapter);
+//        binding.rvRecentlySearch.setLayoutManager(new GridLayoutManager(requireContext(),5) {
+//
+//        });
+//    }
 }

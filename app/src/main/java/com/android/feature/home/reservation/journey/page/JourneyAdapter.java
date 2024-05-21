@@ -1,7 +1,6 @@
-package com.android.feature.home.reservation.journey;
+package com.android.feature.home.reservation.journey.page;
 
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;

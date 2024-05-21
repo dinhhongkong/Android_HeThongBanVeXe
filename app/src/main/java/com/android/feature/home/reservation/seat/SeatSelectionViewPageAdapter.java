@@ -1,13 +1,11 @@
-package com.android.feature.home.reservation;
+package com.android.feature.home.reservation.seat;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 
-import com.android.feature.home.reservation.journey.DepartureFragment;
-import com.android.feature.home.reservation.journey.ReturnFragment;
-import com.android.feature.home.reservation.seat.DepartureSeatFragment;
-import com.android.feature.home.reservation.seat.ReturnSeatFragment;
+import com.android.feature.home.reservation.seat.page.DepartureSeatFragment;
+import com.android.feature.home.reservation.seat.page.ReturnSeatFragment;
 
 public class SeatSelectionViewPageAdapter extends FragmentStateAdapter {
     private final boolean isRoundTrip;

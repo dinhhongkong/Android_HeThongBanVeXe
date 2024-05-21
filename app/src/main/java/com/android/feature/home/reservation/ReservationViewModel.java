@@ -1,7 +1,5 @@
 package com.android.feature.home.reservation;
 
-import android.util.Log;
-
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
@@ -11,7 +9,7 @@ import com.android.model.Ticket;
 import com.android.model.request.JourneyRequest;
 import com.android.model.response.JourneyResponse;
 import com.android.service.ReservationApiService;
-import com.android.service.Response;
+import com.android.core.Response;
 import com.android.service.api_interface.ApiClient;
 
 import java.util.List;

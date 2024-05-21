@@ -1,36 +1,46 @@
-package com.android.feature.home.reservation.journey;
-
+package com.android.feature.home.reservation.journey.page;
 
 import android.os.Bundle;
+import android.view.View;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.android.model.Ticket;
 
-public class ReturnFragment extends BaseJourneyFragment{
-    public static ReturnFragment newInstance() {
-        return new ReturnFragment();
+public class DepartureFragment extends BaseJourneyFragment {
+    public static DepartureFragment newInstance() {
+        return new DepartureFragment();
     }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        viewModel.loadReturnJourneyList();
+        viewModel.loadDepartureJourneyList();
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
     }
 
     @Override
     protected void initJourneyAdapter() {
-        viewModel.getReturnJourneyList().observe(getViewLifecycleOwner(),item->{
+        viewModel.getDepartureJourneyList().observe(getViewLifecycleOwner(),item->{
             journeyAdapter = new JourneyAdapter();
             binding.rvJourney.setAdapter(journeyAdapter);
             binding.rvJourney.setLayoutManager(new LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false));
-            journeyAdapter.submitList(viewModel.getReturnJourneyList().getValue());
+            journeyAdapter.submitList(viewModel.getDepartureJourneyList().getValue());
             journeyAdapter.setOnItemClickListener(journey -> {
                 Ticket ticket = new Ticket();
                 ticket.setJourney(journey);
-                viewModel.setReturnTicket(ticket);
+                viewModel.setDepartureTicket(ticket);
             });
         });
+
     }
+
+
 }

@@ -1,4 +1,4 @@
-package com.android.service;
+package com.android.core;
 
 public class Response<T> {
     private int status;

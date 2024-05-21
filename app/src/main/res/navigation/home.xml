@@ -32,7 +32,7 @@
     </fragment>
     <fragment
         android:id="@+id/reservationFragment"
-        android:name="com.android.feature.home.reservation.TripSelectionFragment"
+        android:name="com.android.feature.home.reservation.journey.TripSelectionFragment"
         android:label="fragment_reservation"
         tools:layout="@layout/fragment_trip_selection">
         <action
@@ -44,7 +44,7 @@
     </fragment>
     <fragment
         android:id="@+id/seatSelectionFragment"
-        android:name="com.android.feature.home.reservation.SeatSelectionFragment"
+        android:name="com.android.feature.home.reservation.seat.SeatSelectionFragment"
         android:label="fragment_seat_selection"
         tools:layout="@layout/fragment_seat_selection" />
 </navigation>
