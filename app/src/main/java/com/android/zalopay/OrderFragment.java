@@ -77,7 +77,7 @@ public class OrderFragment extends Fragment {
             CreateOrder orderApi = new CreateOrder();
             try {
                 // PAYMENT INFORMATION.
-                double totalDouble = NumberUtils.parse(binding.Price.getText().toString());
+                double totalDouble = NumberUtils.parse("30000");
                 if (Double.isNaN(totalDouble)) {
                     Toast.makeText(getContext(), "Đã có lỗi xảy ra. Vui lòng thử lại!", Toast.LENGTH_SHORT).show();
                     return;

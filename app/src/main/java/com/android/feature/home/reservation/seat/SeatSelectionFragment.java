@@ -105,10 +105,18 @@ public class SeatSelectionFragment extends Fragment {
         binding.btnDeleteReturn.setOnClickListener(v->{
             viewModel.setReturnTicket(new Ticket());
         });
+
+        binding.btnContinue.setOnClickListener(v->{
+            goToCustomerInfoScreen();
+        });
     }
 
 
     private void goBack() {
         Navigation.findNavController(requireView()).navigate(R.id.action_reservationFragment_to_ticketFragment);
+    }
+
+    private void goToCustomerInfoScreen() {
+        Navigation.findNavController(requireView()).navigate(R.id.action_seatSelectionFragment_to_customerInfoFragment);
     }
 }

@@ -46,5 +46,18 @@
         android:id="@+id/seatSelectionFragment"
         android:name="com.android.feature.home.reservation.seat.SeatSelectionFragment"
         android:label="fragment_seat_selection"
-        tools:layout="@layout/fragment_seat_selection" />
+        tools:layout="@layout/fragment_seat_selection" >
+        <action
+            android:id="@+id/action_seatSelectionFragment_to_customerInfoFragment"
+            app:destination="@id/customerInfoFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/customerInfoFragment"
+        android:name="com.android.feature.home.reservation.customerinfo.CustomerInfoFragment"
+        android:label="fragment_customer_info"
+        tools:layout="@layout/fragment_customer_info" >
+        <action
+            android:id="@+id/action_customerInfoFragment_to_orderFragment"
+            app:destination="@id/orderFragment" />
+    </fragment>
 </navigation>

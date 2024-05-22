@@ -10,7 +10,7 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ApiClient {
-    private static final String BASE_URL = "http://172.30.80.1:8084/";
+    private static final String BASE_URL = "http://192.168.2.19:8084/";
     private static final HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY);
     private static final OkHttpClient client = new OkHttpClient.Builder()
             .addNetworkInterceptor(interceptor)

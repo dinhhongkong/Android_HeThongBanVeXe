@@ -1,25 +1,33 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Base.Theme.CoachTicketBookingApp" parent="Theme.AppCompat.DayNight.NoActionBar">
+    <style name="Base.Theme.CoachTicketBookingApp" parent="Theme.MaterialComponents.Light.NoActionBar">
         <!-- Customize your light theme here. -->
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
-<!--        <item name="android:fontFamily">@font/calistoga</item>-->
-                <item name="android:fontFamily">@font/inter_tight</item>
+        <!--        <item name="android:fontFamily">@font/calistoga</item>-->
+<!--        Theme.MaterialComponents.Light.NoActionBar-->
+        <item name="android:fontFamily">@font/inter_tight</item>
+        <!-- Màu chính và các biến thể -->
+        <item name="colorPrimary">@color/orange</item>
+        <item name="colorOnPrimary">@color/md_theme_onPrimary</item>
+
+        <!-- Màu cấp hai và các biến thể -->
+        <item name="colorSecondary">#7c5726</item>
+        <item name="colorOnSecondary">@color/sky_500</item>
+
+        <!-- Màu nền và bề mặt -->
+<!--        <item name="colorBackground">@color/backgroundColor</item>-->
+        <item name="colorSurface">@color/md_theme_surfaceContainerHigh</item>
+        <item name="colorOnBackground">@color/background_color</item>
+        <item name="colorOnSurface">@color/md_theme_onSurface</item>
+
+        <!-- Màu lỗi -->
+        <item name="colorError">@color/md_theme_error</item>
+        <item name="colorOnError">@color/md_theme_onError</item>
+        <!-- Status bar color. -->
+        <item name="android:statusBarColor" tools:targetApi="Q">#a63b18</item>
+
     </style>
 
     <style name="Theme.CoachTicketBookingApp" parent="Base.Theme.CoachTicketBookingApp" />
 
-<!--    <style name="Theme.CoachTicketBookingApp" parent="Theme.MaterialComponents.DayNight.DarkActionBar">-->
-<!--        &lt;!&ndash; Primary brand color. &ndash;&gt;-->
-<!--        <item name="colorPrimary">@color/green</item>-->
-<!--        <item name="colorPrimaryVariant">@color/green_dark</item>-->
-<!--        <item name="colorOnPrimary">@color/white</item>-->
-<!--        &lt;!&ndash; Secondary brand color. &ndash;&gt;-->
-<!--        <item name="colorSecondary">@color/blue</item>-->
-<!--        <item name="colorSecondaryVariant">@color/blue_dark</item>-->
-<!--        <item name="colorOnSecondary">@color/black</item>-->
-<!--        &lt;!&ndash; Status bar color. &ndash;&gt;-->
-<!--        <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>-->
-<!--        &lt;!&ndash; Customize your theme here. &ndash;&gt;-->
-<!--    </style>-->
 </resources>

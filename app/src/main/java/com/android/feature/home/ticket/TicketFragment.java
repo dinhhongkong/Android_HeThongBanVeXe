@@ -193,9 +193,9 @@ public class TicketFragment extends Fragment{
     }
 
     private void goToJourneyFragment() {
-        if (!validate()) {
-            return;
-        }
+//        if (!validate()) {
+//            return;
+//        }
 
         Navigation.findNavController(requireView()).navigate(R.id.action_ticketFragment_to_reservationFragment);
 
