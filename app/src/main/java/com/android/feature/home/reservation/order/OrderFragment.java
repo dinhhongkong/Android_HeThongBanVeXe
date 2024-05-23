@@ -1,4 +1,4 @@
-package com.android.zalopay;
+package com.android.feature.home.reservation.order;
 
 import android.os.Bundle;
 import android.os.StrictMode;
@@ -10,18 +10,13 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.navigation.Navigation;
 
-import com.android.R;
 import com.android.databinding.FragmentOrderBinding;
-import com.android.model.response.JourneyResponse;
 import com.android.utils.NumberUtils;
 import com.android.zalopay.Api.CreateOrder;
 import com.android.zalopay.Constant.AppInfo;
 
 import org.json.JSONObject;
-
-import java.util.List;
 
 import vn.zalopay.sdk.Environment;
 import vn.zalopay.sdk.ZaloPayError;
@@ -61,17 +56,10 @@ public class OrderFragment extends Fragment {
     }
 
     private void setControl() {
-//        binding.Origin.setText(item.getOrigin().getName());
-//        binding.Destination.setText(item.getDestination().getName());
-//        binding.StartDate.setText(item.getStartTime());
-//        binding.Duration.setText(NumberUtils.formatIntegerConstraint(item.getDuration()));
-//        binding.Price.setText(NumberUtils.format(item.getPrice()));
-//        binding.TicketQuantity.setText(String.valueOf(listChosenSeat.size()));
-//        binding.Total.setText(NumberUtils.format(item.getPrice() * listChosenSeat.size()));
+
     }
 
     private void setEvent() {
-        binding.btnCancel.setOnClickListener(v -> goBack());
 
         binding.btnOrder.setOnClickListener(v -> {
             CreateOrder orderApi = new CreateOrder();

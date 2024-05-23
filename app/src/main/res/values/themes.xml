@@ -11,7 +11,7 @@
         <item name="colorOnPrimary">@color/md_theme_onPrimary</item>
 
         <!-- Màu cấp hai và các biến thể -->
-        <item name="colorSecondary">#7c5726</item>
+        <item name="colorSecondary">#4CAF50</item>
         <item name="colorOnSecondary">@color/sky_500</item>
 
         <!-- Màu nền và bề mặt -->
