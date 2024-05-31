@@ -8,6 +8,7 @@ import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.http.GET;
+import retrofit2.http.POST;
 import retrofit2.http.Query;
 
 public interface ReservationApiService {
@@ -18,4 +19,11 @@ public interface ReservationApiService {
 
     @GET("datve/get-all-province")
     Call<Response<List<Province>>> getAllProvince();
+
+    @POST("thanhtoan/zalopay-payment/oneway-trip")
+    Call<String> createOrderOneWayTrip();
+
+    @POST("thanhtoan/zalopay-payment/round-trip")
+    Call<String> createOrderRoundTrip();
+
 }

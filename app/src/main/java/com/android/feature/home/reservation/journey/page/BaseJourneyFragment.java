@@ -14,6 +14,7 @@ import androidx.lifecycle.ViewModelProvider;
 import com.android.databinding.FragmentJourneyBinding;
 import com.android.feature.home.reservation.ReservationViewModel;
 import com.android.feature.home.reservation.journey.page.JourneyAdapter;
+import com.android.model.Ticket;
 
 public abstract class BaseJourneyFragment extends Fragment {
     protected FragmentJourneyBinding binding;
@@ -39,6 +40,9 @@ public abstract class BaseJourneyFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         initJourneyAdapter();
+        Ticket ticket = new Ticket();
+        viewModel.setDepartureTicket(ticket);
+        viewModel.setReturnTicket(ticket);
     }
 
     @Override

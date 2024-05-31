@@ -1,29 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     tools:context=".feature.home.reservation.order.OrderFragment">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
+
         <com.google.android.material.appbar.AppBarLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
+
             <Toolbar
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
+
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:gravity="center"
                     android:text="Thanh toán hóa đơn"
-                    android:textSize="26sp"
                     android:textColor="@color/white"
-                    android:textStyle="bold"
-                    android:gravity="center"/>
+                    android:textSize="26sp"
+                    android:textStyle="bold" />
             </Toolbar>
         </com.google.android.material.appbar.AppBarLayout>
 
@@ -40,27 +44,31 @@
                 android:layout_margin="8dp"
                 app:cardCornerRadius="8dp"
                 app:cardElevation="4dp">
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:paddingHorizontal="16dp"
                         android:layout_marginTop="8dp"
-                        android:text="Thông tin hành khách:"
                         android:fontFamily="@font/inter_tight_bold"
-                        android:textAppearance="?attr/textAppearanceHeadline6"/>
+                        android:paddingHorizontal="16dp"
+                        android:text="Thông tin hành khách:"
+                        android:textAppearance="?attr/textAppearanceHeadline6" />
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal">
+
                         <LinearLayout
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:orientation="vertical"
                             android:layout_weight="1"
+                            android:orientation="vertical"
                             android:padding="16dp">
 
                             <TextView
@@ -84,23 +92,25 @@
                                 android:textAppearance="?attr/textAppearanceBody1" />
 
                         </LinearLayout>
+
                         <LinearLayout
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:orientation="vertical"
                             android:layout_weight="1"
-                            android:padding="16dp"
-                            android:gravity="end">
-
+                            android:gravity="end"
+                            android:orientation="vertical"
+                            android:padding="16dp">
 
 
                             <TextView
+                                android:id="@+id/tvFullName"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="Tuyến xe:"
                                 android:textAppearance="?attr/textAppearanceBody1" />
 
                             <TextView
+                                android:id="@+id/tvPhoneNumber"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="4dp"
@@ -108,6 +118,7 @@
                                 android:textAppearance="?attr/textAppearanceBody1" />
 
                             <TextView
+                                android:id="@+id/tvEmail"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="4dp"
@@ -121,9 +132,6 @@
                 </LinearLayout>
 
 
-
-
-
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
@@ -132,34 +140,56 @@
                 android:layout_margin="8dp"
                 app:cardCornerRadius="8dp"
                 app:cardElevation="4dp">
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:paddingVertical="16dp"
                     android:orientation="vertical">
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:paddingHorizontal="16dp"
                         android:layout_marginTop="8dp"
-                        android:text="Thông tin lượt đi:"
                         android:fontFamily="@font/inter_tight_bold"
-                        android:textAppearance="?attr/textAppearanceHeadline6"/>
+                        android:paddingHorizontal="16dp"
+                        android:text="Thông tin lượt đi:"
+                        android:textAppearance="?attr/textAppearanceHeadline6" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:paddingHorizontal="16dp"
+                        android:paddingTop="16dp">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Tuyến xe:"
+                            android:textAppearance="?attr/textAppearanceBody1" />
+
+                        <TextView
+                            android:id="@+id/tvDepartureName"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:gravity="end"
+                            android:layout_weight="1"
+                            android:text="Tuyến xe:"
+                            android:textAppearance="?attr/textAppearanceBody1" />
+                    </LinearLayout>
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal">
+
                         <LinearLayout
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:orientation="vertical"
                             android:layout_weight="1"
-                            android:padding="16dp">
+                            android:orientation="vertical"
+                            android:paddingHorizontal="16dp">
 
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="Tuyến xe:"
-                                android:textAppearance="?attr/textAppearanceBody1" />
 
                             <TextView
                                 android:layout_width="wrap_content"
@@ -176,27 +206,26 @@
                                 android:textAppearance="?attr/textAppearanceBody1" />
 
 
-
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="4dp"
-                                android:text="Số ghế: B20"
+                                android:text="Số ghế:"
                                 android:textAppearance="?attr/textAppearanceBody1" />
 
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="4dp"
-                                android:text="Điểm lên xe:"
-                                android:textAppearance="?attr/textAppearanceBody1" />
+                            <!--                            <TextView-->
+                            <!--                                android:layout_width="wrap_content"-->
+                            <!--                                android:layout_height="wrap_content"-->
+                            <!--                                android:layout_marginTop="4dp"-->
+                            <!--                                android:text="Điểm lên xe:"-->
+                            <!--                                android:textAppearance="?attr/textAppearanceBody1" />-->
 
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="4dp"
-                                android:text="Thời gian tới điểm lên xe:"
-                                android:textAppearance="?attr/textAppearanceBody1" />
+                            <!--                            <TextView-->
+                            <!--                                android:layout_width="wrap_content"-->
+                            <!--                                android:layout_height="wrap_content"-->
+                            <!--                                android:layout_marginTop="4dp"-->
+                            <!--                                android:text="Thời gian tới điểm lên xe:"-->
+                            <!--                                android:textAppearance="?attr/textAppearanceBody1" />-->
 
                             <TextView
                                 android:layout_width="wrap_content"
@@ -207,23 +236,17 @@
                                 android:textStyle="bold" />
 
                         </LinearLayout>
+
                         <LinearLayout
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:orientation="vertical"
                             android:layout_weight="1"
-                            android:padding="16dp"
-                            android:gravity="end">
-
-
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="Tuyến xe:"
-                                android:textAppearance="?attr/textAppearanceBody1" />
+                            android:gravity="end"
+                            android:orientation="vertical"
+                            android:paddingHorizontal="16dp">
 
                             <TextView
+                                android:id="@+id/tvDepartureDate"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="4dp"
@@ -231,6 +254,7 @@
                                 android:textAppearance="?attr/textAppearanceBody1" />
 
                             <TextView
+                                android:id="@+id/tvDepartureSeatNumber"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="4dp"
@@ -238,27 +262,29 @@
                                 android:textAppearance="?attr/textAppearanceBody1" />
 
                             <TextView
+                                android:id="@+id/tvDepartureSeatName"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="4dp"
                                 android:text="Số ghế: B20"
                                 android:textAppearance="?attr/textAppearanceBody1" />
 
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="4dp"
-                                android:text="Điểm lên xe:"
-                                android:textAppearance="?attr/textAppearanceBody1" />
+                            <!--                            <TextView-->
+                            <!--                                android:layout_width="wrap_content"-->
+                            <!--                                android:layout_height="wrap_content"-->
+                            <!--                                android:layout_marginTop="4dp"-->
+                            <!--                                android:text="Điểm lên xe:"-->
+                            <!--                                android:textAppearance="?attr/textAppearanceBody1" />-->
+
+                            <!--                            <TextView-->
+                            <!--                                android:layout_width="wrap_content"-->
+                            <!--                                android:layout_height="wrap_content"-->
+                            <!--                                android:layout_marginTop="4dp"-->
+                            <!--                                android:text="Thời gian tới điểm lên xe:"-->
+                            <!--                                android:textAppearance="?attr/textAppearanceBody1" />-->
 
                             <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="4dp"
-                                android:text="Thời gian tới điểm lên xe:"
-                                android:textAppearance="?attr/textAppearanceBody1" />
-
-                            <TextView
+                                android:id="@+id/tvDepartureTotalPrice"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="8dp"
@@ -270,9 +296,6 @@
 
                     </LinearLayout>
                 </LinearLayout>
-
-
-
 
 
             </androidx.cardview.widget.CardView>
@@ -283,35 +306,58 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="8dp"
                 app:cardCornerRadius="8dp"
-                app:cardElevation="4dp">
+                app:cardElevation="4dp"
+                android:visibility="gone">
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    android:paddingVertical="16dp">
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:paddingHorizontal="16dp"
                         android:layout_marginTop="8dp"
-                        android:text="Thông tin lượt về:"
                         android:fontFamily="@font/inter_tight_bold"
-                        android:textAppearance="?attr/textAppearanceHeadline6"/>
+                        android:paddingHorizontal="16dp"
+                        android:text="Thông tin lượt về:"
+                        android:textAppearance="?attr/textAppearanceHeadline6" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:paddingHorizontal="16dp"
+                        android:paddingTop="16dp">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Tuyến xe:"
+                            android:textAppearance="?attr/textAppearanceBody1" />
+
+                        <TextView
+                            android:id="@+id/tvReturnName"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="end"
+                            android:layout_weight="1"
+                            android:text="Tuyến xe:"
+                            android:textAppearance="?attr/textAppearanceBody1" />
+                    </LinearLayout>
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal">
+
                         <LinearLayout
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:orientation="vertical"
                             android:layout_weight="1"
-                            android:padding="16dp">
+                            android:orientation="vertical"
+                            android:paddingHorizontal="16dp">
 
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="Tuyến xe:"
-                                android:textAppearance="?attr/textAppearanceBody1" />
 
                             <TextView
                                 android:layout_width="wrap_content"
@@ -334,19 +380,19 @@
                                 android:text="Số ghế: B20"
                                 android:textAppearance="?attr/textAppearanceBody1" />
 
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="4dp"
-                                android:text="Điểm lên xe:"
-                                android:textAppearance="?attr/textAppearanceBody1" />
+                            <!--                            <TextView-->
+                            <!--                                android:layout_width="wrap_content"-->
+                            <!--                                android:layout_height="wrap_content"-->
+                            <!--                                android:layout_marginTop="4dp"-->
+                            <!--                                android:text="Điểm lên xe:"-->
+                            <!--                                android:textAppearance="?attr/textAppearanceBody1" />-->
 
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="4dp"
-                                android:text="Thời gian tới điểm lên xe:"
-                                android:textAppearance="?attr/textAppearanceBody1" />
+                            <!--                            <TextView-->
+                            <!--                                android:layout_width="wrap_content"-->
+                            <!--                                android:layout_height="wrap_content"-->
+                            <!--                                android:layout_marginTop="4dp"-->
+                            <!--                                android:text="Thời gian tới điểm lên xe:"-->
+                            <!--                                android:textAppearance="?attr/textAppearanceBody1" />-->
 
                             <TextView
                                 android:layout_width="wrap_content"
@@ -357,23 +403,17 @@
                                 android:textStyle="bold" />
 
                         </LinearLayout>
+
                         <LinearLayout
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:orientation="vertical"
                             android:layout_weight="1"
-                            android:padding="16dp"
-                            android:gravity="end">
-
-
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="Tuyến xe:"
-                                android:textAppearance="?attr/textAppearanceBody1" />
+                            android:gravity="end"
+                            android:orientation="vertical"
+                            android:paddingHorizontal="16dp">
 
                             <TextView
+                                android:id="@+id/tvReturnDate"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="4dp"
@@ -381,6 +421,7 @@
                                 android:textAppearance="?attr/textAppearanceBody1" />
 
                             <TextView
+                                android:id="@+id/tvReturnSeatNumber"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="4dp"
@@ -388,27 +429,29 @@
                                 android:textAppearance="?attr/textAppearanceBody1" />
 
                             <TextView
+                                android:id="@+id/tvReturnSeatName"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="4dp"
                                 android:text="Số ghế: B20"
                                 android:textAppearance="?attr/textAppearanceBody1" />
 
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="4dp"
-                                android:text="Điểm lên xe:"
-                                android:textAppearance="?attr/textAppearanceBody1" />
+                            <!--                            <TextView-->
+                            <!--                                android:layout_width="wrap_content"-->
+                            <!--                                android:layout_height="wrap_content"-->
+                            <!--                                android:layout_marginTop="4dp"-->
+                            <!--                                android:text="Điểm lên xe:"-->
+                            <!--                                android:textAppearance="?attr/textAppearanceBody1" />-->
+
+                            <!--                            <TextView-->
+                            <!--                                android:layout_width="wrap_content"-->
+                            <!--                                android:layout_height="wrap_content"-->
+                            <!--                                android:layout_marginTop="4dp"-->
+                            <!--                                android:text="Thời gian tới điểm lên xe:"-->
+                            <!--                                android:textAppearance="?attr/textAppearanceBody1" />-->
 
                             <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="4dp"
-                                android:text="Thời gian tới điểm lên xe:"
-                                android:textAppearance="?attr/textAppearanceBody1" />
-
-                            <TextView
+                                android:id="@+id/tvReturnTotalPrice"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="8dp"
@@ -422,16 +465,15 @@
                 </LinearLayout>
 
 
-
-
-
             </androidx.cardview.widget.CardView>
+
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="8dp"
                 app:cardCornerRadius="8dp"
                 app:cardElevation="4dp">
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -450,13 +492,14 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal">
+
                         <LinearLayout
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:orientation="vertical"
                             android:layout_weight="1"
-                            android:paddingStart="16dp"
-                            android:paddingVertical="16dp">
+                            android:orientation="vertical"
+                            android:paddingVertical="16dp"
+                            android:paddingStart="16dp">
 
                             <TextView
                                 android:layout_width="wrap_content"
@@ -475,12 +518,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="1dp"
                                 android:layout_marginVertical="10dp"
-                                android:background="@color/black"/>
-
-
-
-
-
+                                android:background="@color/black" />
 
 
                             <TextView
@@ -492,39 +530,41 @@
                                 android:textStyle="bold" />
 
                         </LinearLayout>
+
                         <LinearLayout
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:orientation="vertical"
                             android:layout_weight="1"
-                            android:paddingEnd="16dp"
+                            android:gravity="end"
+                            android:orientation="vertical"
                             android:paddingVertical="16dp"
-                            android:gravity="end">
-
+                            android:paddingEnd="16dp">
 
 
                             <TextView
+                                android:id="@+id/tvPriceDeparture"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="Tuyến xe:"
                                 android:textAppearance="?attr/textAppearanceBody1" />
 
                             <TextView
+                                android:id="@+id/tvPriceReturn"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="4dp"
-                                android:text="Thời gian xuất bến:"
+                                android:text="0đ"
                                 android:textAppearance="?attr/textAppearanceBody1" />
 
                             <View
                                 android:layout_width="match_parent"
                                 android:layout_height="1dp"
                                 android:layout_marginVertical="10dp"
-                                android:background="@color/black"/>
-
+                                android:background="@color/black" />
 
 
                             <TextView
+                                android:id="@+id/tvTotalPrice"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="8dp"
@@ -538,54 +578,57 @@
                 </LinearLayout>
 
 
-
-
-
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp">
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:paddingHorizontal="16dp"
                         android:layout_marginTop="8dp"
-                        android:text="Phương thức thanh toán"
                         android:fontFamily="@font/inter_tight_bold"
-                        android:textAppearance="?attr/textAppearanceHeadline6"/>
+                        android:paddingHorizontal="16dp"
+                        android:text="Phương thức thanh toán"
+                        android:textAppearance="?attr/textAppearanceHeadline6" />
+
                     <RadioGroup
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
+
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:orientation="horizontal">
+
                             <RadioButton
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_marginStart="8dp"
                                 android:layout_gravity="center"
-                                android:checked="true"/>
+                                android:layout_marginStart="8dp"
+                                android:checked="true" />
 
                             <ImageView
                                 android:layout_width="75dp"
                                 android:layout_height="75dp"
-                                android:src="@drawable/ic_zalopay"/>
+                                android:src="@drawable/ic_zalopay" />
+
                             <TextView
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
-                                android:text="Thanh toán với ZaloPay"
-                                android:gravity="center_vertical"
                                 android:layout_marginStart="20dp"
+                                android:gravity="center_vertical"
+                                android:text="Thanh toán với ZaloPay"
+                                android:textColor="@color/black"
                                 android:textSize="16sp"
-                                android:textStyle="bold"
-                                android:textColor="@color/black"/>
+                                android:textStyle="bold" />
 
                         </LinearLayout>
                     </RadioGroup>
@@ -594,7 +637,6 @@
                 </LinearLayout>
 
             </androidx.cardview.widget.CardView>
-
 
 
         </LinearLayout>
@@ -619,26 +661,21 @@
                 android:textSize="16sp"
                 tools:ignore="ButtonStyle" />
 
-<!--            <Button-->
-<!--                android:id="@+id/btnCancel"-->
-<!--                android:layout_width="150dp"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_marginStart="10dp"-->
-<!--                android:background="@drawable/bg_rounded_small"-->
-<!--                android:backgroundTint="@color/red_500"-->
-<!--                android:text="HỦY BỎ"-->
-<!--                android:textColor="@color/white"-->
-<!--                android:textSize="16sp"-->
-<!--                tools:ignore="ButtonStyle" />-->
+            <!--            <Button-->
+            <!--                android:id="@+id/btnCancel"-->
+            <!--                android:layout_width="150dp"-->
+            <!--                android:layout_height="wrap_content"-->
+            <!--                android:layout_marginStart="10dp"-->
+            <!--                android:background="@drawable/bg_rounded_small"-->
+            <!--                android:backgroundTint="@color/red_500"-->
+            <!--                android:text="HỦY BỎ"-->
+            <!--                android:textColor="@color/white"-->
+            <!--                android:textSize="16sp"-->
+            <!--                tools:ignore="ButtonStyle" />-->
 
         </LinearLayout>
 
     </LinearLayout>
-
-
-
-
-
 
 
 </androidx.core.widget.NestedScrollView>

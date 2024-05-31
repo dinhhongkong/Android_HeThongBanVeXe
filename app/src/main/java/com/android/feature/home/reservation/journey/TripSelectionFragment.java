@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -123,7 +124,17 @@ public class TripSelectionFragment extends Fragment {
         Navigation.findNavController(requireView()).navigate(R.id.action_reservationFragment_to_ticketFragment);
     }
 
+
     private void goToSelectSeat() {
+
+        if(viewModel.getDepartureTicket().getValue().getJourney() == null) {
+            Toast.makeText(requireContext(), "Vui lòng chọn chuyến khởi hành", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        if(viewModel.getReturnTicket().getValue().getJourney() == null && viewModel.getIsRoundTrip().getValue()) {
+            Toast.makeText(requireContext(), "Vui lòng chọn chuyến khứ hồi", Toast.LENGTH_SHORT).show();
+            return;
+        }
         Navigation.findNavController(requireView()).navigate(R.id.action_reservationFragment_to_seatSelectionFragment);
     }
 }

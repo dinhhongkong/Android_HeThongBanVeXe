@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.databinding.JourneyItemLayoutBinding;
 import com.android.model.response.JourneyResponse;
+import com.android.utils.NumberUtils;
 
 import java.util.List;
 
@@ -77,7 +78,7 @@ public class JourneyAdapter extends RecyclerView.Adapter<JourneyAdapter.VH> {
             binding.tvDestination.setText(journey.getDestProvince());
 //            binding.tvSeatType.setText();
 //            binding.tvEmptySeat.setText();
-            binding.tvPrice.setText(String.valueOf(journey.getPrice()) +"đ");
+            binding.tvPrice.setText(NumberUtils.format(journey.getPrice()) +"đ");
 
 
         }

@@ -1,6 +1,7 @@
 package com.android.feature.home.reservation.seat.page;
 
 import android.graphics.Color;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,22 +18,29 @@ import com.android.model.Seat;
 import java.security.InvalidParameterException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 public class SeatAdapter extends RecyclerView.Adapter<SeatAdapter.VH> {
     private final AsyncListDiffer<Seat> differ = new AsyncListDiffer<>(this, DIFF_CALLBACK);
 
-    public SeatAdapter(Type type, Position position) {
+    public List<Seat> getListOfSeat() {
+        return differ.getCurrentList();
+    }
+
+    public void submitList(List<Seat> list) {
+        differ.submitList(list);
+    }
+
+    public SeatAdapter(Type type, Position position, List<String> listDisabledSeat) {
+        Log.d("TAG check", "SeatAdapter: " + listDisabledSeat.toString());
         String positionSeat ;
         String seatStyle;
         int seatIndex = 1;
         int hideIndex = 1;
 
         // init style seats
-        if (type == Type.BOTTOM_SLEEPING_BERTH) {
-            seatStyle = TypeDesignSeat.BOTTOM_SLEEPING_BERTH;
-        }
-        else if (type == Type.TOP_SLEEPING_BERTH) {
-            seatStyle = TypeDesignSeat.TOP_SLEEPING_BERTH;
+        if (type == Type.SLEEPING_BERTH) {
+            seatStyle = TypeDesignSeat.SLEEPING_BERTH;
         }
         else if (type == Type.LIMOUSINE) {
             seatStyle = TypeDesignSeat.LIMOUSINE;
@@ -59,11 +67,25 @@ public class SeatAdapter extends RecyclerView.Adapter<SeatAdapter.VH> {
 
         for (int i = 0; i < seatStyle.length(); i++) {
             if (seatStyle.charAt(i) == 'U') {
-                if (seatIndex == 16 && type == Type.TOP_SLEEPING_BERTH ) {
-                    seatIndex++;
+                String seatName = "";
+                if (seatIndex < 10) {
+                    seatName = positionSeat + 0 + seatIndex++;
                 }
-                String seatName = positionSeat + seatIndex++;
-                Seats.add( new Seat(seatName,0,true));
+                else {
+                    seatName = positionSeat + seatIndex++;
+                }
+
+                boolean checkDisabled = false;
+                for (int j = 0; j < listDisabledSeat.size(); j++)  {
+                    if (seatName.equals(listDisabledSeat.get(j))) {
+                        Seats.add( new Seat(seatName,1,true));
+                        checkDisabled = true;
+                        break;
+                    }
+                }
+                if (!checkDisabled) {
+                    Seats.add( new Seat(seatName,0,true));
+                }
             }
             else {
                 String seatName = "HIDE"+ hideIndex++;
@@ -84,6 +106,9 @@ public class SeatAdapter extends RecyclerView.Adapter<SeatAdapter.VH> {
     }
 
 
+
+
+
     @NonNull
     @Override
     public VH onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -98,8 +123,16 @@ public class SeatAdapter extends RecyclerView.Adapter<SeatAdapter.VH> {
         holder.onBind(seat);
         holder.binding.tvSeat.setOnClickListener(v->{
             itemClick.onItemClick(seat);
-        });
+            if(seat.getStatus()==2) {
+                holder.binding.tvSeat.setBackgroundResource(R.drawable.seat_selecting);
+                holder.binding.tvSeat.setTextColor(Color.parseColor("#EF5222"));
+            }
+            else if (seat.getStatus()==0) {
+                holder.binding.tvSeat.setBackgroundResource(R.drawable.seat_active);
+                holder.binding.tvSeat.setTextColor(Color.parseColor("#339AF4"));
 
+            }
+        });
 
     }
 
@@ -122,8 +155,14 @@ public class SeatAdapter extends RecyclerView.Adapter<SeatAdapter.VH> {
                 binding.tvSeat.setBackgroundResource(R.drawable.seat_active);
                 binding.tvSeat.setTextColor(Color.parseColor("#339AF4"));
             }
-            else {
+            else if (seat.getStatus() == 1) {
                 binding.tvSeat.setBackgroundResource(R.drawable.seat_disabled);
+                binding.tvSeat.setTextColor(Color.parseColor("#A2ABB3"));
+                binding.tvSeat.setEnabled(false);
+            }
+            else if (seat.getStatus() == 2) {
+                binding.tvSeat.setBackgroundResource(R.drawable.seat_selecting);
+                binding.tvSeat.setTextColor(Color.parseColor("#EF5222"));
             }
 
         }
@@ -142,8 +181,7 @@ public class SeatAdapter extends RecyclerView.Adapter<SeatAdapter.VH> {
     };
 
     public enum Type {
-        TOP_SLEEPING_BERTH,
-        BOTTOM_SLEEPING_BERTH,
+        SLEEPING_BERTH,
         LIMOUSINE
     }
 
@@ -157,7 +195,7 @@ final class TypeDesignSeat {
     private TypeDesignSeat() {
 
     }
-    public final static String BOTTOM_SLEEPING_BERTH =
+    public final static String SLEEPING_BERTH =
             "U_U_U" +
             "U_U_U" +
             "U_U_U" +
@@ -166,23 +204,14 @@ final class TypeDesignSeat {
             "U___U" +
             "UUUUU";
 
-    public final static String TOP_SLEEPING_BERTH =
-            "U_U_U" +
-            "U_U_U" +
-            "U_U_U" +
-            "U_U_U" +
-            "U_U_U" +
-            "____U" +
-            "UUUUU";
-
 
     public final static String LIMOUSINE =
-            "U_U" +
-            "UUU" +
-            "UUU" +
-            "UUU" +
-            "UUU" +
-            "UUU";
+            "U___U" +
+            "U_U_U" +
+            "U_U_U" +
+            "U_U_U" +
+            "U_U_U" +
+            "U_U_U";
 
 
 }

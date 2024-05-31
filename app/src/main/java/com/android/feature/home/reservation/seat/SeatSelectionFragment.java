@@ -11,6 +11,7 @@ import androidx.navigation.Navigation;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.android.R;
 import com.android.databinding.FragmentSeatSelectionBinding;
@@ -117,6 +118,14 @@ public class SeatSelectionFragment extends Fragment {
     }
 
     private void goToCustomerInfoScreen() {
+        if(viewModel.getDepartureTicket().getValue().getSeatNameList().isEmpty()) {
+            Toast.makeText(requireContext(), "Vui lòng chọn ít nhất 1 ghế tại chuyến khởi hành", Toast.LENGTH_SHORT).show();
+            return ;
+        }
+        if(viewModel.getReturnTicket().getValue().getSeatNameList().isEmpty() && viewModel.getIsRoundTrip().getValue()) {
+            Toast.makeText(requireContext(), "Vui lòng chọn chọn ít nhất 1 ghế tại chuyến khứ hồi", Toast.LENGTH_SHORT).show();
+            return ;
+        }
         Navigation.findNavController(requireView()).navigate(R.id.action_seatSelectionFragment_to_customerInfoFragment);
     }
 }

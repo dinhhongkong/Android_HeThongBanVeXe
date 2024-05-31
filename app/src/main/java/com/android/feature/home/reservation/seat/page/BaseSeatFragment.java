@@ -15,6 +15,10 @@ import android.view.ViewGroup;
 import com.android.databinding.FragmentSeatBinding;
 import com.android.feature.home.reservation.ReservationViewModel;
 import com.android.feature.home.reservation.seat.page.SeatAdapter;
+import com.android.model.Seat;
+
+import java.util.List;
+import java.util.Set;
 
 public abstract class BaseSeatFragment extends Fragment {
 
@@ -45,6 +49,17 @@ public abstract class BaseSeatFragment extends Fragment {
     public void onDestroyView() {
         binding = null;
         super.onDestroyView();
+    }
+
+    public List<Seat> setSelectedSeatByUser(Set<String> selectedSeat, List<Seat> seats) {
+        for (String seat : selectedSeat) {
+            for(Seat item : seats) {
+                if(item.getName().equals(seat)) {
+                    item.setStatus(2);
+                }
+            }
+        }
+        return seats;
     }
 
 

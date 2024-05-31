@@ -43,7 +43,7 @@
                     android:textColor="@color/orange"/>
 
                 <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/outlinedTextField0"
+                    android:id="@+id/outlinedTextFieldFullname"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:paddingVertical="5dp"
@@ -64,7 +64,7 @@
 
 
                 <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/outlinedTextField1"
+                    android:id="@+id/outlinedTextFieldPhoneNumber"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:paddingVertical="5dp"
@@ -85,14 +85,14 @@
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/outlinedTextField2"
+                    android:id="@+id/outlinedTextFieldEmail"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:paddingVertical="5dp"
                     android:hint="Email"
                     app:errorEnabled="true"
                     app:counterEnabled="true"
-                    app:counterMaxLength="15"
+                    app:counterMaxLength="30"
                     app:helperTextEnabled="true"
                     app:helperText="Vui lòng nhập email"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
