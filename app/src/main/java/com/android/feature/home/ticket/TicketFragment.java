@@ -1,5 +1,6 @@
 package com.android.feature.home.ticket;
 
+import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -84,15 +85,19 @@ public class TicketFragment extends Fragment{
     }
 
 
+    @SuppressLint("ClickableViewAccessibility")
     private void setEvent() {
 
         // SHOW DROPDOWN LIST EVENT.
-        binding.actOrigin.setOnClickListener(v->{
+
+        binding.actOrigin.setOnTouchListener((v, event)->{
             binding.actOrigin.showDropDown();
+            return false;
         });
 
-        binding.actDestination.setOnClickListener(v->{
+        binding.actDestination.setOnTouchListener((v, event)->{
             binding.actDestination.showDropDown();
+            return false;
         });
         // TYPE DESTINATION EVENT.
 //        binding.actOrigin.setOnFocusChangeListener();
@@ -141,7 +146,7 @@ public class TicketFragment extends Fragment{
         DatePickerDialog dialog = new DatePickerDialog(requireContext());
         dialog.setOnDateSetListener((view1, year, month, dayOfMonth) -> {
             Date date = DateUtils.getDate(year, month, dayOfMonth);
-            binding.edtStartDate.setText(DateUtils.format(date));
+            binding.edtStartDate.setText(DateUtils.convertToDDMMYYYY(DateUtils.format(date)));
             viewModel.getJourney().getValue().setStartDate(DateUtils.format(date));
 
         });
@@ -160,7 +165,7 @@ public class TicketFragment extends Fragment{
         DatePickerDialog dialog = new DatePickerDialog(requireContext());
         dialog.setOnDateSetListener((view1, year, month, dayOfMonth) -> {
             Date date = DateUtils.getDate(year, month, dayOfMonth);
-            binding.edtEndDate.setText(DateUtils.format(date));
+            binding.edtEndDate.setText(DateUtils.convertToDDMMYYYY(DateUtils.format(date)));
             viewModel.getJourney().getValue().setEndDate(DateUtils.format(date));
         });
         // CONSTRAINT MIN & MAX DATE.

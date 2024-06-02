@@ -7,6 +7,8 @@ import androidx.lifecycle.ViewModel;
 import com.android.model.Province;
 import com.android.model.Ticket;
 import com.android.model.request.JourneyRequest;
+import com.android.model.request.PaymentOneWayRequest;
+import com.android.model.request.PaymentTwoWayRequest;
 import com.android.model.response.JourneyResponse;
 import com.android.service.ReservationApiService;
 import com.android.core.Response;
@@ -93,6 +95,64 @@ public class ReservationViewModel extends ViewModel {
 
                     }
                 });
+    }
+
+    public void orderOneWayTicket(String transactionId) {
+        Ticket ticket = departureTicket.getValue();
+        PaymentOneWayRequest request = new PaymentOneWayRequest(
+                1,
+                ticket.getSeatNameList(),
+                1,
+                ticket.getJourney().getId(),
+                ticket.getFullName(),
+                ticket.getPhoneNumber(),
+                ticket.getEmail(),
+                transactionId
+        );
+        reservationApiService.createOrderOneWayTrip(request).enqueue(new Callback<String>() {
+            @Override
+            public void onResponse(Call<String> call, retrofit2.Response<String> response) {
+
+            }
+
+            @Override
+            public void onFailure(Call<String> call, Throwable t) {
+
+            }
+        });
+
+
+    }
+
+    public void orderRoundTripTicket(String transactionId) {
+
+        Ticket departureTicket = this.departureTicket.getValue();
+        Ticket returnTicket = this.returnTicket.getValue();
+
+        PaymentTwoWayRequest request = new PaymentTwoWayRequest(
+                1,
+                departureTicket.getSeatNameList(),
+                returnTicket.getSeatNameList(),
+                1,
+                departureTicket.getJourney().getId(),
+                returnTicket.getJourney().getId(),
+                departureTicket.getFullName(),
+                departureTicket.getPhoneNumber(),
+                departureTicket.getEmail(),
+                transactionId
+        );
+        reservationApiService.createOrderRoundTrip(request).enqueue(new Callback<String>() {
+            @Override
+            public void onResponse(Call<String> call, retrofit2.Response<String> response) {
+
+            }
+
+            @Override
+            public void onFailure(Call<String> call, Throwable t) {
+
+            }
+        });
+
     }
 
 

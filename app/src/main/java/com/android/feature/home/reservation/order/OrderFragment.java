@@ -122,6 +122,7 @@ public class OrderFragment extends Fragment {
                         @Override
                         public void onPaymentSucceeded(final String transactionId, final String transToken, final String appTransID) {
                             Toast.makeText(OrderFragment.this.requireActivity(), "Thanh toán thành công!", Toast.LENGTH_SHORT).show();
+                            paymentSuccess(transactionId);
                         }
 
                         @Override
@@ -138,6 +139,15 @@ public class OrderFragment extends Fragment {
             } catch (Exception ignored) {
             }
         });
+    }
+
+    private void paymentSuccess(String transactionId) {
+        if(viewModel.getIsRoundTrip().getValue()) {
+            viewModel.orderRoundTripTicket(transactionId);
+        }
+        else {
+            viewModel.orderOneWayTicket(transactionId);
+        }
     }
 
 }

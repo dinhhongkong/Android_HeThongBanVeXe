@@ -2,11 +2,14 @@ package com.android.service;
 
 import com.android.core.Response;
 import com.android.model.Province;
+import com.android.model.request.PaymentOneWayRequest;
+import com.android.model.request.PaymentTwoWayRequest;
 import com.android.model.response.JourneyResponse;
 
 import java.util.List;
 
 import retrofit2.Call;
+import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.Query;
@@ -21,9 +24,9 @@ public interface ReservationApiService {
     Call<Response<List<Province>>> getAllProvince();
 
     @POST("thanhtoan/zalopay-payment/oneway-trip")
-    Call<String> createOrderOneWayTrip();
+    Call<String> createOrderOneWayTrip(@Body PaymentOneWayRequest request);
 
     @POST("thanhtoan/zalopay-payment/round-trip")
-    Call<String> createOrderRoundTrip();
+    Call<String> createOrderRoundTrip(@Body PaymentTwoWayRequest request);
 
 }

@@ -10,17 +10,16 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import com.android.R;
 import com.android.databinding.FragmentPaymentBinding;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 
 
-public class PaymentFragment extends BottomSheetDialogFragment {
+public class PaymentStatusFragment extends BottomSheetDialogFragment {
     private FragmentPaymentBinding binding;
 
 
-    public static PaymentFragment newInstance() {
-        return new PaymentFragment();
+    public static PaymentStatusFragment newInstance() {
+        return new PaymentStatusFragment();
     }
 
     @Override
