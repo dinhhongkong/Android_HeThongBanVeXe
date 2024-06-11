@@ -19,6 +19,6 @@ public class SharedPref {
         }
         return sharedPreferences;
     }
-    
+
 
 }

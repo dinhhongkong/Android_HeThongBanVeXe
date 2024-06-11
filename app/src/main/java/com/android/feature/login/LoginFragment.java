@@ -26,7 +26,8 @@ public class LoginFragment extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        viewModel = new ViewModelProvider(this, new ViewModelFactory(requireActivity().getApplication())).get(LoginViewModel.class);
+        ViewModelFactory factory = new ViewModelFactory(requireActivity().getApplication());
+        viewModel = new ViewModelProvider(this, factory).get(LoginViewModel.class);
     }
 
     @Override
@@ -64,10 +65,15 @@ public class LoginFragment extends Fragment {
                 Navigation.findNavController(requireView()).navigate(R.id.action_loginFragment_to_homeFragment);
                 Toast.makeText(requireContext(), "Đăng nhập thành công", Toast.LENGTH_SHORT).show();
                 viewModel.setLoginStatus(LoginStatus.NONE);
-
             }
             else if (status == LoginStatus.AUTHORIZED) {
                 Toast.makeText(requireContext(), "Đang đăng nhập", Toast.LENGTH_SHORT).show();
+            }
+            else if (status == LoginStatus.ERROR) {
+                Toast.makeText(requireContext(), "Thông tin tài khoản hoặc mật khẩu không chính xác", Toast.LENGTH_SHORT).show();
+            }
+            else if(status == LoginStatus.UNAUTHORIZED) {
+                Toast.makeText(requireContext(), "Thời gian đăng nhập hết hạn", Toast.LENGTH_SHORT).show();
             }
         });
 

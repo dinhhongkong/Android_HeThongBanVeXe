@@ -10,7 +10,7 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ApiClient {
-    private static final String BASE_URL = "http://10.252.1.247:8080/";
+    private static final String BASE_URL = "http://192.168.2.19:8080/";
     private static ApiClient instance; // Biến duy nhất của ApiClient
     private static final HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY);
     private static OkHttpClient client;
@@ -41,11 +41,14 @@ public class ApiClient {
                 .build();
     }
 
+
+
     public static synchronized Retrofit getRetrofitInstance(String token) {
-        if (instance == null) {
-            instance = new ApiClient(token);
-        }
-        return instance.getRetrofit();
+        return new ApiClient(token).getRetrofit();
+    }
+
+    public static synchronized Retrofit getRetrofitInstance() {
+        return new ApiClient("").getRetrofit();
     }
 
     private Retrofit getRetrofit() {

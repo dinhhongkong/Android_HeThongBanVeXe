@@ -1,5 +1,6 @@
 package com.android.feature.login;
 
+import android.app.Application;
 import android.content.SharedPreferences;
 import android.util.Log;
 
@@ -11,6 +12,7 @@ import com.android.model.request.LoginRequest;
 import com.android.payload.Resource;
 import com.android.service.AuthApiService;
 import com.android.service.api_interface.ApiClient;
+import com.android.utils.JwtUtils;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -18,15 +20,15 @@ import retrofit2.Response;
 
 public class LoginViewModel extends ViewModel {
     private AuthApiService authApiService;
-    private SharedPreferences sharedPrefer;
+    private Application application;
     private String token = "";
     private MutableLiveData<LoginStatus> loginStatus = new MutableLiveData<>(LoginStatus.NONE);
 
 
     private MutableLiveData<LoginRequest> loginRequest = new MutableLiveData<>();
 
-    public LoginViewModel(SharedPreferences sharedPrefer) {
-        this.sharedPrefer = sharedPrefer;
+    public LoginViewModel( Application application) {
+        this.application = application;
         authApiService = ApiClient.getRetrofitInstance(token).create(AuthApiService.class);
     }
 
@@ -36,9 +38,12 @@ public class LoginViewModel extends ViewModel {
             public void onResponse(Call<Resource<String>> call, Response<Resource<String>> response) {
                 if (response.isSuccessful()) {
                     token = response.body().getData();
-                    sharedPrefer.edit().putString("token", token).apply();
+                    JwtUtils.saveToken(application,token);
                     loginStatus.setValue(LoginStatus.SUCCESS);
                     loginRequest.setValue(new LoginRequest());
+                }
+                else {
+                    loginStatus.postValue(LoginStatus.ERROR);
                 }
             }
 
@@ -50,9 +55,11 @@ public class LoginViewModel extends ViewModel {
     }
 
     public void validateToken() {
-        if ( !sharedPrefer.getString("token", "").isEmpty()) {
-            token = sharedPrefer.getString("token", "");
-            loginStatus.postValue(LoginStatus.AUTHORIZED);
+
+        if ( !JwtUtils.getToken(application).isEmpty()) {
+            token = JwtUtils.getToken(application);
+            Log.d("token",token);
+//            loginStatus.postValue(LoginStatus.AUTHORIZED);
         }
         else {
             return;
@@ -60,7 +67,13 @@ public class LoginViewModel extends ViewModel {
         authApiService.validate(token).enqueue(new Callback<String>() {
             @Override
             public void onResponse(Call<String> call, Response<String> response) {
-                loginStatus.postValue(LoginStatus.SUCCESS);
+                if (response.isSuccessful()) {
+                    loginStatus.postValue(LoginStatus.SUCCESS);
+                }
+                else {
+                    loginStatus.postValue(LoginStatus.UNAUTHORIZED);
+                }
+
             }
 
             @Override

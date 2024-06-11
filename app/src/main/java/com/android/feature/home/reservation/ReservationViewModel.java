@@ -1,6 +1,8 @@
 package com.android.feature.home.reservation;
 
+import android.app.Application;
 import android.content.SharedPreferences;
+import android.util.Log;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
@@ -15,6 +17,7 @@ import com.android.model.response.JourneyResponse;
 import com.android.service.ReservationApiService;
 import com.android.payload.Resource;
 import com.android.service.api_interface.ApiClient;
+import com.android.utils.JwtUtils;
 
 import java.util.List;
 
@@ -24,8 +27,8 @@ import retrofit2.Callback;
 public class ReservationViewModel extends ViewModel {
 
     private ReservationApiService reservationApiService;
-    private SharedPreferences sharedPrefer;
-    private String token;
+    private int userId;
+
     private MutableLiveData<Boolean> isRoundTrip = new MutableLiveData<>(false);
     private MutableLiveData<List<Province>> provinces = new MutableLiveData<>(null);
     private MutableLiveData<JourneyRequest> journey = new MutableLiveData<>(new JourneyRequest());
@@ -35,10 +38,10 @@ public class ReservationViewModel extends ViewModel {
     private MutableLiveData<Ticket> departureTicket = new MutableLiveData<>(new Ticket());
     private MutableLiveData<Ticket> returnTicket = new MutableLiveData<>(new Ticket());
 
-    public ReservationViewModel(SharedPreferences sharedPrefer){
-        this.sharedPrefer = sharedPrefer;
-        token = sharedPrefer.getString("token", "");
+    public ReservationViewModel(Application application){
+        String token = JwtUtils.getToken(application);
         reservationApiService = ApiClient.getRetrofitInstance(token).create(ReservationApiService.class);
+        userId = JwtUtils.getUserId(token);
     }
 
     public void loadAllProvince() {
@@ -108,7 +111,7 @@ public class ReservationViewModel extends ViewModel {
         PaymentOneWayRequest request = new PaymentOneWayRequest(
                 1,
                 ticket.getSeatNameList(),
-                1,
+                userId,
                 ticket.getJourney().getId(),
                 ticket.getFullName(),
                 ticket.getPhoneNumber(),
@@ -139,7 +142,7 @@ public class ReservationViewModel extends ViewModel {
                 1,
                 departureTicket.getSeatNameList(),
                 returnTicket.getSeatNameList(),
-                1,
+                userId,
                 departureTicket.getJourney().getId(),
                 returnTicket.getJourney().getId(),
                 departureTicket.getFullName(),
