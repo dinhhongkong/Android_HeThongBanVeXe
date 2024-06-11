@@ -1,4 +1,4 @@
-package com.android.feature.home.ticket;
+package com.android.feature.home.reservation.ticket;
 
 import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
@@ -20,6 +20,7 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 
 import com.android.R;
+import com.android.core.ViewModelFactory;
 import com.android.databinding.FragmentTicketBinding;
 import com.android.feature.home.reservation.ReservationViewModel;
 import com.android.model.Province;
@@ -38,7 +39,7 @@ public class TicketFragment extends Fragment{
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        viewModel = new ViewModelProvider(requireActivity()).get(ReservationViewModel.class);
+        viewModel = new ViewModelProvider(requireActivity(), new ViewModelFactory(requireActivity().getApplication())).get(ReservationViewModel.class);
         viewModel.loadAllProvince();
     }
 

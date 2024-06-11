@@ -34,6 +34,7 @@
             android:orientation="vertical">
 
             <EditText
+                android:id="@+id/edtUsername"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="20dp"
@@ -48,6 +49,7 @@
                 android:textColorHint="@color/teal_600" />
 
             <EditText
+                android:id="@+id/edtPassword"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="20dp"
@@ -57,7 +59,6 @@
                 android:inputType="textPassword"
                 android:paddingHorizontal="25dp"
                 android:paddingVertical="20dp"
-                android:text="@={LoginViewModel.password}"
                 android:textColor="@color/teal_600"
                 android:textColorHint="@color/teal_600" />
 

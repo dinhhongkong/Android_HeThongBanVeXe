@@ -12,7 +12,9 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.Navigation;
 
+import com.android.R;
 import com.android.databinding.FragmentOrderBinding;
 import com.android.feature.home.reservation.ReservationViewModel;
 import com.android.model.Ticket;
@@ -123,6 +125,7 @@ public class OrderFragment extends Fragment {
                         public void onPaymentSucceeded(final String transactionId, final String transToken, final String appTransID) {
                             Toast.makeText(OrderFragment.this.requireActivity(), "Thanh toán thành công!", Toast.LENGTH_SHORT).show();
                             paymentSuccess(transactionId);
+                            Navigation.findNavController(requireView()).navigate(R.id.action_orderFragment_to_ticketFragment);
                         }
 
                         @Override

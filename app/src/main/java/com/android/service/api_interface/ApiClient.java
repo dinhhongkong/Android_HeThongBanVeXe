@@ -10,28 +10,45 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ApiClient {
-    private static final String BASE_URL = "http://192.168.2.19:8080/";
+    private static final String BASE_URL = "http://10.252.1.247:8080/";
+    private static ApiClient instance; // Biến duy nhất của ApiClient
     private static final HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY);
-    private static final OkHttpClient client = new OkHttpClient.Builder()
-            .addNetworkInterceptor(interceptor)
-            .addInterceptor(chain -> {
-                var original = chain.request();
-                var requestBuilder = original.newBuilder()
-                        .header("Authorization", "Bearer $authToken")
-                        .method(original.method(), original.body());
-                var request = requestBuilder.build();
-                return chain.proceed(request);
-            })
-            .connectTimeout(30, TimeUnit.SECONDS)
-            .readTimeout(20, TimeUnit.SECONDS)
-            .writeTimeout(25, TimeUnit.SECONDS)
-            .build();
+    private static OkHttpClient client;
+    private static Retrofit retrofitInstance;
+    private String authToken; // Biến lưu trữ token
 
-    public static Retrofit getRetrofitInstance() {
-        return new Retrofit.Builder()
+    private ApiClient(String token) {
+        this.authToken = token;
+        client = new OkHttpClient.Builder()
+                .addNetworkInterceptor(interceptor)
+                .addInterceptor(chain -> {
+                    var original = chain.request();
+                    var requestBuilder = original.newBuilder()
+                            .header("Authorization", "Bearer " + authToken) // Thêm token vào header
+                            .method(original.method(), original.body());
+                    var request = requestBuilder.build();
+                    return chain.proceed(request);
+                })
+                .connectTimeout(30, TimeUnit.SECONDS)
+                .readTimeout(20, TimeUnit.SECONDS)
+                .writeTimeout(25, TimeUnit.SECONDS)
+                .build();
+
+        retrofitInstance = new Retrofit.Builder()
                 .baseUrl(BASE_URL)
                 .client(client)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
+    }
+
+    public static synchronized Retrofit getRetrofitInstance(String token) {
+        if (instance == null) {
+            instance = new ApiClient(token);
+        }
+        return instance.getRetrofit();
+    }
+
+    private Retrofit getRetrofit() {
+        return retrofitInstance;
     }
 }

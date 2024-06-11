@@ -1,5 +1,6 @@
 package com.android.feature.home;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -18,12 +19,20 @@ import androidx.navigation.Navigation;
 import com.android.MainActivity;
 import com.android.R;
 import com.android.databinding.FragmentHomeBinding;
+import com.android.utils.SharedPref;
 import com.google.android.material.navigation.NavigationView;
 
 import java.util.Objects;
 
 public class HomeFragment extends Fragment {
     private FragmentHomeBinding binding;
+    private SharedPreferences sharedPrefer;
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        sharedPrefer = SharedPref.getSharedPref(requireActivity().getApplication());
+    }
 
     @Nullable
     @Override
@@ -73,7 +82,9 @@ public class HomeFragment extends Fragment {
                     View view = getView();
                     if (view != null) {
                         // HANDLE LOGOUT LOGIC & REDIRECT TO LOGIN PAGE.
+                        sharedPrefer.edit().putString("token", "").apply();
                         Navigation.findNavController(view).popBackStack();
+
                     }
                 }
 

@@ -1,6 +1,6 @@
 package com.android.service;
 
-import com.android.core.Response;
+import com.android.payload.Resource;
 import com.android.model.Province;
 import com.android.model.request.PaymentOneWayRequest;
 import com.android.model.request.PaymentTwoWayRequest;
@@ -16,12 +16,12 @@ import retrofit2.http.Query;
 
 public interface ReservationApiService {
     @GET("chuyenxe/get-chuyen-xe")
-    Call<Response<List<JourneyResponse>>> findJourney(@Query("maTinhDi") int origin,
+    Call<Resource<List<JourneyResponse>>> findJourney(@Query("maTinhDi") int origin,
                                                       @Query("maTinhDen") int destination,
                                                       @Query("ngayXuatPhat") String startDate);
 
     @GET("datve/get-all-province")
-    Call<Response<List<Province>>> getAllProvince();
+    Call<Resource<List<Province>>> getAllProvince();
 
     @POST("thanhtoan/zalopay-payment/oneway-trip")
     Call<String> createOrderOneWayTrip(@Body PaymentOneWayRequest request);

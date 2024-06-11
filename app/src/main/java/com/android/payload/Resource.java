@@ -1,14 +1,14 @@
-package com.android.core;
+package com.android.payload;
 
-public class Response<T> {
+public class Resource<T> {
     private int status;
     private String message;
     private T data;
 
-    public Response() {
+    public Resource() {
     }
 
-    public Response(int status, String message, T data) {
+    public Resource(int status, String message, T data) {
         this.status = status;
         this.message = message;
         this.data = data;
