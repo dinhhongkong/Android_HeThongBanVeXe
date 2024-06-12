@@ -1,5 +1,7 @@
 package com.android.feature.login;
 
+import static androidx.navigation.Navigation.findNavController;
+
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -57,12 +59,15 @@ public class LoginFragment extends Fragment {
         binding.btnLogin.setOnClickListener(v->{
             loginEvent();
         });
+        binding.tvDky.setOnClickListener(v->{
+            findNavController(requireView()).navigate(R.id.action_loginFragment_to_registerFragment);
+        });
     }
 
     private void setObserver() {
         viewModel.getLoginStatus().observe(getViewLifecycleOwner(),status->{
             if (status == LoginStatus.SUCCESS) {
-                Navigation.findNavController(requireView()).navigate(R.id.action_loginFragment_to_homeFragment);
+                findNavController(requireView()).navigate(R.id.action_loginFragment_to_homeFragment);
                 Toast.makeText(requireContext(), "Đăng nhập thành công", Toast.LENGTH_SHORT).show();
                 viewModel.setLoginStatus(LoginStatus.NONE);
             }

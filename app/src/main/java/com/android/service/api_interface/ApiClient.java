@@ -10,7 +10,7 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ApiClient {
-    private static final String BASE_URL = "http://192.168.2.19:8080/";
+    private static final String BASE_URL = "http://192.168.1.17:8080/";
     private static ApiClient instance; // Biến duy nhất của ApiClient
     private static final HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY);
     private static OkHttpClient client;
