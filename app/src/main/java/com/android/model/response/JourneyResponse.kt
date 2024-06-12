@@ -21,5 +21,7 @@ data class JourneyResponse  (
     @SerializedName("tenTinhDen")
     var destProvince: String,
     @SerializedName("listMaGhe")
-    var listIdSeat: List<String>
+    var listIdSeat: List<String>,
+    @SerializedName("loaiXe")
+    var seatType: String
 )

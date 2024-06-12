@@ -85,6 +85,7 @@ public class TripSelectionFragment extends Fragment {
                 binding.tvInfoEndTimeDeparture.setText(ticket.getJourney().getStartTime());
                 binding.tvInfoDepature.setText(ticket.getJourney().getDepartureProvince());
                 binding.tvInfoDestination.setText(ticket.getJourney().getDestProvince());
+                binding.tvSeatTypeDeparture.setText(ticket.getJourney().getSeatType());
             } else {
                 binding.cvInfoDeparture.setVisibility(View.GONE);
             }
@@ -99,6 +100,7 @@ public class TripSelectionFragment extends Fragment {
                 binding.tvInfoEndTimeReturn.setText(ticket.getJourney().getStartTime());
                 binding.tvInfoReturn.setText(ticket.getJourney().getDepartureProvince());
                 binding.tvInfoReturnDestination.setText(ticket.getJourney().getDestProvince());
+                binding.tvSeatTypeReturn.setText(ticket.getJourney().getSeatType());
             } else {
                 binding.cvInfoReturn.setVisibility(View.GONE);
             }

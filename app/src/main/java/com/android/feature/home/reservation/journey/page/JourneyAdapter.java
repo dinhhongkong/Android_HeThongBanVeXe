@@ -76,7 +76,7 @@ public class JourneyAdapter extends RecyclerView.Adapter<JourneyAdapter.VH> {
 
             binding.tvDeparture.setText(journey.getDepartureProvince());
             binding.tvDestination.setText(journey.getDestProvince());
-//            binding.tvSeatType.setText();
+            binding.tvSeatType.setText(journey.getSeatType());
 //            binding.tvEmptySeat.setText();
             binding.tvPrice.setText(NumberUtils.format(journey.getPrice()) +"đ");
 
