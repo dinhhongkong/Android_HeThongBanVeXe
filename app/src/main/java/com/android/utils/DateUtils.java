@@ -2,6 +2,7 @@ package com.android.utils;
 
 import android.annotation.SuppressLint;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -46,5 +47,31 @@ public class DateUtils {
 
     public static String format(Date date) {
         return formatterDate.format(date);
+    }
+
+    public static String convertToYYYYMMDD(String date) {
+        SimpleDateFormat originalFormat = new SimpleDateFormat("dd/MM/yyyy");
+        SimpleDateFormat targetFormat = new SimpleDateFormat("yyyy-MM-dd");
+        Date dateObj;
+        String formattedDate = "";
+        try {
+            dateObj = originalFormat.parse(date);
+            formattedDate = targetFormat.format(dateObj);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return formattedDate;
+    }
+
+    public static String convertToDDMMYYYY(String dateString) {
+        SimpleDateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd");
+        SimpleDateFormat outputFormat = new SimpleDateFormat("dd/MM/yyyy");
+        Date date = null;
+        try {
+            date = inputFormat.parse(dateString);
+        } catch (ParseException e) {
+            throw new RuntimeException(e);
+        }
+        return outputFormat.format(date);
     }
 }

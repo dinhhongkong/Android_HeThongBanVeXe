@@ -1,19 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_height="wrap_content"
+    android:layout_width="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <data>
-
-        <variable
-            name="JourneyResponse"
-            type="com.android.model.response.JourneyResponse" />
-
-    </data>
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/bgi_journey"
-        android:padding="15dp">
+        android:padding="15dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <RelativeLayout
             android:id="@+id/InfoOrigin"
@@ -26,7 +25,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="start"
-                android:text="@{JourneyResponse.getStartTimePart()}"
+                android:text=""
                 android:textColor="@color/black"
                 android:textSize="18sp" />
 
@@ -35,7 +34,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/OriginTime"
                 android:gravity="start"
-                android:text="@{JourneyResponse.origin.name.toUpperCase()}"
+                android:text=""
                 android:textColor="@color/black"
                 android:textSize="14sp" />
 
@@ -70,7 +69,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:text="@{JourneyResponse.toString(JourneyResponse.duration)}"
+                    android:text=""
                     android:textSize="16sp" />
 
                 <TextView
@@ -98,7 +97,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
                 android:gravity="end"
-                android:text="@{JourneyResponse.getEndTimePart()}"
+                android:text=""
                 android:textColor="@color/black"
                 android:textSize="18sp" />
 
@@ -109,7 +108,7 @@
                 android:layout_below="@id/DestinationTime"
                 android:layout_alignParentEnd="true"
                 android:gravity="end"
-                android:text="@{JourneyResponse.destination.name.toUpperCase()}"
+                android:text=""
                 android:textColor="@color/black"
                 android:textSize="14sp" />
 
@@ -153,7 +152,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_toEndOf="@id/TitleSeat"
-                android:text="@{JourneyResponse.toString(JourneyResponse.getAvailableSeat())}"
+                android:text=""
                 android:textColor="@color/green_500"
                 android:textSize="16sp" />
 
@@ -162,7 +161,7 @@
                 android:layout_height="wrap_content"
                 android:layout_toStartOf="@id/TitlePrice"
                 android:gravity="end"
-                android:text="@{JourneyResponse.toString(JourneyResponse.price)}"
+                android:text=""
                 android:textColor="@color/red_500"
                 android:textSize="16sp" />
 
@@ -181,4 +180,4 @@
 
     </RelativeLayout>
 
-</layout>
+</androidx.constraintlayout.widget.ConstraintLayout>

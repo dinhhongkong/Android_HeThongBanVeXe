@@ -1,13 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
-    <data>
-
-        <variable
-            name="LoginViewModel"
-            type="com.android.auth.login.LoginViewModel" />
-
-    </data>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -39,6 +34,7 @@
             android:orientation="vertical">
 
             <EditText
+                android:id="@+id/edtUsername"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="20dp"
@@ -48,11 +44,12 @@
                 android:inputType="phone"
                 android:paddingHorizontal="25dp"
                 android:paddingVertical="20dp"
-                android:text="@={LoginViewModel.username}"
+                android:text=""
                 android:textColor="@color/teal_600"
                 android:textColorHint="@color/teal_600" />
 
             <EditText
+                android:id="@+id/edtPassword"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="20dp"
@@ -62,34 +59,31 @@
                 android:inputType="textPassword"
                 android:paddingHorizontal="25dp"
                 android:paddingVertical="20dp"
-                android:text="@={LoginViewModel.password}"
                 android:textColor="@color/teal_600"
                 android:textColorHint="@color/teal_600" />
 
             <TextView
+                android:id="@+id/tvDky"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="end"
                 android:layout_marginBottom="20dp"
-                android:onClick="@{LoginViewModel.redirectToRegisterPage}"
                 android:text="Đăng ký tài khoản mới"
                 android:textColor="@color/red_600"
                 android:textSize="16sp"
                 android:textStyle="italic" />
 
             <Button
+                android:id="@+id/btnLogin"
                 style="@style/CustomTextAppearanceButton"
                 android:layout_width="175dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:background="@drawable/bg_rounded"
-                android:backgroundTint="@{LoginViewModel.username.length() > 0 &amp;&amp; LoginViewModel.password.length() > 0 ? @color/red_500 : @color/red_300}"
-                android:enabled="@{LoginViewModel.username.length() > 0 &amp;&amp; LoginViewModel.password.length() > 0}"
-                android:onClick="@{LoginViewModel.login}"
                 android:text="ĐĂNG NHẬP" />
 
         </LinearLayout>
 
     </LinearLayout>
 
-</layout>
+</androidx.constraintlayout.widget.ConstraintLayout>
